@@ -1,0 +1,92 @@
+@use "sass:math" as math;
+
+$trtime_fast: 0.25s;
+
+$scwidth_xxl: 3840px;
+$scwidth_xl: 2048px;
+$scwidth_l: 1920px;
+$scwidth_xxm: 1600px;
+$scwidth_xm: 1536px;
+$scwidth_m: 1440px;
+$scwidth_sm: 1024px;
+$scwidth_xsm: 768px;
+$scwidth_xxsm: 480px;
+
+@function rem($px) {
+  @return math.div($px, 16) + rem;
+}
+
+@function screen_variant($variant) {
+  @if ($variant == "xxl") {
+    @return 3840px;
+  }
+
+  @if ($variant == "xl") {
+    @return 2560px;
+  }
+
+  @if ($variant == "l") {
+    @return 1920px;
+  }
+
+  @if ($variant == "xxm") {
+    @return 1600px;
+  }
+
+  @if ($variant == "xm") {
+    @return 1536px;
+  }
+
+  @if ($variant == "m") {
+    @return 1440px;
+  }
+
+  @if ($variant == "sm") {
+    @return 1024px;
+  }
+
+  @if ($variant == "xsm") {
+    @return 768px;
+  }
+
+  @if ($variant == "xxsm") {
+    @return 480px;
+  }
+
+  @error "unidentified screen variant";
+}
+
+@mixin screen_lte($variant) {
+  @media screen and (max-width: #{screen_variant($variant)}) {
+    @content;
+  }
+}
+
+@mixin screen_gte($variant) {
+  @media screen and (min-width: #{screen_variant($variant)}) {
+    @content;
+  }
+}
+
+@function tr_variant($variant) {
+  @if ($variant == "fast") {
+    @return 0.25s;
+  }
+
+  @error "Unknonw transition variant";
+}
+
+@function tr($variant, $list) {
+  $result: "";
+  $time: tr_variant($variant);
+
+  @each $name in $list {
+    @if ($result == "") {
+      $result: $name + " " + $time;
+    } @else {
+      $result: $result + ", " + $name + " " + $time;
+    }
+  }
+
+  @return $result;
+}

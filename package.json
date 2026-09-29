@@ -1,0 +1,9 @@
+{
+    "name": "ta",
+    "private": true,
+
+    "workspaces": [
+        "./app/*",
+        "./pckg/*"
+    ]
+}

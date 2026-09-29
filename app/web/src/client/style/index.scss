@@ -1,0 +1,61 @@
+@use "util:palette";
+@use "util:std";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  font-family: sans-serif;
+
+  @include std.screen_gte("xxl") {
+    font-size: 2rem;
+  }
+
+  @include std.screen_lte("xxl") {
+    font-size: 2rem;
+  }
+
+  @include std.screen_lte("xl") {
+    font-size: 1.2rem;
+  }
+
+  @include std.screen_lte("l") {
+    font-size: 1rem;
+  }
+
+  @include std.screen_lte("m") {
+    font-size: 0.85rem;
+  }
+
+  @include std.screen_lte("sm") {
+    font-size: 0.75rem;
+  }
+
+  @include std.screen_lte("xsm") {
+    font-size: 0.65rem;
+  }
+
+  @include std.screen_lte("xxsm") {
+    font-size: 0.55rem;
+  }
+}
+
+body {
+  margin: 0;
+}
+
+input,
+textarea {
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+  font-size: inherit;
+  color: inherit;
+  font-family: inherit;
+}

@@ -1,0 +1,383 @@
+@use "sass:color" as clr;
+@use "sass:math" as math;
+
+@function mul($left, $right) {
+  @return $left * $right;
+}
+
+:root {
+  --p-bg-primary: #f0f0f0;
+  --p-bg-primary-h100: #eaeaea;
+  --p-bg-primary-h200: #e5e5e5;
+  --p-bg-primary-h300: #dedede;
+  --p-bg-primary-h400: #d0d0d0;
+  --p-bg-primary-h500: #c9c9c9;
+  --p-bg-primary-h600: #c2c2c2;
+  --p-bg-primary-h700: #bababa;
+  --p-bg-primary-h800: #b2b2b2;
+  --p-bg-primary-h900: #aaaaaa;
+
+  --p-bg-primary-m100: #f8f8f8;
+  --p-bg-primary-m200: #ffffff;
+  --p-bg-primary-m300: #ffffff;
+  --p-bg-primary-m400: #ffffff;
+  --p-bg-primary-m500: #ffffff;
+  --p-bg-primary-m600: #ffffff;
+  --p-bg-primary-m700: #ffffff;
+  --p-bg-primary-m800: #ffffff;
+  --p-bg-primary-m900: #ffffff;
+
+  $border_primary: rgb(156, 156, 156);
+  $border_primary_h: rgb(0, 0, 0);
+  $border_primary_m: rgb(255, 255, 255);
+  $border_primary_step: 9%;
+
+  --p-border-primary: #{$border_primary};
+  --p-border-primary-h100: #{clr.mix($border-primary_h, $border_primary, mul($border_primary_step, 1))};
+  --p-border-primary-h200: #{clr.mix($border-primary_h, $border_primary, mul($border_primary_step, 2))};
+  --p-border-primary-h300: #{clr.mix($border-primary_h, $border_primary, mul($border_primary_step, 3))};
+  --p-border-primary-h400: #{clr.mix($border-primary_h, $border_primary, mul($border_primary_step, 4))};
+  --p-border-primary-h500: #{clr.mix($border-primary_h, $border_primary, mul($border_primary_step, 5))};
+  --p-border-primary-h600: #{clr.mix($border-primary_h, $border_primary, mul($border_primary_step, 6))};
+  --p-border-primary-h700: #{clr.mix($border-primary_h, $border_primary, mul($border_primary_step, 7))};
+  --p-border-primary-h800: #{clr.mix($border-primary_h, $border_primary, mul($border_primary_step, 8))};
+  --p-border-primary-h900: #{clr.mix($border-primary_h, $border_primary, mul($border_primary_step, 9))};
+
+  --p-border-primary-m100: #{clr.mix($border-primary_m, $border_primary, mul($border_primary_step, 1))};
+  --p-border-primary-m200: #{clr.mix($border-primary_m, $border_primary, mul($border_primary_step, 2))};
+  --p-border-primary-m300: #{clr.mix($border-primary_m, $border_primary, mul($border_primary_step, 3))};
+  --p-border-primary-m400: #{clr.mix($border-primary_m, $border_primary, mul($border_primary_step, 4))};
+  --p-border-primary-m500: #{clr.mix($border-primary_m, $border_primary, mul($border_primary_step, 5))};
+  --p-border-primary-m600: #{clr.mix($border-primary_m, $border_primary, mul($border_primary_step, 6))};
+  --p-border-primary-m700: #{clr.mix($border-primary_m, $border_primary, mul($border_primary_step, 7))};
+  --p-border-primary-m800: #{clr.mix($border-primary_m, $border_primary, mul($border_primary_step, 8))};
+  --p-border-primary-m900: #{clr.mix($border-primary_m, $border_primary, mul($border_primary_step, 9))};
+
+  --p-text-normal: #333333;
+
+  --p-text-normal-h100: #2b2b2b;
+  --p-text-normal-h200: #222222;
+  --p-text-normal-h300: #1a1a1a;
+  --p-text-normal-h400: #111111;
+  --p-text-normal-h500: #090909;
+  --p-text-normal-h600: #000000;
+  --p-text-normal-h700: #000000;
+  --p-text-normal-h800: #000000;
+  --p-text-normal-h900: #000000;
+
+  --p-text-normal-m100: #3c3c3c;
+  --p-text-normal-m200: #454545;
+  --p-text-normal-m300: #4d4d4d;
+  --p-text-normal-m400: #565656;
+  --p-text-normal-m500: #5e5e5e;
+  --p-text-normal-m600: #676767;
+  --p-text-normal-m700: #6f6f6f;
+  --p-text-normal-m800: #787878;
+  --p-text-normal-m900: #808080;
+
+  $text_error: rgb(229, 57, 53);
+  $text_error_h: rgb(0, 0, 0);
+  $text_error_m: rgb(255, 255, 255);
+  $text_error_step: 9%;
+
+  --p-text-error: #{$text_error};
+  --p-text-error-h100: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 1))};
+  --p-text-error-h200: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 2))};
+  --p-text-error-h300: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 3))};
+  --p-text-error-h400: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 4))};
+  --p-text-error-h500: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 5))};
+  --p-text-error-h600: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 6))};
+  --p-text-error-h700: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 7))};
+  --p-text-error-h800: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 8))};
+  --p-text-error-h900: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 9))};
+
+  --p-text-error-m100: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 1))};
+  --p-text-error-m200: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 2))};
+  --p-text-error-m300: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 3))};
+  --p-text-error-m400: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 4))};
+  --p-text-error-m500: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 5))};
+  --p-text-error-m600: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 6))};
+  --p-text-error-m700: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 7))};
+  --p-text-error-m800: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 8))};
+  --p-text-error-m900: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 9))};
+
+  $text_success: rgb(16, 145, 18);
+  $text_success_h: rgb(0, 0, 0);
+  $text_success_m: rgb(255, 255, 255);
+  $text_success_step: 4%;
+
+  --p-text-success: #{$text_success};
+  --p-text-success-h100: #{clr.mix($text-success_h, $text_success, mul($text_success_step, 1))};
+  --p-text-success-h200: #{clr.mix($text-success_h, $text_success, mul($text_success_step, 2))};
+  --p-text-success-h300: #{clr.mix($text-success_h, $text_success, mul($text_success_step, 3))};
+  --p-text-success-h400: #{clr.mix($text-success_h, $text_success, mul($text_success_step, 4))};
+  --p-text-success-h500: #{clr.mix($text-success_h, $text_success, mul($text_success_step, 5))};
+  --p-text-success-h600: #{clr.mix($text-success_h, $text_success, mul($text_success_step, 6))};
+  --p-text-success-h700: #{clr.mix($text-success_h, $text_success, mul($text_success_step, 7))};
+  --p-text-success-h800: #{clr.mix($text-success_h, $text_success, mul($text_success_step, 8))};
+  --p-text-success-h900: #{clr.mix($text-success_h, $text_success, mul($text_success_step, 9))};
+
+  --p-text-success-m100: #{clr.mix($text-success_m, $text_success, mul($text_success_step, 1))};
+  --p-text-success-m200: #{clr.mix($text-success_m, $text_success, mul($text_success_step, 2))};
+  --p-text-success-m300: #{clr.mix($text-success_m, $text_success, mul($text_success_step, 3))};
+  --p-text-success-m400: #{clr.mix($text-success_m, $text_success, mul($text_success_step, 4))};
+  --p-text-success-m500: #{clr.mix($text-success_m, $text_success, mul($text_success_step, 5))};
+  --p-text-success-m600: #{clr.mix($text-success_m, $text_success, mul($text_success_step, 6))};
+  --p-text-success-m700: #{clr.mix($text-success_m, $text_success, mul($text_success_step, 7))};
+  --p-text-success-m800: #{clr.mix($text-success_m, $text_success, mul($text_success_step, 8))};
+  --p-text-success-m900: #{clr.mix($text-success_m, $text_success, mul($text_success_step, 9))};
+
+  $text_green: rgb(255, 255, 255);
+  $text_green_h: rgb(255, 255, 255);
+  $text_green_m: rgb(16, 145, 18);
+  $text_green_step: 4%;
+
+  --p-text-green: #{$text_green};
+  --p-text-green-h100: #{clr.mix($text-green_h, $text_green, mul($text_green_step, 1))};
+  --p-text-green-h200: #{clr.mix($text-green_h, $text_green, mul($text_green_step, 2))};
+  --p-text-green-h300: #{clr.mix($text-green_h, $text_green, mul($text_green_step, 3))};
+  --p-text-green-h400: #{clr.mix($text-green_h, $text_green, mul($text_green_step, 4))};
+  --p-text-green-h500: #{clr.mix($text-green_h, $text_green, mul($text_green_step, 5))};
+  --p-text-green-h600: #{clr.mix($text-green_h, $text_green, mul($text_green_step, 6))};
+  --p-text-green-h700: #{clr.mix($text-green_h, $text_green, mul($text_green_step, 7))};
+  --p-text-green-h800: #{clr.mix($text-green_h, $text_green, mul($text_green_step, 8))};
+  --p-text-green-h900: #{clr.mix($text-green_h, $text_green, mul($text_green_step, 9))};
+
+  --p-text-green-m100: #{clr.mix($text-green_m, $text_green, mul($text_green_step, 1))};
+  --p-text-green-m200: #{clr.mix($text-green_m, $text_green, mul($text_green_step, 2))};
+  --p-text-green-m300: #{clr.mix($text-green_m, $text_green, mul($text_green_step, 3))};
+  --p-text-green-m400: #{clr.mix($text-green_m, $text_green, mul($text_green_step, 4))};
+  --p-text-green-m500: #{clr.mix($text-green_m, $text_green, mul($text_green_step, 5))};
+  --p-text-green-m600: #{clr.mix($text-green_m, $text_green, mul($text_green_step, 6))};
+  --p-text-green-m700: #{clr.mix($text-green_m, $text_green, mul($text_green_step, 7))};
+  --p-text-green-m800: #{clr.mix($text-green_m, $text_green, mul($text_green_step, 8))};
+  --p-text-green-m900: #{clr.mix($text-green_m, $text_green, mul($text_green_step, 9))};
+
+  $bg_green: rgb(48, 195, 54);
+  $bg_green_h: rgb(0, 0, 0);
+  $bg_green_m: rgb(255, 255, 255);
+  $bg_green_step: 6%;
+
+  --p-bg-green: #{$bg_green};
+  --p-bg-green-h100: #{clr.mix($bg-green_h, $bg_green, mul($bg_green_step, 1))};
+  --p-bg-green-h200: #{clr.mix($bg-green_h, $bg_green, mul($bg_green_step, 2))};
+  --p-bg-green-h300: #{clr.mix($bg-green_h, $bg_green, mul($bg_green_step, 3))};
+  --p-bg-green-h400: #{clr.mix($bg-green_h, $bg_green, mul($bg_green_step, 4))};
+  --p-bg-green-h500: #{clr.mix($bg-green_h, $bg_green, mul($bg_green_step, 5))};
+  --p-bg-green-h600: #{clr.mix($bg-green_h, $bg_green, mul($bg_green_step, 6))};
+  --p-bg-green-h700: #{clr.mix($bg-green_h, $bg_green, mul($bg_green_step, 7))};
+  --p-bg-green-h800: #{clr.mix($bg-green_h, $bg_green, mul($bg_green_step, 8))};
+  --p-bg-green-h900: #{clr.mix($bg-green_h, $bg_green, mul($bg_green_step, 9))};
+
+  --p-bg-green-m100: #{clr.mix($bg-green_m, $bg_green, mul($bg_green_step, 1))};
+  --p-bg-green-m200: #{clr.mix($bg-green_m, $bg_green, mul($bg_green_step, 2))};
+  --p-bg-green-m300: #{clr.mix($bg-green_m, $bg_green, mul($bg_green_step, 3))};
+  --p-bg-green-m400: #{clr.mix($bg-green_m, $bg_green, mul($bg_green_step, 4))};
+  --p-bg-green-m500: #{clr.mix($bg-green_m, $bg_green, mul($bg_green_step, 5))};
+  --p-bg-green-m600: #{clr.mix($bg-green_m, $bg_green, mul($bg_green_step, 6))};
+  --p-bg-green-m700: #{clr.mix($bg-green_m, $bg_green, mul($bg_green_step, 7))};
+  --p-bg-green-m800: #{clr.mix($bg-green_m, $bg_green, mul($bg_green_step, 8))};
+  --p-bg-green-m900: #{clr.mix($bg-green_m, $bg_green, mul($bg_green_step, 9))};
+
+  --p-bg-inputlight: #ffffff;
+
+  --p-bg-inputlight-h100: #efefef;
+  --p-bg-inputlight-h200: #e5e5e5;
+  --p-bg-inputlight-h300: #dedede;
+  --p-bg-inputlight-h400: #d0d0d0;
+  --p-bg-inputlight-h500: #c9c9c9;
+  --p-bg-inputlight-h600: #c2c2c2;
+  --p-bg-inputlight-h700: #bababa;
+  --p-bg-inputlight-h800: #b2b2b2;
+  --p-bg-inputlight-h900: #aaaaaa;
+
+  --p-bg-inputlight-m100: #ffffff;
+  --p-bg-inputlight-m200: #ffffff;
+  --p-bg-inputlight-m300: #ffffff;
+  --p-bg-inputlight-m400: #ffffff;
+  --p-bg-inputlight-m500: #ffffff;
+  --p-bg-inputlight-m600: #ffffff;
+  --p-bg-inputlight-m700: #ffffff;
+  --p-bg-inputlight-m800: #ffffff;
+  --p-bg-inputlight-m900: #ffffff;
+
+  --p-bg-inputerror: rgba(255, 0, 0, .21);
+
+  --p-bg-inputerror-h100: rgba(255, 0, 0, .24);
+  --p-bg-inputerror-h200: rgba(255, 0, 0, .27);
+  --p-bg-inputerror-h300: rgba(255, 0, 0, .30);
+  --p-bg-inputerror-h400: rgba(255, 0, 0, .33);
+  --p-bg-inputerror-h500: rgba(255, 0, 0, .36);
+  --p-bg-inputerror-h600: rgba(255, 0, 0, .39);
+  --p-bg-inputerror-h700: rgba(255, 0, 0, .42);
+  --p-bg-inputerror-h800: rgba(255, 0, 0, .45);
+  --p-bg-inputerror-h900: rgba(255, 0, 0, .48);
+
+  --p-bg-inputerror-m100: rgba(255, 0, 0, .18);
+  --p-bg-inputerror-m200: rgba(255, 0, 0, .15);
+  --p-bg-inputerror-m300: rgba(255, 0, 0, .12);
+  --p-bg-inputerror-m400: rgba(255, 0, 0, .9);
+  --p-bg-inputerror-m500: rgba(255, 0, 0, .6);
+  --p-bg-inputerror-m600: rgba(255, 0, 0, .3);
+  --p-bg-inputerror-m700: rgba(255, 0, 0, .3);
+  --p-bg-inputerror-m800: rgba(255, 0, 0, .3);
+  --p-bg-inputerror-m900: rgba(255, 0, 0, .3);
+
+  --p-text-inputlight: #333333;
+
+  --p-text-inputlight-h100: #2b2b2b;
+  --p-text-inputlight-h200: #222222;
+  --p-text-inputlight-h300: #1a1a1a;
+  --p-text-inputlight-h400: #111111;
+  --p-text-inputlight-h500: #090909;
+  --p-text-inputlight-h600: #000000;
+  --p-text-inputlight-h700: #000000;
+  --p-text-inputlight-h800: #000000;
+  --p-text-inputlight-h900: #000000;
+
+  --p-text-inputlight-m100: #3c3c3c;
+  --p-text-inputlight-m200: #454545;
+  --p-text-inputlight-m300: #4d4d4d;
+  --p-text-inputlight-m400: #565656;
+  --p-text-inputlight-m500: #5e5e5e;
+  --p-text-inputlight-m600: #676767;
+  --p-text-inputlight-m700: #6f6f6f;
+  --p-text-inputlight-m800: #787878;
+  --p-text-inputlight-m900: #808080;
+
+  --p-bg-modaldark: rgba(0, 0, 0, 0.5);
+
+  --p-bg-modaldark-h100: rgba(0, 0, 0, 0.55);
+  --p-bg-modaldark-h200: rgba(0, 0, 0, 0.60);
+  --p-bg-modaldark-h300: rgba(0, 0, 0, 0.65);
+  --p-bg-modaldark-h400: rgba(0, 0, 0, 0.70);
+  --p-bg-modaldark-h500: rgba(0, 0, 0, 0.75);
+  --p-bg-modaldark-h600: rgba(0, 0, 0, 0.80);
+  --p-bg-modaldark-h700: rgba(0, 0, 0, 0.85);
+  --p-bg-modaldark-h800: rgba(0, 0, 0, 0.90);
+  --p-bg-modaldark-h900: rgba(0, 0, 0, 0.95);
+
+  --p-bg-modaldark-m100: rgba(0, 0, 0, 0.45);
+  --p-bg-modaldark-m200: rgba(0, 0, 0, 0.40);
+  --p-bg-modaldark-m300: rgba(0, 0, 0, 0.35);
+  --p-bg-modaldark-m400: rgba(0, 0, 0, 0.30);
+  --p-bg-modaldark-m500: rgba(0, 0, 0, 0.25);
+  --p-bg-modaldark-m600: rgba(0, 0, 0, 0.20);
+  --p-bg-modaldark-m700: rgba(0, 0, 0, 0.15);
+  --p-bg-modaldark-m800: rgba(0, 0, 0, 0.10);
+  --p-bg-modaldark-m900: rgba(0, 0, 0, 0.05);
+
+  --p-bg-modallight: rgba(255, 255, 255, 0.5);
+
+  --p-bg-modallight-h100: rgba(255, 255, 255, 0.55);
+  --p-bg-modallight-h200: rgba(255, 255, 255, 0.60);
+  --p-bg-modallight-h300: rgba(255, 255, 255, 0.65);
+  --p-bg-modallight-h400: rgba(255, 255, 255, 0.70);
+  --p-bg-modallight-h500: rgba(255, 255, 255, 0.75);
+  --p-bg-modallight-h600: rgba(255, 255, 255, 0.80);
+  --p-bg-modallight-h700: rgba(255, 255, 255, 0.85);
+  --p-bg-modallight-h800: rgba(255, 255, 255, 0.90);
+  --p-bg-modallight-h900: rgba(255, 255, 255, 0.95);
+
+  --p-bg-modallight-m100: rgba(255, 255, 255, 0.45);
+  --p-bg-modallight-m200: rgba(255, 255, 255, 0.40);
+  --p-bg-modallight-m300: rgba(255, 255, 255, 0.35);
+  --p-bg-modallight-m400: rgba(255, 255, 255, 0.30);
+  --p-bg-modallight-m500: rgba(255, 255, 255, 0.25);
+  --p-bg-modallight-m600: rgba(255, 255, 255, 0.20);
+  --p-bg-modallight-m700: rgba(255, 255, 255, 0.15);
+  --p-bg-modallight-m800: rgba(255, 255, 255, 0.10);
+  --p-bg-modallight-m900: rgba(255, 255, 255, 0.05);
+
+  $bg_secondary: rgb(110, 140, 255);
+  $bg_secondary_h: rgb(0, 0, 0);
+  $bg_secondary_m: rgb(255, 255, 255);
+  $bg_secondary_step: 9%;
+
+  --p-bg-secondary: #{$bg_secondary};
+  --p-bg-secondary-h100: #{clr.mix($bg-secondary_h, $bg_secondary, mul($bg_secondary_step, 1))};
+  --p-bg-secondary-h200: #{clr.mix($bg-secondary_h, $bg_secondary, mul($bg_secondary_step, 2))};
+  --p-bg-secondary-h300: #{clr.mix($bg-secondary_h, $bg_secondary, mul($bg_secondary_step, 3))};
+  --p-bg-secondary-h400: #{clr.mix($bg-secondary_h, $bg_secondary, mul($bg_secondary_step, 4))};
+  --p-bg-secondary-h500: #{clr.mix($bg-secondary_h, $bg_secondary, mul($bg_secondary_step, 5))};
+  --p-bg-secondary-h600: #{clr.mix($bg-secondary_h, $bg_secondary, mul($bg_secondary_step, 6))};
+  --p-bg-secondary-h700: #{clr.mix($bg-secondary_h, $bg_secondary, mul($bg_secondary_step, 7))};
+  --p-bg-secondary-h800: #{clr.mix($bg-secondary_h, $bg_secondary, mul($bg_secondary_step, 8))};
+  --p-bg-secondary-h900: #{clr.mix($bg-secondary_h, $bg_secondary, mul($bg_secondary_step, 9))};
+
+  --p-bg-secondary-m100: #{clr.mix($bg-secondary_m, $bg_secondary, mul($bg_secondary_step, 1))};
+  --p-bg-secondary-m200: #{clr.mix($bg-secondary_m, $bg_secondary, mul($bg_secondary_step, 2))};
+  --p-bg-secondary-m300: #{clr.mix($bg-secondary_m, $bg_secondary, mul($bg_secondary_step, 3))};
+  --p-bg-secondary-m400: #{clr.mix($bg-secondary_m, $bg_secondary, mul($bg_secondary_step, 4))};
+  --p-bg-secondary-m500: #{clr.mix($bg-secondary_m, $bg_secondary, mul($bg_secondary_step, 5))};
+  --p-bg-secondary-m600: #{clr.mix($bg-secondary_m, $bg_secondary, mul($bg_secondary_step, 6))};
+  --p-bg-secondary-m700: #{clr.mix($bg-secondary_m, $bg_secondary, mul($bg_secondary_step, 7))};
+  --p-bg-secondary-m800: #{clr.mix($bg-secondary_m, $bg_secondary, mul($bg_secondary_step, 8))};
+  --p-bg-secondary-m900: #{clr.mix($bg-secondary_m, $bg_secondary, mul($bg_secondary_step, 9))};
+
+  --p-text-secondary: #ffffff;
+
+  --p-text-secondary-h100: #dcdcdc;
+  --p-text-secondary-h200: #d3d3d3;
+  --p-text-secondary-h300: #cbcbcb;
+  --p-text-secondary-h400: #c2c2c2;
+  --p-text-secondary-h500: #bababa;
+  --p-text-secondary-h600: #b1b1b1;
+  --p-text-secondary-h700: #a9a9a9;
+  --p-text-secondary-h800: #a0a0a0;
+  --p-text-secondary-h900: #989898;
+
+  --p-text-secondary-m100: #ffffff;
+  --p-text-secondary-m200: #ffffff;
+  --p-text-secondary-m300: #ffffff;
+  --p-text-secondary-m400: #ffffff;
+  --p-text-secondary-m500: #ffffff;
+  --p-text-secondary-m600: #ffffff;
+  --p-text-secondary-m700: #ffffff;
+  --p-text-secondary-m800: #ffffff;
+  --p-text-secondary-m900: #ffffff;
+
+  --p-bg-red: #ef4444;
+
+  --p-bg-red-h100: #e54242;
+  --p-bg-red-h200: #db3f3f;
+  --p-bg-red-h300: #d13c3c;
+  --p-bg-red-h400: #c73939;
+  --p-bg-red-h500: #bd3636;
+  --p-bg-red-h600: #b33333;
+  --p-bg-red-h700: #a93030;
+  --p-bg-red-h800: #9f2e2e;
+  --p-bg-red-h900: #952b2b;
+
+  --p-bg-red-m100: #ef4e4e;
+  --p-bg-red-m200: #ef5757;
+  --p-bg-red-m300: #ef6161;
+  --p-bg-red-m400: #ef6a6a;
+  --p-bg-red-m500: #ef7373;
+  --p-bg-red-m600: #ef7d7d;
+  --p-bg-red-m700: #ef8686;
+  --p-bg-red-m800: #ef8f8f;
+  --p-bg-red-m900: #ef9999;
+
+  --p-bg-purple: #8200e7;
+
+  --p-bg-purple-h100: #8200e7;
+  --p-bg-purple-h200: #8200e7;
+  --p-bg-purple-h300: #8200e7;
+  --p-bg-purple-h400: #8200e7;
+  --p-bg-purple-h500: #8200e7;
+  --p-bg-purple-h600: #8200e7;
+  --p-bg-purple-h700: #8200e7;
+  --p-bg-purple-h800: #8200e7;
+  --p-bg-purple-h900: #8200e7;
+
+  --p-bg-purple-m100: #8200e7;
+  --p-bg-purple-m200: #8200e7;
+  --p-bg-purple-m300: #8200e7;
+  --p-bg-purple-m400: #8200e7;
+  --p-bg-purple-m500: #8200e7;
+  --p-bg-purple-m600: #8200e7;
+  --p-bg-purple-m700: #8200e7;
+  --p-bg-purple-m800: #8200e7;
+  --p-bg-purple-m900: #8200e7;
+}

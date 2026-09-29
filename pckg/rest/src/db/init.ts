@@ -6,7 +6,7 @@ import dbdef from "./db.sql"
 
 export type Database = {
     porder: {
-        id: number
+        id: string
         deleted_at: Date | null
         created_at: Date
 
@@ -15,11 +15,11 @@ export type Database = {
     },
 
     product: {
-        id: number
-        deleted_at: Date
+        id: string
+        deleted_at: Date | null
         created_at: Date
 
-        porder_id: number
+        porder_id: string | null
 
         kind: cst.ProductStatus_Kind
         status_wear: cst.ProductStatus_Wear
@@ -27,8 +27,7 @@ export type Database = {
 
         title: string
         price_usd: number
-        warranty_start: Date
-        warranty_end: Date
+        price_uah: number
     },
 }
 

@@ -8,5 +8,11 @@ export * from "#src/res/new/json"
 export * from "#src/type/config"
 
 export * from "#src/send/porder/delete"
+export * from "#src/send/porder/post"
+export * from "#src/send/porder/patch"
+export * from "#src/send/porder/mget"
 
 export * from "#src/send/product/delete"
+export * from "#src/send/product/post"
+export * from "#src/send/product/patch"
+export * from "#src/send/product/mget"

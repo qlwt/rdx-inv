@@ -1,14 +1,14 @@
-import type { Cluster_Route } from "#src/util/cluster/type/cluster";
-import * as z from "zod"
-import * as eu from "@ta/express-utils"
 import { db } from "#src/db/init";
-import * as cst from "@ta/cst"
+import type { Cluster_Route } from "#src/util/cluster/type/cluster";
+import * as cst from "@ta/cst";
+import * as eu from "@ta/express-utils";
+import * as z from "zod";
 
 export type RestRoutePOrderDelete_New_Params = {}
 
 export const restroute_porder_delete_new = (params: RestRoutePOrderDelete_New_Params) => {
-    const schema_url = z.object({
-        id: z.coerce.number().int(),
+    const schema_url = z.strictObject({
+        id: z.uuidv7(),
     });
 
     return {
@@ -21,8 +21,8 @@ export const restroute_porder_delete_new = (params: RestRoutePOrderDelete_New_Pa
             path: `/rest/porder/:id`,
 
             middleware: [
-                eu.middleware_new_cookie(),
-                eu.middleware_new_json_short(),
+                eu.middleware_new_url_short(),
+                // eu.middleware_new_json_short(),
             ],
 
             handler: async ctx => {
@@ -33,6 +33,7 @@ export const restroute_porder_delete_new = (params: RestRoutePOrderDelete_New_Pa
                     const sql_result = await (trx
                         .updateTable("porder")
                         .where("id", "=", url.id)
+                        .where("deleted_at", "is", null)
                         .set({ deleted_at, })
                         .limit(1)
                         .executeTakeFirst()
@@ -41,6 +42,14 @@ export const restroute_porder_delete_new = (params: RestRoutePOrderDelete_New_Pa
                     if (sql_result.numUpdatedRows === 0n) {
                         throw eu.error_new_custom(404, cst.ServerError.NotFound)
                     }
+
+                    await (trx
+                        .updateTable("product")
+                        .where("porder_id", "=", url.id)
+                        .where("deleted_at", "is", null)
+                        .set({ porder_id: null, })
+                        .execute()
+                    )
                 })
 
                 return eu.response_new_json({

@@ -13,3 +13,7 @@ export enum ProductStatus_Kind {
     CPU = 1,
     Monitor = 2,
 }
+
+export const product_limits = {
+    title_mxlength: 255,
+}

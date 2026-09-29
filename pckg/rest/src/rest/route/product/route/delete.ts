@@ -8,7 +8,7 @@ export type RestRouteOrderDelete_New_Params = {}
 
 export const restroute_product_delete_new = (params: RestRouteOrderDelete_New_Params) => {
     const schema_url = z.object({
-        id: z.coerce.number().int(),
+        id: z.uuidv7(),
     });
 
     return {
@@ -21,8 +21,8 @@ export const restroute_product_delete_new = (params: RestRouteOrderDelete_New_Pa
             path: `/rest/product/delete/:id`,
 
             middleware: [
-                eu.middleware_new_cookie(),
-                eu.middleware_new_json_short(),
+                eu.middleware_new_url_short(),
+                // eu.middleware_new_json_short(),
             ],
 
             handler: async ctx => {
@@ -33,6 +33,7 @@ export const restroute_product_delete_new = (params: RestRouteOrderDelete_New_Pa
                     const sql_result = await (trx
                         .updateTable("product")
                         .where("id", "=", url.id)
+                        .where("deleted_at", "is", null)
                         .set({ deleted_at, })
                         .limit(1)
                         .executeTakeFirst()

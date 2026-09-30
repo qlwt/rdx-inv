@@ -1,9 +1,9 @@
 import { db } from "#src/db/init";
 import type { Cluster_Route } from "#src/util/cluster/type/cluster";
+import * as cst from "@ta/cst";
 import * as eu from "@ta/express-utils";
 import * as std from "@ta/std";
 import * as z from "zod";
-import * as cst from "@ta/cst"
 
 export type RestRouteProductMGet_New_Params = {}
 
@@ -40,6 +40,7 @@ export const restroute_product_mget_new = (params: RestRouteProductMGet_New_Para
                 const result = await db.transaction().execute(async trx => {
                     let builder_nodes = (trx
                         .selectFrom("product")
+                        .orderBy("id", "desc")
                         .where("deleted_at", "is", null)
                         .selectAll()
                     )
@@ -47,6 +48,7 @@ export const restroute_product_mget_new = (params: RestRouteProductMGet_New_Para
                     let builder_cursor = (trx
                         .selectFrom("product")
                         .select(["id"])
+                        .orderBy("id", "desc")
                         .where("deleted_at", "is", null)
                         .limit(1)
                     )
@@ -56,8 +58,8 @@ export const restroute_product_mget_new = (params: RestRouteProductMGet_New_Para
                     }
 
                     if (typeof query.cursor === "string") {
-                        builder_nodes = builder_nodes.where("id", ">=", query.cursor)
-                        builder_cursor = builder_cursor.where("id", ">=", query.cursor)
+                        builder_nodes = builder_nodes.where("id", "<=", query.cursor)
+                        builder_cursor = builder_cursor.where("id", "<=", query.cursor)
                     }
 
                     if (query.pick) {
@@ -80,18 +82,12 @@ export const restroute_product_mget_new = (params: RestRouteProductMGet_New_Para
 
                         return {
                             cursor: res_cursor?.id ?? null,
-
-                            node_list: {
-                                product: res_nodes,
-                            },
+                            node_list: res_nodes,
                         }
                     } else {
                         return {
                             cursor: null,
-
-                            node_list: {
-                                product: await builder_nodes.execute(),
-                            },
+                            node_list: await builder_nodes.execute(),
                         }
                     }
                 })

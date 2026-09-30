@@ -16,7 +16,7 @@ export const restroute_product_patch_new = (params: RestRouteProductPatch_New_Pa
         price_uah: z.number().gte(0).exactOptional(),
         price_usd: z.number().gte(0).exactOptional(),
 
-        kind: z.enum(cst.ProductStatus_Kind),
+        kind: z.enum(cst.ProductStatus_Kind).exactOptional(),
         status_wear: z.enum(cst.ProductStatus_Wear).exactOptional(),
         status_avail: z.enum(cst.ProductStatus_Avail).exactOptional(),
 
@@ -50,9 +50,7 @@ export const restroute_product_patch_new = (params: RestRouteProductPatch_New_Pa
                     const sql_result = await (trx
                         .updateTable("product")
                         .where("id", "=", url.id)
-                        .where("deleted_at", "is", null)
                         .set(body)
-                        .limit(1)
                         .executeTakeFirst()
                     )
 

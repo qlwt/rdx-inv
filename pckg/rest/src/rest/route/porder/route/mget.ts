@@ -36,12 +36,14 @@ export const restroute_porder_mget_new = (params: RestRoutePOrderMGet_New_Params
                     let builder_cursor = (trx
                         .selectFrom("porder")
                         .select(["id"])
+                        .orderBy("id")
                         .where("deleted_at", "is", null)
                         .limit(1)
                     )
 
                     let builder_nodes = (trx
                         .selectFrom("porder")
+                        .orderBy("id")
                         .where("deleted_at", "is", null)
                         .selectAll()
                         .select([
@@ -62,8 +64,8 @@ export const restroute_porder_mget_new = (params: RestRoutePOrderMGet_New_Params
                     }
 
                     if (typeof query.cursor === "string") {
-                        builder_nodes = builder_nodes.where("id", ">=", query.cursor)
-                        builder_cursor = builder_cursor.where("id", ">=", query.cursor)
+                        builder_nodes = builder_nodes.where("id", "<=", query.cursor)
+                        builder_cursor = builder_cursor.where("id", "<=", query.cursor)
                     }
 
                     if (query.pick) {
@@ -86,18 +88,12 @@ export const restroute_porder_mget_new = (params: RestRoutePOrderMGet_New_Params
 
                         return {
                             cursor: res_cursor?.id ?? null,
-
-                            node_list: {
-                                porder: res_nodes,
-                            },
+                            node_list: res_nodes,
                         }
                     } else {
                         return {
                             cursor: null,
-
-                            node_list: {
-                                porder: await builder_nodes.execute(),
-                            },
+                            node_list: await builder_nodes.execute(),
                         }
                     }
                 })

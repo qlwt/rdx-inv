@@ -26,7 +26,7 @@ export const restroute_product_delete_new = (params: RestRouteOrderDelete_New_Pa
             ],
 
             handler: async ctx => {
-                const deleted_at = new Date()
+                const deleted_at = Date.now()
                 const url = eu.input_parse_zod(schema_url, ctx.req.params)
 
                 await db.transaction().execute(async trx => {

@@ -45,7 +45,6 @@ export const restroute_porder_patch_new = (params: RestRoutePOrderPatch_New_Para
                         .where("id", "=", url.id)
                         .where("deleted_at", "is", null)
                         .set(body)
-                        .limit(1)
                         .executeTakeFirst()
                     )
 

@@ -7,8 +7,8 @@ import dbdef from "./db.sql"
 export type Database = {
     porder: {
         id: string
-        deleted_at: Date | null
-        created_at: Date
+        deleted_at: number | null
+        created_at: number
 
         title: string
         description: string
@@ -16,8 +16,8 @@ export type Database = {
 
     product: {
         id: string
-        deleted_at: Date | null
-        created_at: Date
+        deleted_at: number | null
+        created_at: number
 
         porder_id: string | null
 
@@ -42,6 +42,8 @@ export const db = new ksly.Kysely<Database>({
         }),
     }),
 })
+
+pg.types.setTypeParser(pg.types.builtins.INT8, Number.parseInt)
 
 export const db_define = async function() {
     return await db.transaction().execute(async trx => {

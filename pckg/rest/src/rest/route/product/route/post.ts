@@ -35,7 +35,7 @@ export const restroute_product_post_new = (params: RestRouteProductPost_New_Para
 
             handler: async ctx => {
                 const id = uuid_new()
-                const created_at = new Date()
+                const created_at = Date.now()
                 const body = eu.input_parse_zod(schema_body, ctx.req.body)
 
                 const result = await db.transaction().execute(async trx => {

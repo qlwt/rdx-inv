@@ -1,3 +1,3 @@
-export type Fn<Return, Params extends any[] = []> = {
+export type Fn<Return, Params extends readonly any[] = []> = {
     (...params: Params): Return
 }

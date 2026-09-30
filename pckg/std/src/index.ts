@@ -27,6 +27,8 @@ export * from "#src/fn/type/commons"
 export * from "#src/object/type/commons"
 export * from "#src/object/new/map"
 export * from "#src/object/new/mapf"
+export * from "#src/object/hash"
+export * from "#src/object/upsert"
 
 // zod
 export * from "#src/zod/is"
@@ -57,6 +59,7 @@ export * from "#src/maybe/expect"
 export * from "#src/maybe/new/map"
 export * from "#src/maybe/new/none"
 export * from "#src/maybe/new/some"
+export * from "#src/maybe/cst/mnone"
 export * from "#src/maybe/type/maybe"
 
 // deferred

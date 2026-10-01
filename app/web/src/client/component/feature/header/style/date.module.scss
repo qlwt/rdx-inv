@@ -1,0 +1,55 @@
+@use "util:std" as std;
+
+.root {
+  display: flex;
+  align-items: flex-end;
+
+  gap: std.rem(20);
+}
+
+.date__top {
+  font-size: std.rem(18);
+}
+
+.date__bottom {
+  font-size: std.rem(16);
+}
+
+.time {
+  display: flex;
+  gap: std.rem(10);
+  align-items: center;
+}
+
+.time__text {
+  font-size: std.rem(16);
+}
+
+.time__clock {
+  position: relative;
+
+  width: std.rem(20);
+  height: std.rem(20);
+
+  border-radius: 50%;
+  border: std.rem(2) solid var(--p-bg-secondary-h200);
+
+  transform: rotate(var(--rotation, 0deg));
+
+  &::before {
+    content: "";
+    display: block;
+
+    position: absolute;
+    top: 0;
+    left: 50%;
+
+    width: std.rem(2);
+    height: std.rem(10);
+
+    background-color: var(--p-bg-secondary-h200); 
+
+    transform: translateX(-50%);
+    // transform: translateX(-50%) rotate(180deg);
+  }
+}

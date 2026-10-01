@@ -1,0 +1,27 @@
+@use "util:std" as std;
+
+.root {
+  background-color: var(--p-bg-primary-m200);
+  box-shadow: 0 0 std.rem(15) 0 var(--p-bg-primary-h600);
+  padding: std.rem(15) 0;
+}
+
+.logo {
+  user-select: none;
+
+  display: flex;
+  align-items: center;
+
+  gap: std.rem(10);
+  font-size: std.rem(22);
+}
+
+.logo__text {
+  color: var(--p-bg-secondary-h100);
+}
+
+.info {
+  display: flex;
+  align-items: end;
+  gap: std.rem(20);
+}

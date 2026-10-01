@@ -1,0 +1,5 @@
+@use "util:std" as std;
+
+.root {
+  font-size: std.rem(16);
+}

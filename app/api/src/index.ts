@@ -6,7 +6,7 @@ type Server_New_Params = {
     readonly origin_list: readonly string[]
 }
 
-const server_new = async function(params: Server_New_Params) {
+const app_new = async function(params: Server_New_Params) {
     const app = express()
 
     app.use((req, res, next) => {
@@ -30,21 +30,23 @@ const server_new = async function(params: Server_New_Params) {
     return app
 }
 
-const server_init = async function() {
-    const app = await server_new({
+const server_init = async function(app: express.Express) {
+    const server = app.listen(env_port, () => {
+        console.log(`Api server initialized on port ${env_port}`)
+    })
+
+    rest.wss_new_gen(server)
+}
+
+const main = async function() {
+    const app = await app_new({
         origin_list: [
             env_client_host,
         ]
     })
 
-    app.listen(env_port, () => {
-        console.log(`Api server initialized on port ${env_port}`)
-    })
-}
-
-const main = async function() {
     await rest.db_define()
-    await server_init()
+    await server_init(app)
 }
 
 main()

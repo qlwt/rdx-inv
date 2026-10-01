@@ -37,7 +37,7 @@ export default defineConfig({
 
         rollupOptions: {
             input: {
-                index_console: path.resolve("./src/index.html")
+                index: path.resolve("./src/index.html")
             },
         },
     },

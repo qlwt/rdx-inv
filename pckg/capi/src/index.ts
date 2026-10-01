@@ -11,3 +11,6 @@ export * from "#src/send/delete"
 export * from "#src/send/post"
 export * from "#src/send/patch"
 export * from "#src/send/mget"
+
+export * from "#src/ws/con"
+export * from "#src/ws/new/gen"

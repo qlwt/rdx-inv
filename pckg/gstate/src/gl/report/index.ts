@@ -90,6 +90,4 @@ export const gl_report = {
     sel: {
         ...slice.selectors,
     },
-
-    ut: {},
 }

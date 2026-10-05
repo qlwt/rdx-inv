@@ -36,14 +36,20 @@ export const restroute_porder_mget_new = (params: RestRoutePOrderMGet_New_Params
                     let builder_cursor = (trx
                         .selectFrom("porder")
                         .select(["id"])
-                        .orderBy("id")
+                        .orderBy("id", "desc")
                         .where("deleted_at", "is", null)
                         .limit(1)
                     )
 
+                    let builder_count = (trx
+                        .selectFrom("porder")
+                        .select(eb => [eb.fn.count("id").as("count")])
+                        .where("deleted_at", "is", null)
+                    )
+
                     let builder_nodes = (trx
                         .selectFrom("porder")
-                        .orderBy("id")
+                        .orderBy("id", "desc")
                         .where("deleted_at", "is", null)
                         .selectAll()
                         .select([
@@ -71,9 +77,11 @@ export const restroute_porder_mget_new = (params: RestRoutePOrderMGet_New_Params
                     if (query.pick) {
                         for (const [pick_key, pick_value] of Object.entries(query.pick)) {
                             if (pick_value === null) {
+                                builder_count = builder_count.where(pick_key as any, "is", null)
                                 builder_nodes = builder_nodes.where(pick_key as any, "is", null)
                                 builder_cursor = builder_cursor.where(pick_key as any, "is", null)
                             } else {
+                                builder_count = builder_count.where(pick_key as any, "=", pick_value)
                                 builder_nodes = builder_nodes.where(pick_key as any, "=", pick_value)
                                 builder_cursor = builder_cursor.where(pick_key as any, "=", pick_value)
                             }
@@ -81,19 +89,27 @@ export const restroute_porder_mget_new = (params: RestRoutePOrderMGet_New_Params
                     }
 
                     if (typeof query.limit === "number") {
-                        const [res_nodes, res_cursor] = await Promise.all([
+                        const [res_count, res_nodes, res_cursor] = await Promise.all([
+                            builder_count.executeTakeFirstOrThrow(),
                             builder_nodes.execute(),
                             builder_cursor.offset(query.limit).executeTakeFirst(),
                         ] as const)
 
                         return {
-                            cursor: res_cursor?.id ?? null,
                             node_list: res_nodes,
+                            count: Number(res_count.count),
+                            cursor: res_cursor?.id ?? null,
                         }
                     } else {
+                        const [res_count, res_nodes] = await Promise.all([
+                            builder_count.executeTakeFirstOrThrow(),
+                            builder_nodes.execute(),
+                        ])
+
                         return {
                             cursor: null,
-                            node_list: await builder_nodes.execute(),
+                            node_list: res_nodes,
+                            count: Number(res_count.count),
                         }
                     }
                 })

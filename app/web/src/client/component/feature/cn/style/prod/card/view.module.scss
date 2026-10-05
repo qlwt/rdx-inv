@@ -1,0 +1,255 @@
+@use "util:std" as std;
+
+.root {
+  position: relative;
+
+  display: grid;
+  gap: std.rem(15);
+  align-items: center;
+
+  padding: std.rem(5) std.rem(15);
+  background-color: var(--p-bg-primary-m500);
+
+  border-radius: 4px;
+  border: 2px solid var(--p-border-primary-m500);
+
+  &._inorder {
+    grid-template-areas: "check kind title price avail wear";
+    grid-template-columns: auto minmax(0, std.rem(72)) minmax(0, 3fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+
+    @include std.screen_lte("xxsm") {
+      grid-template-areas:
+        "check kind title title price"
+        ".     .    avail wear  .    "
+      ;
+
+      grid-template-columns: auto minmax(0, std.rem(72)) minmax(0, 3fr) minmax(0, 2fr) minmax(0, 2fr);
+    }
+  }
+
+  &._full {
+    grid-template-areas: "indicator kind title price porder avail wear act";
+    grid-template-columns: auto minmax(0, std.rem(72)) minmax(0, 3fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) auto;
+
+    @include std.screen_lte("xxsm") {
+      grid-template-areas:
+        "indicator kind title title  price .      act "
+        ".         .    .     porder avail wear   .   "
+      ;
+
+      grid-template-columns: auto minmax(0, std.rem(72)) minmax(0, 3fr) minmax(0, 2fr) minmax(0, 3fr) minmax(0, 1fr) auto;
+    }
+  }
+}
+
+.field_indicator {
+  grid-area: indicator;
+
+  width: std.rem(12);
+  height: std.rem(12);
+  border-radius: 50%;
+
+  &._green {
+    background-color: var(--p-text-sp_success-m800);
+  }
+
+  &._red {
+    background-color: var(--p-text-sp_red);
+  }
+}
+
+.field_check {
+  display: flex;
+  align-items: center;
+}
+
+.field_kind {
+  grid-area: kind;
+  cursor: pointer;
+
+  display: flex;
+
+  border-radius: 4px;
+
+  overflow: hidden;
+  height: std.rem(72);
+}
+
+.field_kind__img {
+  display: flex;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.field_title {
+  grid-area: title;
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.field_title__spec {
+  font-size: std.rem(14);
+  color: var(--p-text-primary-m600);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &._placeholder {
+    color: var(--p-text-primary-m800);
+  }
+}
+
+.field_title__head {
+  font-size: std.rem(18);
+  color: var(--p-text-primary-h200);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: underline;
+
+  &._placeholder {
+    text-decoration: none;
+    color: var(--p-text-primary-m800);
+  }
+}
+
+.field_price {
+  grid-area: price;
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: minmax(0, 1fr);
+
+  justify-content: end;
+}
+
+.field_price__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.field_price__text {
+  font-size: std.rem(14);
+
+  text-align: end;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.field_porder {
+  grid-area: porder;
+  text-align: center;
+
+  &._ordered {
+    color: var(--p-text-sp_yellow);
+  }
+
+  &._instock {
+    color: var(--p-text-sp_success);
+  }
+}
+
+.field_avail {
+  grid-area: avail;
+  text-align: center;
+}
+
+.field_avail__text {
+  font-size: std.rem(16);
+
+  &._avail_free {
+    color: var(--p-text-sp_success);
+  }
+
+  &._avail_broken {
+    color: var(--p-text-sp_red);
+  }
+}
+
+.field_wear {
+  grid-area: wear;
+  text-align: center;
+}
+
+.field_wear__text {
+  font-size: std.rem(16);
+  color: var(--p-text-primary-m800);
+}
+
+.field_act {
+  grid-area: act;
+  display: flex;
+  gap: std.rem(10);
+}
+
+.field_act__act {
+  outline: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: std.rem(15);
+
+  border-radius: 4px;
+  border: 1px solid var(--p-border-primary-m200);
+
+  padding: std.rem(10) std.rem(10);
+  background-color: var(--p-bg-primary-m200);
+
+  transition: background-color std.$trtime_fast;
+
+  &._delete {
+    color: var(--p-text-sp_red);
+  }
+
+  &:hover, &:focus {
+    background-color: var(--p-bg-primary);
+  }
+}
+
+.pending {
+  z-index: 1;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(0, 0, 0, .3);
+}
+
+.inbool {
+  outline: none;
+
+  font-size: std.rem(12);
+
+  border-radius: 2px;
+  border: 1px solid var(--p-border-primary);
+  padding: std.rem(3) std.rem(7);
+
+  transition: color std.$trtime_fast, background-color std.$trtime_fast;
+
+  &:not(._active) {
+    color: var(--p-text-primary);
+    background-color: var(--p-bg-primary-m200);
+
+    &:hover, &:focus {
+      background-color: var(--p-bg-primary);
+    }
+  }
+
+  &._active {
+    color: var(--p-text-secondary);
+    background-color: var(--p-bg-secondary);
+
+    &:hover, &:focus {
+      background-color: var(--p-bg-secondary);
+    }
+  }
+}

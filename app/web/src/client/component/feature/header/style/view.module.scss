@@ -1,6 +1,12 @@
 @use "util:std" as std;
 
 .root {
+  z-index: 2;
+
+  position: sticky;
+  top: 0;
+  left: 0;
+
   background-color: var(--p-bg-primary-m200);
   box-shadow: 0 0 std.rem(15) 0 var(--p-bg-primary-h600);
   padding: std.rem(15) 0;

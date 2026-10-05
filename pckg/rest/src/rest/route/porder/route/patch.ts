@@ -12,6 +12,9 @@ export const restroute_porder_patch_new = (params: RestRoutePOrderPatch_New_Para
     })
 
     const schema_body = z.strictObject({
+        sent_at: z.number().int().gte(0).nullable().exactOptional(),
+        sent_to: z.string().max(cst.porder_limits.sent_to_mxlength).nullable().exactOptional(),
+
         title: z.string().max(cst.porder_limits.title_mxlength).exactOptional(),
         description: z.string().max(cst.porder_limits.description_mxlength).exactOptional(),
     })

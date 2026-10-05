@@ -53,6 +53,8 @@ export * from "#src/promise/raceto"
 export * from "#src/promise/every"
 
 // maybe
+export * from "#src/maybe/type/maybe"
+export * from "#src/maybe/is"
 export * from "#src/maybe/pick"
 export * from "#src/maybe/unpack"
 export * from "#src/maybe/expect"
@@ -60,7 +62,6 @@ export * from "#src/maybe/new/map"
 export * from "#src/maybe/new/none"
 export * from "#src/maybe/new/some"
 export * from "#src/maybe/cst/mnone"
-export * from "#src/maybe/type/maybe"
 
 // deferred
 export * from "#src/deferred/type/deferred"

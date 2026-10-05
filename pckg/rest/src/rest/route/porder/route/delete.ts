@@ -35,7 +35,6 @@ export const restroute_porder_delete_new = (params: RestRoutePOrderDelete_New_Pa
                         .where("id", "=", url.id)
                         .where("deleted_at", "is", null)
                         .set({ deleted_at, })
-                        .limit(1)
                         .executeTakeFirst()
                     )
 

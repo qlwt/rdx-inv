@@ -1,0 +1,61 @@
+@use "util:std" as std;
+
+.root {
+  z-index: 1;
+
+  display: grid;
+  overflow: auto;
+  grid-template-columns: auto;
+
+  align-content: space-around;
+  background-color: var(--p-bg-primary-m200);
+
+  box-shadow: 0 0 std.rem(15) 0 var(--p-bg-primary-h600);
+
+  @include std.screen_lte("xsm") {
+    contain: initial;
+
+    overflow: auto;
+    max-height: 30vh;
+  }
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  padding: std.rem(10) std.rem(10);
+}
+
+.link {
+  display: block;
+
+  padding: std.rem(15) std.rem(10);
+
+  text-align: center;
+  text-decoration: none;
+  font-size: std.rem(24);
+  color: var(--p-text-primary-h200);
+}
+
+.link__text {
+  position: relative;
+
+  &::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    top: 100%;
+
+    width: 0;
+    height: std.rem(5);
+
+    background-color: var(--p-bg-secondary);
+
+    transition: width std.$trtime_fast;
+
+    .link:hover &, .link._active & {
+      width: 100%;
+    }
+  }
+}

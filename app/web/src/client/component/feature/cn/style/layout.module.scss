@@ -1,0 +1,17 @@
+@use "util:std" as std;
+
+.root {
+  flex-grow: 1;
+  flex-shrink: 1;
+
+  overflow: hidden;
+
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: minmax(0, 1fr);
+
+  @include std.screen_lte("xsm") {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+}

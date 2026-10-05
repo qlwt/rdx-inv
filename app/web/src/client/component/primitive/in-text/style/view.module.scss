@@ -1,0 +1,130 @@
+@use "util:std" as std;
+
+:where(.root) {
+  display: flex;
+}
+
+.root {
+  overflow: hidden;
+  outline-offset: -2px;
+  outline: 2px solid transparent;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 2px;
+
+  transition: background-color std.$trtime_fast, border-color std.$trtime_fast, outline-color std.$trtime_fast;
+
+  &._mix_opaque,
+  &._mix_transparent:hover,
+  &._mix_transparent:focus-within,
+  &._mix_transparent._error,
+  &._mix_transparent._success {
+    border-color: var(--p-border-primary);
+    background-color: var(--p-bg-primary-m200);
+  }
+
+  &._mix_transparent {
+    border-color: transparent;
+    background-color: transparent;
+  }
+
+  &._disabled {
+    background-color: var(--p-bg-primary-m100);
+  }
+
+  &._error:not(:focus-within) {
+    border-color: var(--p-bg-error);
+    outline-color: var(--p-bg-error);
+  }
+
+  &._success:not(:focus-within) {
+    border-color: var(--p-bg-green);
+    outline-color: var(--p-bg-green);
+  }
+
+  &:not(._disabled) {
+    &:hover {
+      background-color: var(--p-bg-primary-m100);
+    }
+
+    &:focus-within {
+      border-color: var(--p-bg-secondary);
+      outline: 1px solid var(--p-bg-secondary);
+      background-color: var(--p-bg-primary-m100);
+    }
+  }
+}
+
+.line {
+  border: none;
+  outline: none;
+
+  color: var(--p-text-normal);
+  background-color: transparent;
+
+  flex-grow: 1;
+
+  .root._size_small & {
+    padding: std.rem(3) std.rem(7);
+  }
+
+  .root:not(._notext)._size_small & {
+    font-size: std.rem(14);
+  }
+
+  .root._size_normal & {
+    padding: std.rem(10) std.rem(15);
+  }
+
+  .root:not(._notext)._size_normal & {
+    font-size: std.rem(14);
+  }
+
+  .root._size_big & {
+    padding: std.rem(10) std.rem(20);
+  }
+
+  .root:not(._notext)._size_big & {
+    font-size: std.rem(20);
+  }
+}
+
+.area {
+  border: none;
+  outline: none;
+
+  color: var(--p-text-normal);
+  background-color: transparent;
+
+  flex-grow: 1;
+
+  resize: none;
+
+  .root._size_small & {
+    padding: std.rem(3) std.rem(7);
+  }
+
+  .root:not(._notext)._size_small & {
+    font-size: std.rem(14);
+  }
+
+  .root._size_normal & {
+    padding: std.rem(10) std.rem(15);
+  }
+
+  .root:not(._notext)._size_normal & {
+    font-size: std.rem(14);
+  }
+
+  .root._size_big & {
+    padding: std.rem(10) std.rem(20);
+  }
+
+  .root:not(._notext)._size_big & {
+    font-size: std.rem(20);
+  }
+}
+
+.placeholder {
+  white-space: pre;
+}

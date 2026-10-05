@@ -8,7 +8,6 @@ import * as capi from "@ta/capi"
 import * as std from "@ta/std"
 import { v7 as uuid_new } from "uuid"
 
-
 export const remfam_slice_new = function <Key extends RemKey>(key: Key): RemSliceDef<Key> {
     const reqmap = new Map<string, VoidFunction>()
 
@@ -149,16 +148,23 @@ export const remfam_slice_new = function <Key extends RemKey>(key: Key): RemSlic
                         state.rempag[paghash] = rempag_node_new()
                     }
                 })
+                .addCase(thunk_pagload.rejected, (state, { meta }) => {
+                    const paghash = std.object_hash_stable(meta.arg.query.pick ?? {})
+                    const pagnode = state.rempag[paghash]!
+
+                    pagnode.status_pending = false
+                })
                 .addCase(thunk_pagload.fulfilled, (state, { payload, meta }) => {
                     const paghash = std.object_hash_stable(meta.arg.query.pick ?? {})
                     const pagnode = state.rempag[paghash]!
 
                     {
-                        pagnode.status_pending = true;
+                        pagnode.status_pending = false
                     }
 
                     if (payload.success) {
-                        pagnode.cursor = std.maybe_new_some(payload.body.cursor);
+                        pagnode.count_total = std.maybe_new_some(payload.body.count)
+                        pagnode.cursor = std.maybe_new_some(payload.body.cursor)
                         adapter.addMany(state.ent, payload.body.node_list)
                     }
                 })

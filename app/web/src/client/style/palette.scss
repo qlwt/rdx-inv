@@ -1,36 +1,115 @@
 @use "sass:color" as clr;
 @use "sass:math" as math;
 
-@function mul($left, $right) {
-  @return $left * $right;
+@function mulprt($left, $right) {
+  @return math.min(100%, $left * $right);
 }
 
 :root {
+  $text_sp_red: rgb(229, 57, 53);
+  $text_sp_red_h: rgb(0, 0, 0);
+  $text_sp_red_m: rgb(255, 255, 255);
+  $text_sp_red_step: 9%;
+
+  --p-text-sp_red: #{$text_sp_red};
+  --p-text-sp_red-h100: #{clr.mix($text-sp_red_h, $text_sp_red, mulprt($text_sp_red_step, 1))};
+  --p-text-sp_red-h200: #{clr.mix($text-sp_red_h, $text_sp_red, mulprt($text_sp_red_step, 2))};
+  --p-text-sp_red-h300: #{clr.mix($text-sp_red_h, $text_sp_red, mulprt($text_sp_red_step, 3))};
+  --p-text-sp_red-h400: #{clr.mix($text-sp_red_h, $text_sp_red, mulprt($text_sp_red_step, 4))};
+  --p-text-sp_red-h500: #{clr.mix($text-sp_red_h, $text_sp_red, mulprt($text_sp_red_step, 5))};
+  --p-text-sp_red-h600: #{clr.mix($text-sp_red_h, $text_sp_red, mulprt($text_sp_red_step, 6))};
+  --p-text-sp_red-h700: #{clr.mix($text-sp_red_h, $text_sp_red, mulprt($text_sp_red_step, 7))};
+  --p-text-sp_red-h800: #{clr.mix($text-sp_red_h, $text_sp_red, mulprt($text_sp_red_step, 8))};
+  --p-text-sp_red-h900: #{clr.mix($text-sp_red_h, $text_sp_red, mulprt($text_sp_red_step, 9))};
+
+  --p-text-sp_red-m100: #{clr.mix($text-sp_red_m, $text_sp_red, mulprt($text_sp_red_step, 1))};
+  --p-text-sp_red-m200: #{clr.mix($text-sp_red_m, $text_sp_red, mulprt($text_sp_red_step, 2))};
+  --p-text-sp_red-m300: #{clr.mix($text-sp_red_m, $text_sp_red, mulprt($text_sp_red_step, 3))};
+  --p-text-sp_red-m400: #{clr.mix($text-sp_red_m, $text_sp_red, mulprt($text_sp_red_step, 4))};
+  --p-text-sp_red-m500: #{clr.mix($text-sp_red_m, $text_sp_red, mulprt($text_sp_red_step, 5))};
+  --p-text-sp_red-m600: #{clr.mix($text-sp_red_m, $text_sp_red, mulprt($text_sp_red_step, 6))};
+  --p-text-sp_red-m700: #{clr.mix($text-sp_red_m, $text_sp_red, mulprt($text_sp_red_step, 7))};
+  --p-text-sp_red-m800: #{clr.mix($text-sp_red_m, $text_sp_red, mulprt($text_sp_red_step, 8))};
+  --p-text-sp_red-m900: #{clr.mix($text-sp_red_m, $text_sp_red, mulprt($text_sp_red_step, 9))};
+
+  $text_sp_success: rgb(16, 145, 18);
+  $text_sp_success_h: rgb(0, 0, 0);
+  $text_sp_success_m: rgb(255, 255, 255);
+  $text_sp_success_step: 4%;
+
+  --p-text-sp_success: #{$text_sp_success};
+  --p-text-sp_success-h100: #{clr.mix($text-sp_success_h, $text_sp_success, mulprt($text_sp_success_step, 1))};
+  --p-text-sp_success-h200: #{clr.mix($text-sp_success_h, $text_sp_success, mulprt($text_sp_success_step, 2))};
+  --p-text-sp_success-h300: #{clr.mix($text-sp_success_h, $text_sp_success, mulprt($text_sp_success_step, 3))};
+  --p-text-sp_success-h400: #{clr.mix($text-sp_success_h, $text_sp_success, mulprt($text_sp_success_step, 4))};
+  --p-text-sp_success-h500: #{clr.mix($text-sp_success_h, $text_sp_success, mulprt($text_sp_success_step, 5))};
+  --p-text-sp_success-h600: #{clr.mix($text-sp_success_h, $text_sp_success, mulprt($text_sp_success_step, 6))};
+  --p-text-sp_success-h700: #{clr.mix($text-sp_success_h, $text_sp_success, mulprt($text_sp_success_step, 7))};
+  --p-text-sp_success-h800: #{clr.mix($text-sp_success_h, $text_sp_success, mulprt($text_sp_success_step, 8))};
+  --p-text-sp_success-h900: #{clr.mix($text-sp_success_h, $text_sp_success, mulprt($text_sp_success_step, 9))};
+
+  --p-text-sp_success-m100: #{clr.mix($text-sp_success_m, $text_sp_success, mulprt($text_sp_success_step, 1))};
+  --p-text-sp_success-m200: #{clr.mix($text-sp_success_m, $text_sp_success, mulprt($text_sp_success_step, 2))};
+  --p-text-sp_success-m300: #{clr.mix($text-sp_success_m, $text_sp_success, mulprt($text_sp_success_step, 3))};
+  --p-text-sp_success-m400: #{clr.mix($text-sp_success_m, $text_sp_success, mulprt($text_sp_success_step, 4))};
+  --p-text-sp_success-m500: #{clr.mix($text-sp_success_m, $text_sp_success, mulprt($text_sp_success_step, 5))};
+  --p-text-sp_success-m600: #{clr.mix($text-sp_success_m, $text_sp_success, mulprt($text_sp_success_step, 6))};
+  --p-text-sp_success-m700: #{clr.mix($text-sp_success_m, $text_sp_success, mulprt($text_sp_success_step, 7))};
+  --p-text-sp_success-m800: #{clr.mix($text-sp_success_m, $text_sp_success, mulprt($text_sp_success_step, 8))};
+  --p-text-sp_success-m900: #{clr.mix($text-sp_success_m, $text_sp_success, mulprt($text_sp_success_step, 9))};
+
+  $text_sp_yellow: rgb(255, 145, 18);
+  $text_sp_yellow_h: rgb(0, 0, 0);
+  $text_sp_yellow_m: rgb(255, 255, 255);
+  $text_sp_yellow_step: 4%;
+
+  --p-text-sp_yellow: #{$text_sp_yellow};
+  --p-text-sp_yellow-h100: #{clr.mix($text-sp_yellow_h, $text_sp_yellow, mulprt($text_sp_yellow_step, 1))};
+  --p-text-sp_yellow-h200: #{clr.mix($text-sp_yellow_h, $text_sp_yellow, mulprt($text_sp_yellow_step, 2))};
+  --p-text-sp_yellow-h300: #{clr.mix($text-sp_yellow_h, $text_sp_yellow, mulprt($text_sp_yellow_step, 3))};
+  --p-text-sp_yellow-h400: #{clr.mix($text-sp_yellow_h, $text_sp_yellow, mulprt($text_sp_yellow_step, 4))};
+  --p-text-sp_yellow-h500: #{clr.mix($text-sp_yellow_h, $text_sp_yellow, mulprt($text_sp_yellow_step, 5))};
+  --p-text-sp_yellow-h600: #{clr.mix($text-sp_yellow_h, $text_sp_yellow, mulprt($text_sp_yellow_step, 6))};
+  --p-text-sp_yellow-h700: #{clr.mix($text-sp_yellow_h, $text_sp_yellow, mulprt($text_sp_yellow_step, 7))};
+  --p-text-sp_yellow-h800: #{clr.mix($text-sp_yellow_h, $text_sp_yellow, mulprt($text_sp_yellow_step, 8))};
+  --p-text-sp_yellow-h900: #{clr.mix($text-sp_yellow_h, $text_sp_yellow, mulprt($text_sp_yellow_step, 9))};
+
+  --p-text-sp_yellow-m100: #{clr.mix($text-sp_yellow_m, $text_sp_yellow, mulprt($text_sp_yellow_step, 1))};
+  --p-text-sp_yellow-m200: #{clr.mix($text-sp_yellow_m, $text_sp_yellow, mulprt($text_sp_yellow_step, 2))};
+  --p-text-sp_yellow-m300: #{clr.mix($text-sp_yellow_m, $text_sp_yellow, mulprt($text_sp_yellow_step, 3))};
+  --p-text-sp_yellow-m400: #{clr.mix($text-sp_yellow_m, $text_sp_yellow, mulprt($text_sp_yellow_step, 4))};
+  --p-text-sp_yellow-m500: #{clr.mix($text-sp_yellow_m, $text_sp_yellow, mulprt($text_sp_yellow_step, 5))};
+  --p-text-sp_yellow-m600: #{clr.mix($text-sp_yellow_m, $text_sp_yellow, mulprt($text_sp_yellow_step, 6))};
+  --p-text-sp_yellow-m700: #{clr.mix($text-sp_yellow_m, $text_sp_yellow, mulprt($text_sp_yellow_step, 7))};
+  --p-text-sp_yellow-m800: #{clr.mix($text-sp_yellow_m, $text_sp_yellow, mulprt($text_sp_yellow_step, 8))};
+  --p-text-sp_yellow-m900: #{clr.mix($text-sp_yellow_m, $text_sp_yellow, mulprt($text_sp_yellow_step, 9))};
+
   $bg_primary: rgb(240, 240, 240);
   $bg_primary_h: rgb(0, 0, 0);
   $bg_primary_m: rgb(255, 255, 255);
-  $bg_primary_step: 3%;
+  $bg_primary_step_up: 35%;
+  $bg_primary_step_down: 3%;
 
   --p-bg-primary: #{$bg_primary};
-  --p-bg-primary-h100: #{clr.mix($bg-primary_h, $bg_primary, mul($bg_primary_step, 1))};
-  --p-bg-primary-h200: #{clr.mix($bg-primary_h, $bg_primary, mul($bg_primary_step, 2))};
-  --p-bg-primary-h300: #{clr.mix($bg-primary_h, $bg_primary, mul($bg_primary_step, 3))};
-  --p-bg-primary-h400: #{clr.mix($bg-primary_h, $bg_primary, mul($bg_primary_step, 4))};
-  --p-bg-primary-h500: #{clr.mix($bg-primary_h, $bg_primary, mul($bg_primary_step, 5))};
-  --p-bg-primary-h600: #{clr.mix($bg-primary_h, $bg_primary, mul($bg_primary_step, 6))};
-  --p-bg-primary-h700: #{clr.mix($bg-primary_h, $bg_primary, mul($bg_primary_step, 7))};
-  --p-bg-primary-h800: #{clr.mix($bg-primary_h, $bg_primary, mul($bg_primary_step, 8))};
-  --p-bg-primary-h900: #{clr.mix($bg-primary_h, $bg_primary, mul($bg_primary_step, 9))};
+  --p-bg-primary-h100: #{clr.mix($bg-primary_h, $bg_primary, mulprt($bg_primary_step_down, 1))};
+  --p-bg-primary-h200: #{clr.mix($bg-primary_h, $bg_primary, mulprt($bg_primary_step_down, 2))};
+  --p-bg-primary-h300: #{clr.mix($bg-primary_h, $bg_primary, mulprt($bg_primary_step_down, 3))};
+  --p-bg-primary-h400: #{clr.mix($bg-primary_h, $bg_primary, mulprt($bg_primary_step_down, 4))};
+  --p-bg-primary-h500: #{clr.mix($bg-primary_h, $bg_primary, mulprt($bg_primary_step_down, 5))};
+  --p-bg-primary-h600: #{clr.mix($bg-primary_h, $bg_primary, mulprt($bg_primary_step_down, 6))};
+  --p-bg-primary-h700: #{clr.mix($bg-primary_h, $bg_primary, mulprt($bg_primary_step_down, 7))};
+  --p-bg-primary-h800: #{clr.mix($bg-primary_h, $bg_primary, mulprt($bg_primary_step_down, 8))};
+  --p-bg-primary-h900: #{clr.mix($bg-primary_h, $bg_primary, mulprt($bg_primary_step_down, 9))};
 
-  --p-bg-primary-m100: #{clr.mix($bg-primary_m, $bg_primary, mul($bg_primary_step, 1))};
-  --p-bg-primary-m200: #{clr.mix($bg-primary_m, $bg_primary, mul($bg_primary_step, 2))};
-  --p-bg-primary-m300: #{clr.mix($bg-primary_m, $bg_primary, mul($bg_primary_step, 3))};
-  --p-bg-primary-m400: #{clr.mix($bg-primary_m, $bg_primary, mul($bg_primary_step, 4))};
-  --p-bg-primary-m500: #{clr.mix($bg-primary_m, $bg_primary, mul($bg_primary_step, 5))};
-  --p-bg-primary-m600: #{clr.mix($bg-primary_m, $bg_primary, mul($bg_primary_step, 6))};
-  --p-bg-primary-m700: #{clr.mix($bg-primary_m, $bg_primary, mul($bg_primary_step, 7))};
-  --p-bg-primary-m800: #{clr.mix($bg-primary_m, $bg_primary, mul($bg_primary_step, 8))};
-  --p-bg-primary-m900: #{clr.mix($bg-primary_m, $bg_primary, mul($bg_primary_step, 9))};
+  --p-bg-primary-m100: #{clr.mix($bg-primary_m, $bg_primary, mulprt($bg_primary_step_up, 1))};
+  --p-bg-primary-m200: #{clr.mix($bg-primary_m, $bg_primary, mulprt($bg_primary_step_up, 2))};
+  --p-bg-primary-m300: #{clr.mix($bg-primary_m, $bg_primary, mulprt($bg_primary_step_up, 3))};
+  --p-bg-primary-m400: #{clr.mix($bg-primary_m, $bg_primary, mulprt($bg_primary_step_up, 4))};
+  --p-bg-primary-m500: #{clr.mix($bg-primary_m, $bg_primary, mulprt($bg_primary_step_up, 5))};
+  --p-bg-primary-m600: #{clr.mix($bg-primary_m, $bg_primary, mulprt($bg_primary_step_up, 6))};
+  --p-bg-primary-m700: #{clr.mix($bg-primary_m, $bg_primary, mulprt($bg_primary_step_up, 7))};
+  --p-bg-primary-m800: #{clr.mix($bg-primary_m, $bg_primary, mulprt($bg_primary_step_up, 8))};
+  --p-bg-primary-m900: #{clr.mix($bg-primary_m, $bg_primary, mulprt($bg_primary_step_up, 9))};
 
   $border_primary: rgb(156, 156, 156);
   $border_primary_h: rgb(0, 0, 0);
@@ -38,25 +117,25 @@
   $border_primary_step: 9%;
 
   --p-border-primary: #{$border_primary};
-  --p-border-primary-h100: #{clr.mix($border-primary_h, $border_primary, mul($border_primary_step, 1))};
-  --p-border-primary-h200: #{clr.mix($border-primary_h, $border_primary, mul($border_primary_step, 2))};
-  --p-border-primary-h300: #{clr.mix($border-primary_h, $border_primary, mul($border_primary_step, 3))};
-  --p-border-primary-h400: #{clr.mix($border-primary_h, $border_primary, mul($border_primary_step, 4))};
-  --p-border-primary-h500: #{clr.mix($border-primary_h, $border_primary, mul($border_primary_step, 5))};
-  --p-border-primary-h600: #{clr.mix($border-primary_h, $border_primary, mul($border_primary_step, 6))};
-  --p-border-primary-h700: #{clr.mix($border-primary_h, $border_primary, mul($border_primary_step, 7))};
-  --p-border-primary-h800: #{clr.mix($border-primary_h, $border_primary, mul($border_primary_step, 8))};
-  --p-border-primary-h900: #{clr.mix($border-primary_h, $border_primary, mul($border_primary_step, 9))};
+  --p-border-primary-h100: #{clr.mix($border-primary_h, $border_primary, mulprt($border_primary_step, 1))};
+  --p-border-primary-h200: #{clr.mix($border-primary_h, $border_primary, mulprt($border_primary_step, 2))};
+  --p-border-primary-h300: #{clr.mix($border-primary_h, $border_primary, mulprt($border_primary_step, 3))};
+  --p-border-primary-h400: #{clr.mix($border-primary_h, $border_primary, mulprt($border_primary_step, 4))};
+  --p-border-primary-h500: #{clr.mix($border-primary_h, $border_primary, mulprt($border_primary_step, 5))};
+  --p-border-primary-h600: #{clr.mix($border-primary_h, $border_primary, mulprt($border_primary_step, 6))};
+  --p-border-primary-h700: #{clr.mix($border-primary_h, $border_primary, mulprt($border_primary_step, 7))};
+  --p-border-primary-h800: #{clr.mix($border-primary_h, $border_primary, mulprt($border_primary_step, 8))};
+  --p-border-primary-h900: #{clr.mix($border-primary_h, $border_primary, mulprt($border_primary_step, 9))};
 
-  --p-border-primary-m100: #{clr.mix($border-primary_m, $border_primary, mul($border_primary_step, 1))};
-  --p-border-primary-m200: #{clr.mix($border-primary_m, $border_primary, mul($border_primary_step, 2))};
-  --p-border-primary-m300: #{clr.mix($border-primary_m, $border_primary, mul($border_primary_step, 3))};
-  --p-border-primary-m400: #{clr.mix($border-primary_m, $border_primary, mul($border_primary_step, 4))};
-  --p-border-primary-m500: #{clr.mix($border-primary_m, $border_primary, mul($border_primary_step, 5))};
-  --p-border-primary-m600: #{clr.mix($border-primary_m, $border_primary, mul($border_primary_step, 6))};
-  --p-border-primary-m700: #{clr.mix($border-primary_m, $border_primary, mul($border_primary_step, 7))};
-  --p-border-primary-m800: #{clr.mix($border-primary_m, $border_primary, mul($border_primary_step, 8))};
-  --p-border-primary-m900: #{clr.mix($border-primary_m, $border_primary, mul($border_primary_step, 9))};
+  --p-border-primary-m100: #{clr.mix($border-primary_m, $border_primary, mulprt($border_primary_step, 1))};
+  --p-border-primary-m200: #{clr.mix($border-primary_m, $border_primary, mulprt($border_primary_step, 2))};
+  --p-border-primary-m300: #{clr.mix($border-primary_m, $border_primary, mulprt($border_primary_step, 3))};
+  --p-border-primary-m400: #{clr.mix($border-primary_m, $border_primary, mulprt($border_primary_step, 4))};
+  --p-border-primary-m500: #{clr.mix($border-primary_m, $border_primary, mulprt($border_primary_step, 5))};
+  --p-border-primary-m600: #{clr.mix($border-primary_m, $border_primary, mulprt($border_primary_step, 6))};
+  --p-border-primary-m700: #{clr.mix($border-primary_m, $border_primary, mulprt($border_primary_step, 7))};
+  --p-border-primary-m800: #{clr.mix($border-primary_m, $border_primary, mulprt($border_primary_step, 8))};
+  --p-border-primary-m900: #{clr.mix($border-primary_m, $border_primary, mulprt($border_primary_step, 9))};
 
   $text_primary: rgb(51, 51, 51);
   $text_primary_h: rgb(0, 0, 0);
@@ -64,77 +143,25 @@
   $text_primary_step: 3%;
 
   --p-text-primary: #{$text_primary};
-  --p-text-primary-h100: #{clr.mix($text-primary_h, $text_primary, mul($text_primary_step, 1))};
-  --p-text-primary-h200: #{clr.mix($text-primary_h, $text_primary, mul($text_primary_step, 2))};
-  --p-text-primary-h300: #{clr.mix($text-primary_h, $text_primary, mul($text_primary_step, 3))};
-  --p-text-primary-h400: #{clr.mix($text-primary_h, $text_primary, mul($text_primary_step, 4))};
-  --p-text-primary-h500: #{clr.mix($text-primary_h, $text_primary, mul($text_primary_step, 5))};
-  --p-text-primary-h600: #{clr.mix($text-primary_h, $text_primary, mul($text_primary_step, 6))};
-  --p-text-primary-h700: #{clr.mix($text-primary_h, $text_primary, mul($text_primary_step, 7))};
-  --p-text-primary-h800: #{clr.mix($text-primary_h, $text_primary, mul($text_primary_step, 8))};
-  --p-text-primary-h900: #{clr.mix($text-primary_h, $text_primary, mul($text_primary_step, 9))};
+  --p-text-primary-h100: #{clr.mix($text-primary_h, $text_primary, mulprt($text_primary_step, 1))};
+  --p-text-primary-h200: #{clr.mix($text-primary_h, $text_primary, mulprt($text_primary_step, 2))};
+  --p-text-primary-h300: #{clr.mix($text-primary_h, $text_primary, mulprt($text_primary_step, 3))};
+  --p-text-primary-h400: #{clr.mix($text-primary_h, $text_primary, mulprt($text_primary_step, 4))};
+  --p-text-primary-h500: #{clr.mix($text-primary_h, $text_primary, mulprt($text_primary_step, 5))};
+  --p-text-primary-h600: #{clr.mix($text-primary_h, $text_primary, mulprt($text_primary_step, 6))};
+  --p-text-primary-h700: #{clr.mix($text-primary_h, $text_primary, mulprt($text_primary_step, 7))};
+  --p-text-primary-h800: #{clr.mix($text-primary_h, $text_primary, mulprt($text_primary_step, 8))};
+  --p-text-primary-h900: #{clr.mix($text-primary_h, $text_primary, mulprt($text_primary_step, 9))};
 
-  --p-text-primary-m100: #{clr.mix($text-primary_m, $text_primary, mul($text_primary_step, 1))};
-  --p-text-primary-m200: #{clr.mix($text-primary_m, $text_primary, mul($text_primary_step, 2))};
-  --p-text-primary-m300: #{clr.mix($text-primary_m, $text_primary, mul($text_primary_step, 3))};
-  --p-text-primary-m400: #{clr.mix($text-primary_m, $text_primary, mul($text_primary_step, 4))};
-  --p-text-primary-m500: #{clr.mix($text-primary_m, $text_primary, mul($text_primary_step, 5))};
-  --p-text-primary-m600: #{clr.mix($text-primary_m, $text_primary, mul($text_primary_step, 6))};
-  --p-text-primary-m700: #{clr.mix($text-primary_m, $text_primary, mul($text_primary_step, 7))};
-  --p-text-primary-m800: #{clr.mix($text-primary_m, $text_primary, mul($text_primary_step, 8))};
-  --p-text-primary-m900: #{clr.mix($text-primary_m, $text_primary, mul($text_primary_step, 9))};
-
-  $text_error: rgb(229, 57, 53);
-  $text_error_h: rgb(0, 0, 0);
-  $text_error_m: rgb(255, 255, 255);
-  $text_error_step: 9%;
-
-  --p-text-error: #{$text_error};
-  --p-text-error-h100: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 1))};
-  --p-text-error-h200: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 2))};
-  --p-text-error-h300: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 3))};
-  --p-text-error-h400: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 4))};
-  --p-text-error-h500: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 5))};
-  --p-text-error-h600: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 6))};
-  --p-text-error-h700: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 7))};
-  --p-text-error-h800: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 8))};
-  --p-text-error-h900: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 9))};
-
-  --p-text-error-m100: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 1))};
-  --p-text-error-m200: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 2))};
-  --p-text-error-m300: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 3))};
-  --p-text-error-m400: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 4))};
-  --p-text-error-m500: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 5))};
-  --p-text-error-m600: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 6))};
-  --p-text-error-m700: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 7))};
-  --p-text-error-m800: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 8))};
-  --p-text-error-m900: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 9))};
-
-  $text_success: rgb(16, 145, 18);
-  $text_success_h: rgb(0, 0, 0);
-  $text_success_m: rgb(255, 255, 255);
-  $text_success_step: 4%;
-
-  --p-text-success: #{$text_success};
-  --p-text-success-h100: #{clr.mix($text-success_h, $text_success, mul($text_success_step, 1))};
-  --p-text-success-h200: #{clr.mix($text-success_h, $text_success, mul($text_success_step, 2))};
-  --p-text-success-h300: #{clr.mix($text-success_h, $text_success, mul($text_success_step, 3))};
-  --p-text-success-h400: #{clr.mix($text-success_h, $text_success, mul($text_success_step, 4))};
-  --p-text-success-h500: #{clr.mix($text-success_h, $text_success, mul($text_success_step, 5))};
-  --p-text-success-h600: #{clr.mix($text-success_h, $text_success, mul($text_success_step, 6))};
-  --p-text-success-h700: #{clr.mix($text-success_h, $text_success, mul($text_success_step, 7))};
-  --p-text-success-h800: #{clr.mix($text-success_h, $text_success, mul($text_success_step, 8))};
-  --p-text-success-h900: #{clr.mix($text-success_h, $text_success, mul($text_success_step, 9))};
-
-  --p-text-success-m100: #{clr.mix($text-success_m, $text_success, mul($text_success_step, 1))};
-  --p-text-success-m200: #{clr.mix($text-success_m, $text_success, mul($text_success_step, 2))};
-  --p-text-success-m300: #{clr.mix($text-success_m, $text_success, mul($text_success_step, 3))};
-  --p-text-success-m400: #{clr.mix($text-success_m, $text_success, mul($text_success_step, 4))};
-  --p-text-success-m500: #{clr.mix($text-success_m, $text_success, mul($text_success_step, 5))};
-  --p-text-success-m600: #{clr.mix($text-success_m, $text_success, mul($text_success_step, 6))};
-  --p-text-success-m700: #{clr.mix($text-success_m, $text_success, mul($text_success_step, 7))};
-  --p-text-success-m800: #{clr.mix($text-success_m, $text_success, mul($text_success_step, 8))};
-  --p-text-success-m900: #{clr.mix($text-success_m, $text_success, mul($text_success_step, 9))};
+  --p-text-primary-m100: #{clr.mix($text-primary_m, $text_primary, mulprt($text_primary_step, 1))};
+  --p-text-primary-m200: #{clr.mix($text-primary_m, $text_primary, mulprt($text_primary_step, 2))};
+  --p-text-primary-m300: #{clr.mix($text-primary_m, $text_primary, mulprt($text_primary_step, 3))};
+  --p-text-primary-m400: #{clr.mix($text-primary_m, $text_primary, mulprt($text_primary_step, 4))};
+  --p-text-primary-m500: #{clr.mix($text-primary_m, $text_primary, mulprt($text_primary_step, 5))};
+  --p-text-primary-m600: #{clr.mix($text-primary_m, $text_primary, mulprt($text_primary_step, 6))};
+  --p-text-primary-m700: #{clr.mix($text-primary_m, $text_primary, mulprt($text_primary_step, 7))};
+  --p-text-primary-m800: #{clr.mix($text-primary_m, $text_primary, mulprt($text_primary_step, 8))};
+  --p-text-primary-m900: #{clr.mix($text-primary_m, $text_primary, mulprt($text_primary_step, 9))};
 
   $text_secondary: rgb(255, 255, 255);
   $text_secondary_h: rgb(255, 255, 255);
@@ -142,77 +169,104 @@
   $text_secondary_step: 4%;
 
   --p-text-secondary: #{$text_secondary};
-  --p-text-secondary-h100: #{clr.mix($text-secondary_h, $text_secondary, mul($text_secondary_step, 1))};
-  --p-text-secondary-h200: #{clr.mix($text-secondary_h, $text_secondary, mul($text_secondary_step, 2))};
-  --p-text-secondary-h300: #{clr.mix($text-secondary_h, $text_secondary, mul($text_secondary_step, 3))};
-  --p-text-secondary-h400: #{clr.mix($text-secondary_h, $text_secondary, mul($text_secondary_step, 4))};
-  --p-text-secondary-h500: #{clr.mix($text-secondary_h, $text_secondary, mul($text_secondary_step, 5))};
-  --p-text-secondary-h600: #{clr.mix($text-secondary_h, $text_secondary, mul($text_secondary_step, 6))};
-  --p-text-secondary-h700: #{clr.mix($text-secondary_h, $text_secondary, mul($text_secondary_step, 7))};
-  --p-text-secondary-h800: #{clr.mix($text-secondary_h, $text_secondary, mul($text_secondary_step, 8))};
-  --p-text-secondary-h900: #{clr.mix($text-secondary_h, $text_secondary, mul($text_secondary_step, 9))};
+  --p-text-secondary-h100: #{clr.mix($text-secondary_h, $text_secondary, mulprt($text_secondary_step, 1))};
+  --p-text-secondary-h200: #{clr.mix($text-secondary_h, $text_secondary, mulprt($text_secondary_step, 2))};
+  --p-text-secondary-h300: #{clr.mix($text-secondary_h, $text_secondary, mulprt($text_secondary_step, 3))};
+  --p-text-secondary-h400: #{clr.mix($text-secondary_h, $text_secondary, mulprt($text_secondary_step, 4))};
+  --p-text-secondary-h500: #{clr.mix($text-secondary_h, $text_secondary, mulprt($text_secondary_step, 5))};
+  --p-text-secondary-h600: #{clr.mix($text-secondary_h, $text_secondary, mulprt($text_secondary_step, 6))};
+  --p-text-secondary-h700: #{clr.mix($text-secondary_h, $text_secondary, mulprt($text_secondary_step, 7))};
+  --p-text-secondary-h800: #{clr.mix($text-secondary_h, $text_secondary, mulprt($text_secondary_step, 8))};
+  --p-text-secondary-h900: #{clr.mix($text-secondary_h, $text_secondary, mulprt($text_secondary_step, 9))};
 
-  --p-text-secondary-m100: #{clr.mix($text-secondary_m, $text_secondary, mul($text_secondary_step, 1))};
-  --p-text-secondary-m200: #{clr.mix($text-secondary_m, $text_secondary, mul($text_secondary_step, 2))};
-  --p-text-secondary-m300: #{clr.mix($text-secondary_m, $text_secondary, mul($text_secondary_step, 3))};
-  --p-text-secondary-m400: #{clr.mix($text-secondary_m, $text_secondary, mul($text_secondary_step, 4))};
-  --p-text-secondary-m500: #{clr.mix($text-secondary_m, $text_secondary, mul($text_secondary_step, 5))};
-  --p-text-secondary-m600: #{clr.mix($text-secondary_m, $text_secondary, mul($text_secondary_step, 6))};
-  --p-text-secondary-m700: #{clr.mix($text-secondary_m, $text_secondary, mul($text_secondary_step, 7))};
-  --p-text-secondary-m800: #{clr.mix($text-secondary_m, $text_secondary, mul($text_secondary_step, 8))};
-  --p-text-secondary-m900: #{clr.mix($text-secondary_m, $text_secondary, mul($text_secondary_step, 9))};
+  --p-text-secondary-m100: #{clr.mix($text-secondary_m, $text_secondary, mulprt($text_secondary_step, 1))};
+  --p-text-secondary-m200: #{clr.mix($text-secondary_m, $text_secondary, mulprt($text_secondary_step, 2))};
+  --p-text-secondary-m300: #{clr.mix($text-secondary_m, $text_secondary, mulprt($text_secondary_step, 3))};
+  --p-text-secondary-m400: #{clr.mix($text-secondary_m, $text_secondary, mulprt($text_secondary_step, 4))};
+  --p-text-secondary-m500: #{clr.mix($text-secondary_m, $text_secondary, mulprt($text_secondary_step, 5))};
+  --p-text-secondary-m600: #{clr.mix($text-secondary_m, $text_secondary, mulprt($text_secondary_step, 6))};
+  --p-text-secondary-m700: #{clr.mix($text-secondary_m, $text_secondary, mulprt($text_secondary_step, 7))};
+  --p-text-secondary-m800: #{clr.mix($text-secondary_m, $text_secondary, mulprt($text_secondary_step, 8))};
+  --p-text-secondary-m900: #{clr.mix($text-secondary_m, $text_secondary, mulprt($text_secondary_step, 9))};
 
-  $bg_secondary: rgb(40, 175, 50);
+  $bg_secondary: rgb(118, 173, 67);
   $bg_secondary_h: rgb(0, 0, 0);
   $bg_secondary_m: rgb(255, 255, 255);
   $bg_secondary_step: 6%;
 
   --p-bg-secondary: #{$bg_secondary};
-  --p-bg-secondary-h100: #{clr.mix($bg-secondary_h, $bg_secondary, mul($bg_secondary_step, 1))};
-  --p-bg-secondary-h200: #{clr.mix($bg-secondary_h, $bg_secondary, mul($bg_secondary_step, 2))};
-  --p-bg-secondary-h300: #{clr.mix($bg-secondary_h, $bg_secondary, mul($bg_secondary_step, 3))};
-  --p-bg-secondary-h400: #{clr.mix($bg-secondary_h, $bg_secondary, mul($bg_secondary_step, 4))};
-  --p-bg-secondary-h500: #{clr.mix($bg-secondary_h, $bg_secondary, mul($bg_secondary_step, 5))};
-  --p-bg-secondary-h600: #{clr.mix($bg-secondary_h, $bg_secondary, mul($bg_secondary_step, 6))};
-  --p-bg-secondary-h700: #{clr.mix($bg-secondary_h, $bg_secondary, mul($bg_secondary_step, 7))};
-  --p-bg-secondary-h800: #{clr.mix($bg-secondary_h, $bg_secondary, mul($bg_secondary_step, 8))};
-  --p-bg-secondary-h900: #{clr.mix($bg-secondary_h, $bg_secondary, mul($bg_secondary_step, 9))};
+  --p-bg-secondary-h100: #{clr.mix($bg-secondary_h, $bg_secondary, mulprt($bg_secondary_step, 1))};
+  --p-bg-secondary-h200: #{clr.mix($bg-secondary_h, $bg_secondary, mulprt($bg_secondary_step, 2))};
+  --p-bg-secondary-h300: #{clr.mix($bg-secondary_h, $bg_secondary, mulprt($bg_secondary_step, 3))};
+  --p-bg-secondary-h400: #{clr.mix($bg-secondary_h, $bg_secondary, mulprt($bg_secondary_step, 4))};
+  --p-bg-secondary-h500: #{clr.mix($bg-secondary_h, $bg_secondary, mulprt($bg_secondary_step, 5))};
+  --p-bg-secondary-h600: #{clr.mix($bg-secondary_h, $bg_secondary, mulprt($bg_secondary_step, 6))};
+  --p-bg-secondary-h700: #{clr.mix($bg-secondary_h, $bg_secondary, mulprt($bg_secondary_step, 7))};
+  --p-bg-secondary-h800: #{clr.mix($bg-secondary_h, $bg_secondary, mulprt($bg_secondary_step, 8))};
+  --p-bg-secondary-h900: #{clr.mix($bg-secondary_h, $bg_secondary, mulprt($bg_secondary_step, 9))};
 
-  --p-bg-secondary-m100: #{clr.mix($bg-secondary_m, $bg_secondary, mul($bg_secondary_step, 1))};
-  --p-bg-secondary-m200: #{clr.mix($bg-secondary_m, $bg_secondary, mul($bg_secondary_step, 2))};
-  --p-bg-secondary-m300: #{clr.mix($bg-secondary_m, $bg_secondary, mul($bg_secondary_step, 3))};
-  --p-bg-secondary-m400: #{clr.mix($bg-secondary_m, $bg_secondary, mul($bg_secondary_step, 4))};
-  --p-bg-secondary-m500: #{clr.mix($bg-secondary_m, $bg_secondary, mul($bg_secondary_step, 5))};
-  --p-bg-secondary-m600: #{clr.mix($bg-secondary_m, $bg_secondary, mul($bg_secondary_step, 6))};
-  --p-bg-secondary-m700: #{clr.mix($bg-secondary_m, $bg_secondary, mul($bg_secondary_step, 7))};
-  --p-bg-secondary-m800: #{clr.mix($bg-secondary_m, $bg_secondary, mul($bg_secondary_step, 8))};
-  --p-bg-secondary-m900: #{clr.mix($bg-secondary_m, $bg_secondary, mul($bg_secondary_step, 9))};
+  --p-bg-secondary-m100: #{clr.mix($bg-secondary_m, $bg_secondary, mulprt($bg_secondary_step, 1))};
+  --p-bg-secondary-m200: #{clr.mix($bg-secondary_m, $bg_secondary, mulprt($bg_secondary_step, 2))};
+  --p-bg-secondary-m300: #{clr.mix($bg-secondary_m, $bg_secondary, mulprt($bg_secondary_step, 3))};
+  --p-bg-secondary-m400: #{clr.mix($bg-secondary_m, $bg_secondary, mulprt($bg_secondary_step, 4))};
+  --p-bg-secondary-m500: #{clr.mix($bg-secondary_m, $bg_secondary, mulprt($bg_secondary_step, 5))};
+  --p-bg-secondary-m600: #{clr.mix($bg-secondary_m, $bg_secondary, mulprt($bg_secondary_step, 6))};
+  --p-bg-secondary-m700: #{clr.mix($bg-secondary_m, $bg_secondary, mulprt($bg_secondary_step, 7))};
+  --p-bg-secondary-m800: #{clr.mix($bg-secondary_m, $bg_secondary, mulprt($bg_secondary_step, 8))};
+  --p-bg-secondary-m900: #{clr.mix($bg-secondary_m, $bg_secondary, mulprt($bg_secondary_step, 9))};
+
+  $border_secondary: rgb(108, 152, 52);
+  $border_secondary_h: rgb(0, 0, 0);
+  $border_secondary_m: rgb(255, 255, 255);
+  $border_secondary_step: 6%;
+
+  --p-border-secondary: #{$border_secondary};
+  --p-border-secondary-h100: #{clr.mix($border-secondary_h, $border_secondary, mulprt($border_secondary_step, 1))};
+  --p-border-secondary-h200: #{clr.mix($border-secondary_h, $border_secondary, mulprt($border_secondary_step, 2))};
+  --p-border-secondary-h300: #{clr.mix($border-secondary_h, $border_secondary, mulprt($border_secondary_step, 3))};
+  --p-border-secondary-h400: #{clr.mix($border-secondary_h, $border_secondary, mulprt($border_secondary_step, 4))};
+  --p-border-secondary-h500: #{clr.mix($border-secondary_h, $border_secondary, mulprt($border_secondary_step, 5))};
+  --p-border-secondary-h600: #{clr.mix($border-secondary_h, $border_secondary, mulprt($border_secondary_step, 6))};
+  --p-border-secondary-h700: #{clr.mix($border-secondary_h, $border_secondary, mulprt($border_secondary_step, 7))};
+  --p-border-secondary-h800: #{clr.mix($border-secondary_h, $border_secondary, mulprt($border_secondary_step, 8))};
+  --p-border-secondary-h900: #{clr.mix($border-secondary_h, $border_secondary, mulprt($border_secondary_step, 9))};
+
+  --p-border-secondary-m100: #{clr.mix($border-secondary_m, $border_secondary, mulprt($border_secondary_step, 1))};
+  --p-border-secondary-m200: #{clr.mix($border-secondary_m, $border_secondary, mulprt($border_secondary_step, 2))};
+  --p-border-secondary-m300: #{clr.mix($border-secondary_m, $border_secondary, mulprt($border_secondary_step, 3))};
+  --p-border-secondary-m400: #{clr.mix($border-secondary_m, $border_secondary, mulprt($border_secondary_step, 4))};
+  --p-border-secondary-m500: #{clr.mix($border-secondary_m, $border_secondary, mulprt($border_secondary_step, 5))};
+  --p-border-secondary-m600: #{clr.mix($border-secondary_m, $border_secondary, mulprt($border_secondary_step, 6))};
+  --p-border-secondary-m700: #{clr.mix($border-secondary_m, $border_secondary, mulprt($border_secondary_step, 7))};
+  --p-border-secondary-m800: #{clr.mix($border-secondary_m, $border_secondary, mulprt($border_secondary_step, 8))};
+  --p-border-secondary-m900: #{clr.mix($border-secondary_m, $border_secondary, mulprt($border_secondary_step, 9))};
 
   $bg_error: rgb(219, 54, 54);
   $bg_error_h: rgb(130, 32, 32);
   $bg_error_m: rgb(255, 100, 100);
-  $bg_error_step: 4%;
+  $bg_error_step_up: 4%;
+  $bg_error_step_down: 8%;
 
   --p-bg-error: #{$bg_error};
-  --p-bg-error-h100: #{clr.mix($bg-error_h, $bg_error, mul($bg_error_step, 1))};
-  --p-bg-error-h200: #{clr.mix($bg-error_h, $bg_error, mul($bg_error_step, 2))};
-  --p-bg-error-h300: #{clr.mix($bg-error_h, $bg_error, mul($bg_error_step, 3))};
-  --p-bg-error-h400: #{clr.mix($bg-error_h, $bg_error, mul($bg_error_step, 4))};
-  --p-bg-error-h500: #{clr.mix($bg-error_h, $bg_error, mul($bg_error_step, 5))};
-  --p-bg-error-h600: #{clr.mix($bg-error_h, $bg_error, mul($bg_error_step, 6))};
-  --p-bg-error-h700: #{clr.mix($bg-error_h, $bg_error, mul($bg_error_step, 7))};
-  --p-bg-error-h800: #{clr.mix($bg-error_h, $bg_error, mul($bg_error_step, 8))};
-  --p-bg-error-h900: #{clr.mix($bg-error_h, $bg_error, mul($bg_error_step, 9))};
+  --p-bg-error-h100: #{clr.mix($bg-error_h, $bg_error, mulprt($bg_error_step_down, 1))};
+  --p-bg-error-h200: #{clr.mix($bg-error_h, $bg_error, mulprt($bg_error_step_down, 2))};
+  --p-bg-error-h300: #{clr.mix($bg-error_h, $bg_error, mulprt($bg_error_step_down, 3))};
+  --p-bg-error-h400: #{clr.mix($bg-error_h, $bg_error, mulprt($bg_error_step_down, 4))};
+  --p-bg-error-h500: #{clr.mix($bg-error_h, $bg_error, mulprt($bg_error_step_down, 5))};
+  --p-bg-error-h600: #{clr.mix($bg-error_h, $bg_error, mulprt($bg_error_step_down, 6))};
+  --p-bg-error-h700: #{clr.mix($bg-error_h, $bg_error, mulprt($bg_error_step_down, 7))};
+  --p-bg-error-h800: #{clr.mix($bg-error_h, $bg_error, mulprt($bg_error_step_down, 8))};
+  --p-bg-error-h900: #{clr.mix($bg-error_h, $bg_error, mulprt($bg_error_step_down, 9))};
 
-  --p-bg-error-m100: #{clr.mix($bg-error_m, $bg_error, mul($bg_error_step, 1))};
-  --p-bg-error-m200: #{clr.mix($bg-error_m, $bg_error, mul($bg_error_step, 2))};
-  --p-bg-error-m300: #{clr.mix($bg-error_m, $bg_error, mul($bg_error_step, 3))};
-  --p-bg-error-m400: #{clr.mix($bg-error_m, $bg_error, mul($bg_error_step, 4))};
-  --p-bg-error-m500: #{clr.mix($bg-error_m, $bg_error, mul($bg_error_step, 5))};
-  --p-bg-error-m600: #{clr.mix($bg-error_m, $bg_error, mul($bg_error_step, 6))};
-  --p-bg-error-m700: #{clr.mix($bg-error_m, $bg_error, mul($bg_error_step, 7))};
-  --p-bg-error-m800: #{clr.mix($bg-error_m, $bg_error, mul($bg_error_step, 8))};
-  --p-bg-error-m900: #{clr.mix($bg-error_m, $bg_error, mul($bg_error_step, 9))};
+  --p-bg-error-m100: #{clr.mix($bg-error_m, $bg_error, mulprt($bg_error_step_up, 1))};
+  --p-bg-error-m200: #{clr.mix($bg-error_m, $bg_error, mulprt($bg_error_step_up, 2))};
+  --p-bg-error-m300: #{clr.mix($bg-error_m, $bg_error, mulprt($bg_error_step_up, 3))};
+  --p-bg-error-m400: #{clr.mix($bg-error_m, $bg_error, mulprt($bg_error_step_up, 4))};
+  --p-bg-error-m500: #{clr.mix($bg-error_m, $bg_error, mulprt($bg_error_step_up, 5))};
+  --p-bg-error-m600: #{clr.mix($bg-error_m, $bg_error, mulprt($bg_error_step_up, 6))};
+  --p-bg-error-m700: #{clr.mix($bg-error_m, $bg_error, mulprt($bg_error_step_up, 7))};
+  --p-bg-error-m800: #{clr.mix($bg-error_m, $bg_error, mulprt($bg_error_step_up, 8))};
+  --p-bg-error-m900: #{clr.mix($bg-error_m, $bg_error, mulprt($bg_error_step_up, 9))};
 
   $text_error: rgb(255, 255, 255);
   $text_error_h: rgb(255, 255, 255);
@@ -220,25 +274,25 @@
   $text_error_step: 4%;
 
   --p-text-error: #{$text_error};
-  --p-text-error-h100: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 1))};
-  --p-text-error-h200: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 2))};
-  --p-text-error-h300: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 3))};
-  --p-text-error-h400: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 4))};
-  --p-text-error-h500: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 5))};
-  --p-text-error-h600: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 6))};
-  --p-text-error-h700: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 7))};
-  --p-text-error-h800: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 8))};
-  --p-text-error-h900: #{clr.mix($text-error_h, $text_error, mul($text_error_step, 9))};
+  --p-text-error-h100: #{clr.mix($text-error_h, $text_error, mulprt($text_error_step, 1))};
+  --p-text-error-h200: #{clr.mix($text-error_h, $text_error, mulprt($text_error_step, 2))};
+  --p-text-error-h300: #{clr.mix($text-error_h, $text_error, mulprt($text_error_step, 3))};
+  --p-text-error-h400: #{clr.mix($text-error_h, $text_error, mulprt($text_error_step, 4))};
+  --p-text-error-h500: #{clr.mix($text-error_h, $text_error, mulprt($text_error_step, 5))};
+  --p-text-error-h600: #{clr.mix($text-error_h, $text_error, mulprt($text_error_step, 6))};
+  --p-text-error-h700: #{clr.mix($text-error_h, $text_error, mulprt($text_error_step, 7))};
+  --p-text-error-h800: #{clr.mix($text-error_h, $text_error, mulprt($text_error_step, 8))};
+  --p-text-error-h900: #{clr.mix($text-error_h, $text_error, mulprt($text_error_step, 9))};
 
-  --p-text-error-m100: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 1))};
-  --p-text-error-m200: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 2))};
-  --p-text-error-m300: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 3))};
-  --p-text-error-m400: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 4))};
-  --p-text-error-m500: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 5))};
-  --p-text-error-m600: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 6))};
-  --p-text-error-m700: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 7))};
-  --p-text-error-m800: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 8))};
-  --p-text-error-m900: #{clr.mix($text-error_m, $text_error, mul($text_error_step, 9))};
+  --p-text-error-m100: #{clr.mix($text-error_m, $text_error, mulprt($text_error_step, 1))};
+  --p-text-error-m200: #{clr.mix($text-error_m, $text_error, mulprt($text_error_step, 2))};
+  --p-text-error-m300: #{clr.mix($text-error_m, $text_error, mulprt($text_error_step, 3))};
+  --p-text-error-m400: #{clr.mix($text-error_m, $text_error, mulprt($text_error_step, 4))};
+  --p-text-error-m500: #{clr.mix($text-error_m, $text_error, mulprt($text_error_step, 5))};
+  --p-text-error-m600: #{clr.mix($text-error_m, $text_error, mulprt($text_error_step, 6))};
+  --p-text-error-m700: #{clr.mix($text-error_m, $text_error, mulprt($text_error_step, 7))};
+  --p-text-error-m800: #{clr.mix($text-error_m, $text_error, mulprt($text_error_step, 8))};
+  --p-text-error-m900: #{clr.mix($text-error_m, $text_error, mulprt($text_error_step, 9))};
 
   $bg_info: rgb(130, 0, 231);
   $bg_info_h: rgb(50, 0, 120);
@@ -246,25 +300,25 @@
   $bg_info_step: 4%;
 
   --p-bg-info: #{$bg_info};
-  --p-bg-info-h100: #{clr.mix($bg-info_h, $bg_info, mul($bg_info_step, 1))};
-  --p-bg-info-h200: #{clr.mix($bg-info_h, $bg_info, mul($bg_info_step, 2))};
-  --p-bg-info-h300: #{clr.mix($bg-info_h, $bg_info, mul($bg_info_step, 3))};
-  --p-bg-info-h400: #{clr.mix($bg-info_h, $bg_info, mul($bg_info_step, 4))};
-  --p-bg-info-h500: #{clr.mix($bg-info_h, $bg_info, mul($bg_info_step, 5))};
-  --p-bg-info-h600: #{clr.mix($bg-info_h, $bg_info, mul($bg_info_step, 6))};
-  --p-bg-info-h700: #{clr.mix($bg-info_h, $bg_info, mul($bg_info_step, 7))};
-  --p-bg-info-h800: #{clr.mix($bg-info_h, $bg_info, mul($bg_info_step, 8))};
-  --p-bg-info-h900: #{clr.mix($bg-info_h, $bg_info, mul($bg_info_step, 9))};
+  --p-bg-info-h100: #{clr.mix($bg-info_h, $bg_info, mulprt($bg_info_step, 1))};
+  --p-bg-info-h200: #{clr.mix($bg-info_h, $bg_info, mulprt($bg_info_step, 2))};
+  --p-bg-info-h300: #{clr.mix($bg-info_h, $bg_info, mulprt($bg_info_step, 3))};
+  --p-bg-info-h400: #{clr.mix($bg-info_h, $bg_info, mulprt($bg_info_step, 4))};
+  --p-bg-info-h500: #{clr.mix($bg-info_h, $bg_info, mulprt($bg_info_step, 5))};
+  --p-bg-info-h600: #{clr.mix($bg-info_h, $bg_info, mulprt($bg_info_step, 6))};
+  --p-bg-info-h700: #{clr.mix($bg-info_h, $bg_info, mulprt($bg_info_step, 7))};
+  --p-bg-info-h800: #{clr.mix($bg-info_h, $bg_info, mulprt($bg_info_step, 8))};
+  --p-bg-info-h900: #{clr.mix($bg-info_h, $bg_info, mulprt($bg_info_step, 9))};
 
-  --p-bg-info-m100: #{clr.mix($bg-info_m, $bg_info, mul($bg_info_step, 1))};
-  --p-bg-info-m200: #{clr.mix($bg-info_m, $bg_info, mul($bg_info_step, 2))};
-  --p-bg-info-m300: #{clr.mix($bg-info_m, $bg_info, mul($bg_info_step, 3))};
-  --p-bg-info-m400: #{clr.mix($bg-info_m, $bg_info, mul($bg_info_step, 4))};
-  --p-bg-info-m500: #{clr.mix($bg-info_m, $bg_info, mul($bg_info_step, 5))};
-  --p-bg-info-m600: #{clr.mix($bg-info_m, $bg_info, mul($bg_info_step, 6))};
-  --p-bg-info-m700: #{clr.mix($bg-info_m, $bg_info, mul($bg_info_step, 7))};
-  --p-bg-info-m800: #{clr.mix($bg-info_m, $bg_info, mul($bg_info_step, 8))};
-  --p-bg-info-m900: #{clr.mix($bg-info_m, $bg_info, mul($bg_info_step, 9))};
+  --p-bg-info-m100: #{clr.mix($bg-info_m, $bg_info, mulprt($bg_info_step, 1))};
+  --p-bg-info-m200: #{clr.mix($bg-info_m, $bg_info, mulprt($bg_info_step, 2))};
+  --p-bg-info-m300: #{clr.mix($bg-info_m, $bg_info, mulprt($bg_info_step, 3))};
+  --p-bg-info-m400: #{clr.mix($bg-info_m, $bg_info, mulprt($bg_info_step, 4))};
+  --p-bg-info-m500: #{clr.mix($bg-info_m, $bg_info, mulprt($bg_info_step, 5))};
+  --p-bg-info-m600: #{clr.mix($bg-info_m, $bg_info, mulprt($bg_info_step, 6))};
+  --p-bg-info-m700: #{clr.mix($bg-info_m, $bg_info, mulprt($bg_info_step, 7))};
+  --p-bg-info-m800: #{clr.mix($bg-info_m, $bg_info, mulprt($bg_info_step, 8))};
+  --p-bg-info-m900: #{clr.mix($bg-info_m, $bg_info, mulprt($bg_info_step, 9))};
 
   $text_info: rgb(255, 255, 255);
   $text_info_h: rgb(255, 255, 255);
@@ -272,23 +326,23 @@
   $text_info_step: 4%;
 
   --p-text-info: #{$text_info};
-  --p-text-info-h100: #{clr.mix($text-info_h, $text_info, mul($text_info_step, 1))};
-  --p-text-info-h200: #{clr.mix($text-info_h, $text_info, mul($text_info_step, 2))};
-  --p-text-info-h300: #{clr.mix($text-info_h, $text_info, mul($text_info_step, 3))};
-  --p-text-info-h400: #{clr.mix($text-info_h, $text_info, mul($text_info_step, 4))};
-  --p-text-info-h500: #{clr.mix($text-info_h, $text_info, mul($text_info_step, 5))};
-  --p-text-info-h600: #{clr.mix($text-info_h, $text_info, mul($text_info_step, 6))};
-  --p-text-info-h700: #{clr.mix($text-info_h, $text_info, mul($text_info_step, 7))};
-  --p-text-info-h800: #{clr.mix($text-info_h, $text_info, mul($text_info_step, 8))};
-  --p-text-info-h900: #{clr.mix($text-info_h, $text_info, mul($text_info_step, 9))};
+  --p-text-info-h100: #{clr.mix($text-info_h, $text_info, mulprt($text_info_step, 1))};
+  --p-text-info-h200: #{clr.mix($text-info_h, $text_info, mulprt($text_info_step, 2))};
+  --p-text-info-h300: #{clr.mix($text-info_h, $text_info, mulprt($text_info_step, 3))};
+  --p-text-info-h400: #{clr.mix($text-info_h, $text_info, mulprt($text_info_step, 4))};
+  --p-text-info-h500: #{clr.mix($text-info_h, $text_info, mulprt($text_info_step, 5))};
+  --p-text-info-h600: #{clr.mix($text-info_h, $text_info, mulprt($text_info_step, 6))};
+  --p-text-info-h700: #{clr.mix($text-info_h, $text_info, mulprt($text_info_step, 7))};
+  --p-text-info-h800: #{clr.mix($text-info_h, $text_info, mulprt($text_info_step, 8))};
+  --p-text-info-h900: #{clr.mix($text-info_h, $text_info, mulprt($text_info_step, 9))};
 
-  --p-text-info-m100: #{clr.mix($text-info_m, $text_info, mul($text_info_step, 1))};
-  --p-text-info-m200: #{clr.mix($text-info_m, $text_info, mul($text_info_step, 2))};
-  --p-text-info-m300: #{clr.mix($text-info_m, $text_info, mul($text_info_step, 3))};
-  --p-text-info-m400: #{clr.mix($text-info_m, $text_info, mul($text_info_step, 4))};
-  --p-text-info-m500: #{clr.mix($text-info_m, $text_info, mul($text_info_step, 5))};
-  --p-text-info-m600: #{clr.mix($text-info_m, $text_info, mul($text_info_step, 6))};
-  --p-text-info-m700: #{clr.mix($text-info_m, $text_info, mul($text_info_step, 7))};
-  --p-text-info-m800: #{clr.mix($text-info_m, $text_info, mul($text_info_step, 8))};
-  --p-text-info-m900: #{clr.mix($text-info_m, $text_info, mul($text_info_step, 9))};
+  --p-text-info-m100: #{clr.mix($text-info_m, $text_info, mulprt($text_info_step, 1))};
+  --p-text-info-m200: #{clr.mix($text-info_m, $text_info, mulprt($text_info_step, 2))};
+  --p-text-info-m300: #{clr.mix($text-info_m, $text_info, mulprt($text_info_step, 3))};
+  --p-text-info-m400: #{clr.mix($text-info_m, $text_info, mulprt($text_info_step, 4))};
+  --p-text-info-m500: #{clr.mix($text-info_m, $text_info, mulprt($text_info_step, 5))};
+  --p-text-info-m600: #{clr.mix($text-info_m, $text_info, mulprt($text_info_step, 6))};
+  --p-text-info-m700: #{clr.mix($text-info_m, $text_info, mulprt($text_info_step, 7))};
+  --p-text-info-m800: #{clr.mix($text-info_m, $text_info, mulprt($text_info_step, 8))};
+  --p-text-info-m900: #{clr.mix($text-info_m, $text_info, mulprt($text_info_step, 9))};
 }

@@ -1,0 +1,53 @@
+@use "util:std" as std;
+
+.root {
+  border: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+
+  transition: background-color std.$trtime_fast, outline-color std.$trtime_fast;
+
+  &._pressable {
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--p-bg-primary-m100);
+    }
+
+    &:focus-within {
+      background-color: var(--p-bg-primary);
+    }
+  }
+
+  &:not(._pressable) {
+    cursor: text;
+  }
+
+  &._size_small {
+    padding: std.rem(3) std.rem(5);
+  }
+
+  &:not(._notext)._size_small {
+    font-size: std.rem(14);
+  }
+
+  &._size_normal {
+    padding: std.rem(10);
+  }
+
+  &:not(._notext)._size_normal {
+    font-size: std.rem(14);
+  }
+
+  &._size_big {
+    padding: std.rem(10);
+  }
+
+  &:not(._notext)._size_big {
+    font-size: std.rem(20);
+  }
+}

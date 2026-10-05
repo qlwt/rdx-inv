@@ -4,6 +4,7 @@ import * as std from "@ta/std";
 export const rempag_node_new = function(): RemPagNode {
     return {
         cursor: std.MNONE,
+        count_total: std.MNONE,
         status_pending: false,
     }
 }

@@ -15,5 +15,6 @@ export enum ProductStatus_Kind {
 }
 
 export const product_limits = {
+    spec_mxlength: 255,
     title_mxlength: 255,
 }

@@ -1,0 +1,22 @@
+.root {
+  display: inline-grid;
+  grid-template-rows: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.item {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+
+  &._hidden {
+    user-select: none;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  &._passive {
+    contain: size;
+  }
+}

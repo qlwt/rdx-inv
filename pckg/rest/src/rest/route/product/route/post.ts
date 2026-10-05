@@ -9,6 +9,7 @@ export type RestRouteProductPost_New_Params = {}
 
 export const restroute_product_post_new = (params: RestRouteProductPost_New_Params) => {
     const schema_body = z.strictObject({
+        spec: z.string().max(cst.product_limits.spec_mxlength),
         title: z.string().max(cst.product_limits.title_mxlength),
         price_uah: z.number().gte(0),
         price_usd: z.number().gte(0),

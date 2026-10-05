@@ -1,0 +1,88 @@
+@use "util:std" as std;
+
+.split {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  gap: std.rem(0);
+
+  transition: gap std.$trtime_slow;
+
+  &._open {
+    gap: std.rem(20);
+
+    @include std.screen_lte("sm") {
+      gap: 0;
+    }
+  }
+}
+
+.split__left {
+  overflow: hidden;
+
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 1;
+
+  transition: flex-grow std.$trtime_fast;
+
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+
+  &._open {
+    @include std.screen_lte("sm") {
+      flex-grow: 0;
+    }
+  }
+
+  &._hide {
+    visibility: hidden;
+  }
+}
+
+.split__right {
+  flex: 0 1 0;
+
+  display: grid;
+  overflow: hidden;
+  grid-template-rows: auto minmax(0, 1fr);
+
+  transition: flex-grow std.$trtime_slow, flex-basis std.$trtime_slow;
+
+  &._open {
+    flex-grow: 3;
+
+    @include std.screen_lte("sm") {
+      flex-basis: 0;
+      flex-grow: 3;
+    }
+  }
+}
+
+.filter_list {
+  display: flex;
+  gap: std.rem(10);
+}
+
+.act {
+  outline: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: std.rem(15);
+  color: var(--p-text-secondary);
+
+  border-radius: 4px;
+  border: 1px solid var(--p-border-primary-m200);
+
+  padding: std.rem(10) std.rem(10);
+  background-color: var(--p-bg-secondary);
+
+  transition: color std.$trtime_fast, background-color std.$trtime_fast;
+
+  &:hover, &:focus {
+    background-color: var(--p-bg-secondary-h200);
+  }
+}

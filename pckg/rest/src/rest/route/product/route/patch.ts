@@ -12,9 +12,10 @@ export const restroute_product_patch_new = (params: RestRouteProductPatch_New_Pa
     })
 
     const schema_body = z.strictObject({
-        title: z.string().max(cst.product_limits.title_mxlength).exactOptional(),
         price_uah: z.number().gte(0).exactOptional(),
         price_usd: z.number().gte(0).exactOptional(),
+        spec: z.string().max(cst.product_limits.spec_mxlength).exactOptional(),
+        title: z.string().max(cst.product_limits.title_mxlength).exactOptional(),
 
         kind: z.enum(cst.ProductStatus_Kind).exactOptional(),
         status_wear: z.enum(cst.ProductStatus_Wear).exactOptional(),
@@ -50,6 +51,7 @@ export const restroute_product_patch_new = (params: RestRouteProductPatch_New_Pa
                     const sql_result = await (trx
                         .updateTable("product")
                         .where("id", "=", url.id)
+                        .where("deleted_at", "is", null)
                         .set(body)
                         .executeTakeFirst()
                     )

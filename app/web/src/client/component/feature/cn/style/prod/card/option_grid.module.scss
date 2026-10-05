@@ -1,0 +1,87 @@
+@use "util:std" as std;
+
+.btn {
+  outline: none;
+  background-color: transparent;
+
+  padding: 0;
+  border-radius: 4px;
+  border: 1px solid transparent;
+
+  transition: background-color std.$trtime_fast, border-color std.$trtime_fast;
+
+  &:hover, &:focus {
+    border-color: var(--p-border-primary);
+    background-color: var(--p-bg-primary);
+  }
+}
+
+.listc {
+  border-radius: 4px;
+  box-shadow: 0 0 std.rem(5) 0 var(--p-border-primary);
+}
+
+.list {
+  border-radius: 4px;
+  background-color: var(--p-bg-primary-m300);
+
+  padding: std.rem(10);
+  display: grid;
+  gap: std.rem(20);
+  grid-template-columns: repeat(3, std.rem(96));
+  grid-auto-rows: std.rem(96);
+}
+
+.item {
+  position: relative;
+
+  padding: 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+
+  display: grid;
+  overflow: hidden;
+  grid-template-rows: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
+
+  border-radius: 4px;
+
+  &::after {
+    z-index: 2;
+    content: "";
+    display: block;
+
+    user-select: none;
+    pointer-events: none;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: transparent;
+
+    transition: background-color std.$trtime_fast;
+  }
+
+  &:not(:disabled) {
+    &:hover::after, &:focus::after {
+      background-color: rgba(0, 0, 0, .1);
+    }
+  }
+
+  &:disabled {
+    &::after {
+      background-color: rgba(0, 0, 0, .2);
+    }
+  }
+}
+
+.item__img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  object-fit: cover;
+}

@@ -1,0 +1,48 @@
+@use "util:std" as std;
+
+.root {
+  &:not(._edit) {
+    display: flex;
+
+    border-radius: 2px;
+    border: 1px solid transparent;
+
+    transition: border-color std.$trtime_fast, background-color std.$trtime_fast;
+
+    &:hover {
+      border-color: var(--p-border-primary);
+      background-color: var(--p-bg-primary-m200);
+    }
+  }
+}
+
+.placeholder {
+  flex-grow: 1;
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  .root._size_small & {
+    padding: std.rem(3) std.rem(7);
+  }
+
+  .root:not(._notext)._size_small & {
+    font-size: std.rem(14);
+  }
+
+  .root._size_normal & {
+    padding: std.rem(10) std.rem(15);
+  }
+
+  .root:not(._notext)._size_normal & {
+    font-size: std.rem(14);
+  }
+
+  .root._size_big & {
+    padding: std.rem(10) std.rem(20);
+  }
+
+  .root:not(._notext)._size_big & {
+    font-size: std.rem(20);
+  }
+}

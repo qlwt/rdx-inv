@@ -1,0 +1,13 @@
+@use "util:std" as std;
+
+.root {
+  display: flex;
+  flex-direction: column;
+
+  gap: std.rem(10);
+  padding: std.rem(5) 0;
+}
+
+.container {
+  scrollbar-width: thin;
+}

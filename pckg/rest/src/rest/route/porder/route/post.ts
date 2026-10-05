@@ -9,6 +9,9 @@ export type RestRoutePOrderPost_New_Params = {}
 
 export const restroute_porder_post_new = (params: RestRoutePOrderPost_New_Params) => {
     const schema_body = z.strictObject({
+        sent_at: z.number().int().gte(0).nullable(),
+        sent_to: z.string().max(cst.porder_limits.sent_to_mxlength).nullable(),
+
         title: z.string().max(cst.porder_limits.title_mxlength),
         description: z.string().max(cst.porder_limits.description_mxlength),
     })

@@ -18,7 +18,7 @@ export const restroute_product_delete_new = (params: RestRouteOrderDelete_New_Pa
 
         handler: eu.route_new_path({
             method: "delete",
-            path: `/rest/product/delete/:id`,
+            path: `/rest/product/:id`,
 
             middleware: [
                 eu.middleware_new_url_short(),
@@ -35,7 +35,6 @@ export const restroute_product_delete_new = (params: RestRouteOrderDelete_New_Pa
                         .where("id", "=", url.id)
                         .where("deleted_at", "is", null)
                         .set({ deleted_at, })
-                        .limit(1)
                         .executeTakeFirst()
                     )
 

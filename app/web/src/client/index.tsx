@@ -1,5 +1,6 @@
 import "#client/style/index.scss";
 import "bootstrap/dist/css/bootstrap.min.css"
+import "@qyu/reactcmp-dropdown/style/index.css"
 
 import ER_App from "#client/component/root/element/app";
 import { cst_root_app, cst_root_dropdown, cst_root_modal } from "#client/const/roots";

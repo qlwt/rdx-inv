@@ -12,6 +12,8 @@ export type Database = {
 
         title: string
         description: string
+        sent_to: string | null
+        sent_at: number | null
     },
 
     product: {
@@ -25,6 +27,7 @@ export type Database = {
         status_wear: cst.ProductStatus_Wear
         status_avail: cst.ProductStatus_Avail
 
+        spec: string
         title: string
         price_usd: number
         price_uah: number

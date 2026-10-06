@@ -1,13 +1,12 @@
-import * as r from "react"
-import * as std from "@ta/std"
-import * as z from "zod"
-import st from "#client/component/primitive/edview-text/style/view.module.scss"
-import EPInText_LineWeakInline from "#/src/client/component/primitive/in-text/element/line_weak_inline"
-import type { EPInText_Size } from "#/src/client/component/primitive/in-text/type/st"
-import type { EPInText_CRenderProps } from "#/src/client/component/primitive/in-text/type/crender_prop"
-import cl from "classnames"
-import * as stdr from "@ta/std-react"
 import EPInText_LineWeak from "#/src/client/component/primitive/in-text/element/line_weak"
+import type { EPInText_CRenderProps } from "#/src/client/component/primitive/in-text/type/crender_prop"
+import type { EPInText_Size } from "#/src/client/component/primitive/in-text/type/st"
+import st from "#client/component/primitive/edview-text/style/view.module.scss"
+import * as std from "@ta/std"
+import * as stdr from "@ta/std-react"
+import cl from "classnames"
+import * as r from "react"
+import * as z from "zod"
 
 export type EPEdViewText__View_Props = {
     readonly text: string

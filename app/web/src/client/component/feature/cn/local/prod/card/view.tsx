@@ -3,20 +3,16 @@ import ELCN_ProdCardFieldKind from "#/src/client/component/feature/cn/local/prod
 import { ELCN_ProdCardFieldPrice } from "#/src/client/component/feature/cn/local/prod/card/field_price"
 import { ELCN_ProdCardFieldTitle } from "#/src/client/component/feature/cn/local/prod/card/field_title"
 import { ELCN_ProdCardFieldWear } from "#/src/client/component/feature/cn/local/prod/card/field_wear"
-import EPEdViewText_View from "#/src/client/component/primitive/edview-text/element/view"
-import { EPInText_Decoration } from "#/src/client/component/primitive/in-text/element/decoration"
 import st from "#client/component/feature/cn/style/prod/card/view.module.scss"
 import * as fas from "@fortawesome/free-solid-svg-icons/faTrashCan"
 import * as faw from "@fortawesome/react-fontawesome"
 import * as rfc from "@qyu/reactcmp-flow-control"
 import * as cst from "@ta/cst"
 import * as gs from "@ta/gstate"
-import { rem } from "@ta/gstate"
 import * as std from "@ta/std"
 import cl from "classnames"
 import * as r from "react"
 import * as rbs from "react-bootstrap"
-import * as z from "zod"
 
 export type ELCN__ProdCardView_Props = {
     readonly ref?: r.Ref<HTMLElement | null>
@@ -25,7 +21,6 @@ export type ELCN__ProdCardView_Props = {
 }
 
 export const ELCN_ProdCardView: r.FC<ELCN__ProdCardView_Props> = props => {
-    const dispatch = gs.useDispatch()
     const rview = gs.useRemView("product", props.remnode)
 
     const status_free = (

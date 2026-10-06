@@ -11,13 +11,21 @@ export type ELCN_SideNav_Props = {
 export const ELCN_SideNav: r.FC<ELCN_SideNav_Props> = props => {
     return <aside className={st.root}>
         <nav className={st.nav}>
-            <rr.NavLink className={({ isActive }) => cl(st.link, isActive && st._active)} to={urlmap.cn_product()}>
+            <rr.NavLink
+                viewTransition
+                to={urlmap.cn_product()}
+                className={({ isActive }) => cl(st.link, isActive && st._active)}
+            >
                 <span className={st.link__text}>
                     PRODUCTS
                 </span>
             </rr.NavLink>
 
-            <rr.NavLink className={({ isActive }) => cl(st.link, isActive && st._active)} to={urlmap.cn_porder()}>
+            <rr.NavLink
+                viewTransition
+                to={urlmap.cn_porder()}
+                className={({ isActive }) => cl(st.link, isActive && st._active)}
+            >
                 <span className={st.link__text}>
                     ORDERS
                 </span>

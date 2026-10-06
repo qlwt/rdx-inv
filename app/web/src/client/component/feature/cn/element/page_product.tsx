@@ -103,6 +103,7 @@ export const EFCN_PageProduct: r.FC<EFCN_PageProduct_Props> = props => {
         <ELCN_Grid
             pick={pick}
             target={"product"}
+            placeholder={`No Products Added`}
 
             render_child={(remnode, refi) => {
                 return <ELCN_ProdCardView

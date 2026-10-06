@@ -100,6 +100,7 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
             <ELCN_Grid
                 pick={{}}
                 target={"porder"}
+                placeholder={`No Active Orders`}
 
                 render_child={(remnode, refi) => {
                     return <ELCN_POrderCardView
@@ -185,6 +186,7 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
                 {([selection]) => <ELCN_Grid
                     target={"product"}
                     pick={pick_product}
+                    placeholder={`No Products in Order`}
 
                     render_child={(remnode, refi) => {
                         return <ELCN_ProdCardViewInOrder

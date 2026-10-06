@@ -11,3 +11,11 @@
 .container {
   scrollbar-width: thin;
 }
+
+.placeholder {
+  padding: std.rem(50) 25%;
+
+  text-align: center;
+  font-size: std.rem(36);
+  color: var(--p-text-primary-m600);
+}

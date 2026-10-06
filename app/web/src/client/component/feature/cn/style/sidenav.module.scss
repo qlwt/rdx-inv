@@ -12,6 +12,8 @@
 
   box-shadow: 0 0 std.rem(15) 0 var(--p-bg-primary-h600);
 
+  view-transition-name: console-sidenav;
+
   @include std.screen_lte("xsm") {
     contain: initial;
 

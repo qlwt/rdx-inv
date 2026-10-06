@@ -10,6 +10,8 @@
   background-color: var(--p-bg-primary-m200);
   box-shadow: 0 0 std.rem(15) 0 var(--p-bg-primary-h600);
   padding: std.rem(15) 0;
+
+  view-transition-name: header;
 }
 
 .logo {
@@ -19,6 +21,7 @@
   align-items: center;
 
   gap: std.rem(10);
+  text-decoration: none;
   font-size: std.rem(22);
 }
 

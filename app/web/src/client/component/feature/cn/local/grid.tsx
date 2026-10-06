@@ -7,6 +7,7 @@ import * as std from "@ta/std"
 import * as stdr from "@ta/std-react"
 import cl from "classnames"
 import * as r from "react"
+import * as rfc from "@qyu/reactcmp-flow-control"
 
 type PickMeta = {
     readonly cache: Map<string, boolean>
@@ -15,6 +16,7 @@ type PickMeta = {
 
 export type ELCN__Grid_Props<Target extends gs.RemKey> = {
     readonly target: Target
+    readonly placeholder: string
     readonly pick: NonNullable<capi.SendMGet_Query<Target>["pick"]>
     readonly render_child: (remnode: gs.RemNode<Target>, refi: stdr.RefI<HTMLElement | null> | null) => r.ReactNode
 }
@@ -86,44 +88,52 @@ export const ELCN_Grid = function <Target extends gs.RemKey>(props: ELCN__Grid_P
         return result
     }, [remnode_list, pick_meta, pagnode, props.render_child])
 
-    return <EPVirtual_LMonDyn
-        window_buffer={1}
-        src_length={remnode_list_fit.length}
+    return <>
+        <rfc.CmpIf value={remnode_list_fit.length === 0 && pagnode && std.maybe_is(pagnode.cursor, null)}>
+            <div className={st.placeholder}>
+                {props.placeholder}
+            </div>
+        </rfc.CmpIf>
 
-        container_render={props => {
-            return <div {...props} className={cl(props.className, st.container)} />
-        }}
+        <EPVirtual_LMonDyn
+            window_buffer={1}
+            src_length={remnode_list_fit.length}
 
-        grid_render={props => {
-            return <div {...props} className={cl(props.className, st.root)} />
-        }}
+            container_render={props => {
+                return <div {...props} className={cl(props.className, st.container)} />
+            }}
 
-        src_render={(index, refi) => {
-            return props.render_child(remnode_list_fit[index]!, refi)
-        }}
+            grid_render={props => {
+                return <div {...props} className={cl(props.className, st.root)} />
+            }}
 
-        pagination={{
-            threashhold: 1,
+            src_render={(index, refi) => {
+                return props.render_child(remnode_list_fit[index]!, refi)
+            }}
 
-            load: () => {
-                dispatch(rem[props.target as "product"].act.pagload({
-                    query: {
-                        cursor: pagnode ? std.maybe_unpack(pagnode.cursor, null) : null,
-                        pick: props.pick,
-                        limit: 20,
-                    },
-                }))
-            },
+            pagination={{
+                threashhold: 1,
 
-            status: (() => {
-                if (!pagnode || !pagnode.cursor.kind) { return "idle" }
-                if (pagnode.cursor.value === null) { return "fulfilled" }
-                if (pagnode.status_pending) { return "pending" }
+                load: () => {
+                    dispatch(rem[props.target as "product"].act.pagload({
+                        query: {
+                            cursor: pagnode ? std.maybe_unpack(pagnode.cursor, null) : null,
+                            pick: props.pick,
+                            limit: 20,
+                        },
+                    }))
+                },
 
-                return "idle"
-            })(),
-        }}
-    />
+                status: (() => {
+                    if (!pagnode || !pagnode.cursor.kind) { return "idle" }
+                    if (pagnode.cursor.value === null) { return "fulfilled" }
+                    if (pagnode.status_pending) { return "pending" }
+
+                    return "idle"
+                })(),
+            }}
+        />
+    </>
 }
 
 export default ELCN_Grid

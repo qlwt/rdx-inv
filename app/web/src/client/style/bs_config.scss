@@ -1,0 +1,27 @@
+.btn.btn-delete {
+  --bs-btn-bg: var(--p-bg-error);
+  --bs-btn-color: var(--p-text-error);
+  --bs-btn-border-color: var(--p-bg-error);
+
+  --bs-btn-hover-bg: var(--p-bg-error-h200);
+  --bs-btn-hover-color: var(--p-text-error);
+  --bs-btn-hover-border-color: var(--p-bg-error-h200);
+
+  --bs-btn-active-bg: var(--p-bg-error-h400);
+  --bs-btn-active-color: var(--p-text-error);
+  --bs-btn-active-border-color: var(--p-bg-error-h400);
+}
+
+.btn.btn-primary {
+  --bs-btn-bg: var(--p-bg-secondary);
+  --bs-btn-color: var(--p-text-secondary);
+  --bs-btn-border-color: var(--p-bg-secondary);
+
+  --bs-btn-hover-bg: var(--p-bg-secondary-h200);
+  --bs-btn-hover-color: var(--p-text-secondary);
+  --bs-btn-hover-border-color: var(--p-bg-secondary-h200);
+
+  --bs-btn-active-bg: var(--p-bg-secondary-h400);
+  --bs-btn-active-color: var(--p-text-secondary);
+  --bs-btn-active-border-color: var(--p-bg-secondary-h400);
+}

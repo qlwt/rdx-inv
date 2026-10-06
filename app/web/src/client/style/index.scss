@@ -1,65 +1,7 @@
 @use "util:std";
 @use "util:palette";
-
-.btn-delete {
-  --bs-btn-bg: var(--p-bg-error);
-  --bs-btn-color: var(--p-text-error);
-  --bs-btn-border-color: var(--p-bg-error);
-
-  --bs-btn-hover-bg: var(--p-bg-error-h200);
-  --bs-btn-hover-color: var(--p-text-error);
-  --bs-btn-hover-border-color: var(--p-bg-error-h200);
-
-  --bs-btn-active-bg: var(--p-bg-error-h400);
-  --bs-btn-active-color: var(--p-text-error);
-  --bs-btn-active-border-color: var(--p-bg-error-h400);
-}
-
-.btn-primary {
-  --bs-btn-bg: var(--p-bg-secondary);
-  --bs-btn-color: var(--p-text-secondary);
-  --bs-btn-border-color: var(--p-bg-secondary);
-
-  --bs-btn-hover-bg: var(--p-bg-secondary-h200);
-  --bs-btn-hover-color: var(--p-text-secondary);
-  --bs-btn-hover-border-color: var(--p-bg-secondary-h200);
-
-  --bs-btn-active-bg: var(--p-bg-secondary-h400);
-  --bs-btn-active-color: var(--p-text-secondary);
-  --bs-btn-active-border-color: var(--p-bg-secondary-h400);
-}
-
-@keyframes fade-out {
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  to {
-    opacity: 0;
-    transform: scale(0.98);
-  }
-}
-
-@keyframes slide-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px); 
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-::view-transition-old(root) {
-  animation: fade-out 250ms ease-in-out forwards;
-}
-
-::view-transition-new(root) {
-  animation: slide-in 250ms ease-in-out forwards;
-}
+@use "util:bs_config";
+@use "util:transition_view";
 
 * {
   box-sizing: border-box;

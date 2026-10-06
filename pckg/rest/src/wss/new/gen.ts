@@ -20,7 +20,9 @@ export const wss_new_gen = function(server: http.Server) {
     })
 
     wss.on("connection", wsi => {
-        counter_s.input(counter_s.output() + 1)
+        let status_open = true
+        let ping_date = Date.now()
+        let ping_id: NodeJS.Timeout
 
         const counter_sub = () => {
             wsi.send(JSON.stringify({
@@ -29,13 +31,21 @@ export const wss_new_gen = function(server: http.Server) {
             } satisfies cst.WSOEvent))
         }
 
+        const act_close = function () {
+            if (status_open) {
+                status_open = false
+
+                clearInterval(ping_id)
+                counter_s.rmsub(counter_sub)
+                counter_s.input(counter_s.output() - 1)
+            }
+        }
+
+        counter_s.input(counter_s.output() + 1)
         counter_s.addsub(counter_sub)
 
-        wsi.on("close", () => {
-            counter_s.rmsub(counter_sub)
-
-            counter_s.input(counter_s.output() - 1)
-        })
+        wsi.on("close", act_close)
+        wsi.on("error", act_close)
 
         wsi.on("message", msg => {
             const event_p = schema.safeParse(msg.toString("utf8"))
@@ -52,5 +62,17 @@ export const wss_new_gen = function(server: http.Server) {
                 }
             }
         })
+
+        wsi.on("pong", () => {
+            ping_date = Date.now()
+        })
+
+        ping_id = setInterval(() => {
+            wsi.ping()
+
+            if (Date.now() - ping_date >= 60e3) {
+                wsi.terminate()
+            }
+        }, 30e3)
     })
 }

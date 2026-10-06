@@ -16,12 +16,37 @@ export type RemSlice<Key extends RemKey> = rtk.Slice<
 
 export type RemSliceDef<Key extends RemKey> = {
     readonly slice: RemSlice<Key>
+    readonly adapter: rtk.EntityAdapter<RemNode<Key>, string>
 
     readonly thunk_hmap: {
-        readonly post: rtk.AsyncThunk<capi.SendPost_Result<Key>, capi.SendPost_Params<Key>, rtk.AsyncThunkConfig>
-        readonly patch: rtk.AsyncThunk<capi.SendPatch_Result<Key>, capi.SendPatch_Params<Key>, rtk.AsyncThunkConfig>
-        readonly delete: rtk.AsyncThunk<capi.SendDelete_Result<Key>, capi.SendDelete_Params<Key>, rtk.AsyncThunkConfig>
-        readonly load: rtk.AsyncThunk<capi.SendMGet_Result<Key>, capi.SendMGet_Params<Key>, rtk.AsyncThunkConfig>
-        readonly pagload: rtk.AsyncThunk<capi.SendMGet_Result<Key>, capi.SendMGet_Params<Key>, rtk.AsyncThunkConfig>
+        readonly post: rtk.AsyncThunk<
+            capi.ApiResponse<capi.SendPost_Result<Key>>,
+            capi.SendPost_Params<Key>,
+            rtk.AsyncThunkConfig
+        >
+
+        readonly patch: rtk.AsyncThunk<
+            capi.ApiResponse<capi.SendPatch_Result<Key>>,
+            capi.SendPatch_Params<Key>,
+            rtk.AsyncThunkConfig
+        >
+
+        readonly delete: rtk.AsyncThunk<
+            capi.ApiResponse<capi.SendDelete_Result<Key>>,
+            capi.SendDelete_Params<Key>,
+            rtk.AsyncThunkConfig
+        >
+
+        readonly load: rtk.AsyncThunk<
+            capi.ApiResponse<capi.SendMGet_Result<Key>>,
+            capi.SendMGet_Params<Key>,
+            rtk.AsyncThunkConfig
+        >
+
+        readonly pagload: rtk.AsyncThunk<
+            capi.ApiResponse<capi.SendMGet_Result<Key>>,
+            capi.SendMGet_Params<Key>,
+            rtk.AsyncThunkConfig
+        >
     }
 }

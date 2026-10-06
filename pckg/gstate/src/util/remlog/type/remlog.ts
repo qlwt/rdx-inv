@@ -13,8 +13,8 @@ export type RemLogPatch<Node extends object> = {
 }
 
 export type RemLogNode<Node extends object> = {
+    del: RemLogDelete[]
     post: RemLogPost | null
-    del: RemLogDelete | null
     patch: RemLogPatch<Node> | null
 }
 

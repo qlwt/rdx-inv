@@ -34,7 +34,7 @@ export const useRemView = function <Key extends RemKey>(key: Key, entry: RemNode
                 },
 
                 pending: {
-                    del: Boolean(remlog.del),
+                    del: remlog.del.length >= 1,
                     post: Boolean(remlog.post),
                 },
             }
@@ -44,7 +44,7 @@ export const useRemView = function <Key extends RemKey>(key: Key, entry: RemNode
             data: entry,
 
             pending: {
-                del: Boolean(remlog.del),
+                del: remlog.del.length >= 1,
                 post: Boolean(remlog.post),
             },
         }

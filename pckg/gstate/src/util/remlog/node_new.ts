@@ -3,7 +3,7 @@ import type * as rtk from "@reduxjs/toolkit"
 
 export const remlog_node_new = function <Node extends object>(): RemLogNode<Node> {
     return {
-        del: null,
+        del: [],
         post: null,
         patch: null,
     }

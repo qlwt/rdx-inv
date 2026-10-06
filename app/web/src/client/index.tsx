@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import EFCN_Layout from "#/src/client/component/feature/cn/element/layout";
 import EFCN_PagePOrder from "#/src/client/component/feature/cn/element/page_porder";
 import EFCN_PageProduct from "#/src/client/component/feature/cn/element/page_product";
-import EFHome_View from "#/src/client/component/feature/home/element/view";
 import ER_App from "#/src/client/component/root/element/app";
 import { urlmap } from "#/src/client/urlmap";
 import { cst_root_app, cst_root_dropdown, cst_root_modal } from "#client/const/roots";
@@ -23,10 +22,10 @@ const router = rr.createBrowserRouter([{
     Component: ER_App,
 
     children: [
-        {
-            path: urlmap.home(),
-            Component: EFHome_View,
-        },
+        // {
+        //     path: urlmap.home(),
+        //     Component: EFHome_View,
+        // },
 
         {
             Component: EFCN_Layout,

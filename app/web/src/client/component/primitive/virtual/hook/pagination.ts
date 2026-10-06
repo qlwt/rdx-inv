@@ -1,15 +1,28 @@
+import type { EPVirtual_Pagination } from "#/src/client/component/primitive/virtual/type/pagination"
 import * as r from "react"
 
-export const useEPVirtualPagination = function (pagination: EPVirtual) {
+export type UseEPVirtualPagination_Params = {
+    readonly pagination?: EPVirtual_Pagination
+    readonly grid_length: number
+    readonly render_end: number
+}
+
+export const useEPVirtualPagination = function (params: UseEPVirtualPagination_Params) {
     r.useEffect(() => {
-        const pag = props.pagination
+        const pag = params.pagination
 
         if (pag) {
-            console.log(pag.status, grid_length, render_end, pag.threashhold)
+            console.log(pag.status, params.grid_length, params.render_end, pag.threashhold)
 
-            if (pag.status === "idle" && grid_length - render_end <= pag.threashhold) {
+            if (pag.status === "idle" && params.grid_length - params.render_end <= pag.threashhold) {
                 pag.load()
             }
         }
-    }, [grid_length, render_end, props.pagination?.threashhold, props.pagination?.load, props.pagination?.status])
+    }, [
+        params.grid_length,
+        params.render_end,
+        params.pagination?.threashhold,
+        params.pagination?.load,
+        params.pagination?.status
+    ])
 }

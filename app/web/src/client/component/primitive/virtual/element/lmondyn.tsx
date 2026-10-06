@@ -1,3 +1,5 @@
+import { useEPVirtualPadding } from "#/src/client/component/primitive/virtual/hook/padding"
+import { useEPVirtualPagination } from "#/src/client/component/primitive/virtual/hook/pagination"
 import type { EPVirtual_Pagination } from "#/src/client/component/primitive/virtual/type/pagination"
 import { epvirtual__dim_reeval, type EPVirtual_Dim } from "#/src/client/component/primitive/virtual/util/dim"
 import st from "#client/component/primitive/virtual/style/view.module.scss"
@@ -50,34 +52,24 @@ export const EPVirtual_LMonDyn: r.FC<EPVirtual__LMonDyn_Props> = props => {
         row_height: 300,
     }))
 
-    const grid_length = r.useMemo(() => {
-        return Math.ceil(props.src_length)
-    }, [props.src_length])
+    useEPVirtualPagination({
+        pagination: props.pagination,
+        render_end,
+        grid_length: props.src_length,
+    })
 
-    const padding_top = r.useMemo(() => {
-        const rwindow_first = Math.max(0, render_start - props.window_buffer)
-
-        return (
-            + rwindow_first * dim.row_gap
-            + rwindow_first * dim.row_height
-        )
-    }, [render_start, dim.row_height, dim.row_gap, grid_length, props.window_buffer])
-
-    const padding_bottom = r.useMemo(() => {
-        const rwindow_end = Math.min(grid_length, render_end + props.window_buffer)
-
-        const bottom_length = grid_length - rwindow_end
-
-        return (
-            + bottom_length * dim.row_height
-            + bottom_length * dim.row_gap
-        )
-    }, [render_end, dim.row_height, dim.row_gap, grid_length])
+    const padding = useEPVirtualPadding({
+        dim,
+        render_end,
+        render_start,
+        grid_length: props.src_length,
+        window_buffer: props.window_buffer,
+    })
 
     const element_items = r.useMemo(() => {
         const result: r.ReactNode[] = []
         const rwindow_first = Math.max(0, render_start - props.window_buffer)
-        const rwindow_end = Math.min(grid_length, render_end + props.window_buffer)
+        const rwindow_end = Math.min(props.src_length, render_end + props.window_buffer)
 
         {
             let i = rwindow_first
@@ -93,7 +85,7 @@ export const EPVirtual_LMonDyn: r.FC<EPVirtual__LMonDyn_Props> = props => {
         }
 
         return result
-    }, [render_start, render_end, props.window_buffer, grid_length, props.src_length, props.src_render, refi_first])
+    }, [render_start, render_end, props.window_buffer, props.src_length, props.src_length, props.src_render, refi_first])
 
     const element_grid = r.useMemo(() => {
         return props.grid_render({
@@ -134,7 +126,7 @@ export const EPVirtual_LMonDyn: r.FC<EPVirtual__LMonDyn_Props> = props => {
             )
 
             const now_render_end = Math.min(
-                grid_length,
+                props.src_length,
                 now_render_start + Math.ceil(
                     (content_height + dim.row_gap)
                     / (dim.row_height + dim.row_gap)
@@ -147,17 +139,7 @@ export const EPVirtual_LMonDyn: r.FC<EPVirtual__LMonDyn_Props> = props => {
             render_start_set(now_render_start)
             render_end_set(now_render_start)
         }
-    }, [container_size, dim.padding, dim.row_gap, dim.row_height, grid_length])
-
-    r.useEffect(() => {
-        const pag = props.pagination
-
-        if (pag) {
-            if (pag.status === "idle" && grid_length - render_end <= pag.threashhold) {
-                pag.load()
-            }
-        }
-    }, [grid_length, render_end, props.pagination?.threashhold, props.pagination?.load, props.pagination?.status])
+    }, [container_size, dim.padding, dim.row_gap, dim.row_height, props.src_length])
 
     r.useLayoutEffect(() => {
         const abort_controller = new AbortController()
@@ -209,11 +191,11 @@ export const EPVirtual_LMonDyn: r.FC<EPVirtual__LMonDyn_Props> = props => {
         },
 
         children: <>
-            <div className={st.plate_placeholder} style={{ height: `${padding_top}px` }} />
+            <div className={st.plate_placeholder} style={{ height: `${padding.top}px` }} />
 
             {element_grid}
 
-            <div className={st.plate_placeholder} style={{ height: `${padding_bottom}px` }} />
+            <div className={st.plate_placeholder} style={{ height: `${padding.bottom}px` }} />
 
             <rfc.CmpIf value={props.pagination && props.pagination.status !== "fulfilled"}>
                 <div className={st.plate_pending} style={{ height: `${dim.row_height}px` }}>

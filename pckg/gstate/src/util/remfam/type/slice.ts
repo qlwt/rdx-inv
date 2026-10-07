@@ -14,11 +14,10 @@ export type RemSlice<Key extends RemKey> = rtk.Slice<
     )
 >
 
-export type RemSliceDef<Key extends RemKey> = {
-    readonly slice: RemSlice<Key>
-    readonly adapter: rtk.EntityAdapter<RemNode<Key>, string>
+export type RemSlice_ThunkDefStd<Key extends RemKey> = {
+    readonly reqmap: Map<string, VoidFunction>
 
-    readonly thunk_hmap: {
+    readonly act: {
         readonly post: rtk.AsyncThunk<
             capi.ApiResponse<capi.SendPost_Result<Key>>,
             capi.SendPost_Params<Key>,
@@ -49,4 +48,9 @@ export type RemSliceDef<Key extends RemKey> = {
             rtk.AsyncThunkConfig
         >
     }
+}
+
+export type RemSliceDef<Key extends RemKey> = {
+    readonly slice: RemSlice<Key>
+    readonly adapter: rtk.EntityAdapter<RemNode<Key>, string>
 }

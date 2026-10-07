@@ -1,130 +1,27 @@
 import type { RemKey, RemNode } from "#src/type/rem"
 import type { RemFam } from "#src/util/remfam/type/fam"
-import type { RemSliceDef } from "#src/util/remfam/type/slice"
+import type { RemSlice_ThunkDefStd, RemSliceDef } from "#src/util/remfam/type/slice"
 import { remlog_node_new_wr } from "#src/util/remlog/node_new"
 import { rempag_node_new } from "#src/util/rempag/node_new"
 import * as rtk from "@reduxjs/toolkit"
-import * as capi from "@ta/capi"
 import * as std from "@ta/std"
 import { v7 as uuid_new } from "uuid"
 
 export type RemFam_Slice_New_Params<Key extends RemKey> = {
+    readonly thunk_std: RemSlice_ThunkDefStd<Key>
     readonly reducer_extra_add?: (builder: rtk.ActionReducerMapBuilder<RemFam<Key>>) => void
 }
 
 export const remfam_slice_new = function <Key extends RemKey>(key: Key, params: RemFam_Slice_New_Params<Key>): RemSliceDef<Key> {
-    const reqmap = new Map<string, VoidFunction>()
+    const { thunk_std } = params
 
     const adapter = rtk.createEntityAdapter({
         selectId: (node: RemNode<Key>) => node.id,
         sortComparer: (a, b) => -a.id.localeCompare(b.id),
     })
 
-    const thunk_load = rtk.createAsyncThunk(
-        `${key}/load`,
-        async (params: capi.SendMGet_Params<Key>, api) => {
-            return await capi.send_mget(key, {
-                ...params,
-
-                config: {
-                    ...params.config,
-
-                    abort_signal: std.abort_signal_new_merge([
-                        params.config?.abort_signal,
-                        api.signal,
-                    ]),
-                },
-            })
-        },
-    )
-
-    const thunk_pagload = rtk.createAsyncThunk(
-        `${key}/pagload`,
-        async (params: capi.SendMGet_Params<Key>, api) => {
-            return await capi.send_mget(key, {
-                ...params,
-
-                config: {
-                    ...params.config,
-
-                    abort_signal: std.abort_signal_new_merge([
-                        params.config?.abort_signal,
-                        api.signal,
-                    ]),
-                },
-            })
-        },
-    )
-
-    const thunk_patch = rtk.createAsyncThunk(
-        `${key}/patch`,
-        async (params: capi.SendPatch_Params<Key>, api) => {
-            reqmap.set(api.requestId, api.abort)
-
-            return await capi.send_patch(key, {
-                ...params,
-
-                config: {
-                    ...params.config,
-
-                    abort_signal: std.abort_signal_new_merge([
-                        params.config?.abort_signal,
-                        api.signal,
-                    ]),
-                },
-            })
-        },
-    )
-
-    const thunk_delete = rtk.createAsyncThunk(
-        `${key}/delete`,
-        async (params: capi.SendDelete_Params<Key>, api) => {
-            reqmap.set(api.requestId, api.abort)
-
-            return await capi.send_delete(key, {
-                ...params,
-
-                config: {
-                    ...params.config,
-
-                    abort_signal: std.abort_signal_new_merge([
-                        params.config?.abort_signal,
-                        api.signal,
-                    ]),
-                },
-            })
-        },
-    )
-
-    const thunk_post = rtk.createAsyncThunk(
-        `${key}/post`,
-        async (params: capi.SendPost_Params<Key>, api) => {
-            return await capi.send_post(key, {
-                ...params,
-
-                config: {
-                    ...params.config,
-
-                    abort_signal: std.abort_signal_new_merge([
-                        params.config?.abort_signal,
-                        api.signal,
-                    ]),
-                },
-            })
-        },
-    )
-
     return {
         adapter,
-
-        thunk_hmap: {
-            load: thunk_load,
-            pagload: thunk_pagload,
-
-            post: thunk_post,
-            patch: thunk_patch,
-            delete: thunk_delete,
-        },
 
         slice: rtk.createSlice({
             name: key,
@@ -144,12 +41,12 @@ export const remfam_slice_new = function <Key extends RemKey>(key: Key, params: 
                 }
 
                 return (builder
-                    .addCase(thunk_load.fulfilled, (state, { payload }) => {
+                    .addCase(thunk_std.act.load.fulfilled, (state, { payload }) => {
                         if (payload.success) {
                             adapter.addMany(state.ent, payload.body.node_list)
                         }
                     })
-                    .addCase(thunk_pagload.pending, (state, action) => {
+                    .addCase(thunk_std.act.pagload.pending, (state, action) => {
                         const paghash = std.object_hash_stable(action.meta.arg.query.pick ?? {})
                         const pagnode = state.rempag[paghash]
 
@@ -159,13 +56,13 @@ export const remfam_slice_new = function <Key extends RemKey>(key: Key, params: 
                             state.rempag[paghash] = rempag_node_new()
                         }
                     })
-                    .addCase(thunk_pagload.rejected, (state, { meta }) => {
+                    .addCase(thunk_std.act.pagload.rejected, (state, { meta }) => {
                         const paghash = std.object_hash_stable(meta.arg.query.pick ?? {})
                         const pagnode = state.rempag[paghash]!
 
                         pagnode.status_pending = false
                     })
-                    .addCase(thunk_pagload.fulfilled, (state, { payload, meta }) => {
+                    .addCase(thunk_std.act.pagload.fulfilled, (state, { payload, meta }) => {
                         const paghash = std.object_hash_stable(meta.arg.query.pick ?? {})
                         const pagnode = state.rempag[paghash]!
 
@@ -181,13 +78,13 @@ export const remfam_slice_new = function <Key extends RemKey>(key: Key, params: 
                     })
 
                     // PATCH
-                    .addCase(thunk_patch.pending, (state, { meta }) => {
+                    .addCase(thunk_std.act.patch.pending, (state, { meta }) => {
                         const node_id = meta.arg.url.id
 
                         const node_remlog = std.object_upsert_lazy(state.remlog, node_id, remlog_node_new_wr)
 
                         if (node_remlog.patch) {
-                            reqmap.get(node_remlog.patch.req_id)?.()
+                            thunk_std.reqmap.get(node_remlog.patch.req_id)?.()
                         }
 
                         node_remlog.patch = {
@@ -195,22 +92,22 @@ export const remfam_slice_new = function <Key extends RemKey>(key: Key, params: 
                             data: meta.arg.body satisfies Partial<RemNode<"product">> as any,
                         }
                     })
-                    .addCase(thunk_patch.rejected, (state, { meta }) => {
+                    .addCase(thunk_std.act.patch.rejected, (state, { meta }) => {
                         const node_id = meta.arg.url.id
                         const node_remlog = std.object_upsert_lazy(state.remlog, node_id, remlog_node_new_wr)
 
-                        reqmap.delete(meta.requestId)
+                        thunk_std.reqmap.delete(meta.requestId)
 
                         if (node_remlog.patch?.req_id === meta.requestId) {
                             node_remlog.patch = null
                         }
                     })
-                    .addCase(thunk_patch.fulfilled, (state, { meta, payload }) => {
+                    .addCase(thunk_std.act.patch.fulfilled, (state, { meta, payload }) => {
                         const node_id = meta.arg.url.id
                         const node_remlog = std.object_upsert_lazy(state.remlog, node_id, remlog_node_new_wr)
 
                         node_remlog.patch = null
-                        reqmap.delete(meta.requestId)
+                        thunk_std.reqmap.delete(meta.requestId)
 
                         if (payload.success) {
                             adapter.updateOne(state.ent, {
@@ -221,7 +118,7 @@ export const remfam_slice_new = function <Key extends RemKey>(key: Key, params: 
                     })
 
                     // DELETE
-                    .addCase(thunk_delete.pending, (state, { meta, }) => {
+                    .addCase(thunk_std.act.delete.pending, (state, { meta, }) => {
                         const node_id = meta.arg.url.id
                         const node_remlog = std.object_upsert_lazy(state.remlog, node_id, remlog_node_new_wr)
 
@@ -229,7 +126,7 @@ export const remfam_slice_new = function <Key extends RemKey>(key: Key, params: 
                             req_id: meta.requestId,
                         })
                     })
-                    .addCase(thunk_delete.rejected, (state, { meta }) => {
+                    .addCase(thunk_std.act.delete.rejected, (state, { meta }) => {
                         const node_id = meta.arg.url.id
                         const node_remlog = std.object_upsert_lazy(state.remlog, node_id, remlog_node_new_wr)
 
@@ -237,7 +134,7 @@ export const remfam_slice_new = function <Key extends RemKey>(key: Key, params: 
                             return remlog_del.req_id !== meta.requestId
                         })
                     })
-                    .addCase(thunk_delete.fulfilled, (state, { meta, payload }) => {
+                    .addCase(thunk_std.act.delete.fulfilled, (state, { meta, payload }) => {
                         const node_id = meta.arg.url.id
                         const node_remlog = std.object_upsert_lazy(state.remlog, node_id, remlog_node_new_wr)
 
@@ -251,7 +148,7 @@ export const remfam_slice_new = function <Key extends RemKey>(key: Key, params: 
                     })
 
                     // POST
-                    .addCase(thunk_post.pending, (state, { meta, }) => {
+                    .addCase(thunk_std.act.post.pending, (state, { meta, }) => {
                         const node_id = uuid_new()
                         const node_remlog = std.object_upsert_lazy(state.remlog, node_id, remlog_node_new_wr)
                         const temp_remlog = std.object_upsert_lazy(state.remlog, meta.requestId, remlog_node_new_wr)
@@ -274,7 +171,7 @@ export const remfam_slice_new = function <Key extends RemKey>(key: Key, params: 
                             created_at: Date.now(),
                         } as RemNode<"product">)
                     })
-                    .addCase(thunk_post.rejected, (state, { meta, }) => {
+                    .addCase(thunk_std.act.post.rejected, (state, { meta, }) => {
                         const temp_remlog = std.object_upsert_lazy(state.remlog, meta.requestId, remlog_node_new_wr)
                         const log_temp = temp_remlog.post
 
@@ -287,7 +184,7 @@ export const remfam_slice_new = function <Key extends RemKey>(key: Key, params: 
                             adapter.removeOne(state.ent, node_id)
                         }
                     })
-                    .addCase(thunk_post.fulfilled, (state, { meta, payload }) => {
+                    .addCase(thunk_std.act.post.fulfilled, (state, { meta, payload }) => {
                         const temp_remlog = std.object_upsert_lazy(state.remlog, meta.requestId, remlog_node_new_wr)
                         const log_temp = temp_remlog.post
 

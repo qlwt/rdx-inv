@@ -225,13 +225,19 @@
 }
 
 .inbool {
+  padding: 0;
   outline: none;
 
-  font-size: std.rem(12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: std.rem(26);
+  height: std.rem(26);
+  font-size: std.rem(16);
 
   border-radius: 2px;
   border: 1px solid var(--p-border-primary);
-  padding: std.rem(3) std.rem(7);
 
   transition: color std.$trtime_fast, background-color std.$trtime_fast;
 

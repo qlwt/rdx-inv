@@ -6,7 +6,6 @@ import * as std from "@ta/std"
 import * as stdr from "@ta/std-react"
 import cl from "classnames"
 import * as r from "react"
-import * as z from "zod"
 
 export type EPEdViewText__View_Props = {
     readonly text: string
@@ -19,7 +18,7 @@ export type EPEdViewText__View_Props = {
     readonly st_notext?: boolean
     readonly st_size?: EPInText_Size
 
-    readonly validation_schema?: z.ZodType
+    readonly validation?: std.FnPredicate<string>
 
     readonly ev_change: std.FnSetterStateles<string>
     readonly render_before?: (cprops: null | EPInText_CRenderProps) => r.ReactNode
@@ -69,7 +68,7 @@ export const EPEdViewText_View: r.FC<EPEdViewText__View_Props> = props => {
                 cl_row={props.cl_input_row}
                 st_notext={props.st_notext}
 
-                validation_schema={props.validation_schema}
+                validation={props.validation}
 
                 render_after={props.render_after}
                 render_before={props.render_before}

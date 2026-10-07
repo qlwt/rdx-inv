@@ -1,6 +1,4 @@
 import st from "#client/component/feature/cn/style/head.module.scss"
-import * as fas from "@fortawesome/free-solid-svg-icons/faPlus"
-import * as rfa from "@fortawesome/react-fontawesome"
 import * as r from "react"
 import * as capi from "@ta/capi"
 import * as gs from "@ta/gstate"
@@ -26,7 +24,7 @@ export const ELCN_Head = function <Target extends gs.RemKey>(props: ELCN__Head_P
     return <div className={st.root}>
         <div className={st.actlist}>
             <button className={st.act} onClick={props.ev_post}>
-                <rfa.FontAwesomeIcon icon={fas.faPlus} />
+                +
             </button>
         </div>
 

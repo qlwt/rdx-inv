@@ -2,14 +2,13 @@ import type { EPInText_CRenderProps } from "#/src/client/component/primitive/in-
 import type { EPInText_Mix, EPInText_Size } from "#/src/client/component/primitive/in-text/type/st"
 import st from "#client/component/primitive/in-text/style/view.module.scss"
 import * as std from "@ta/std"
+import * as stdr from "@ta/std-react"
 import cl from "classnames"
 import * as r from "react"
-import type { z } from "zod"
-import * as stdr from "@ta/std-react"
 
 export type EPInText__AreaStrong_Props = {
     readonly input_id?: string
-    readonly input_value?: string
+    readonly input_value: string
     readonly input_placeholder?: string
     readonly input_ref?: stdr.RefI<HTMLTextAreaElement | null>
 
@@ -20,7 +19,7 @@ export type EPInText__AreaStrong_Props = {
     readonly status_success?: boolean
     readonly status_disabled?: boolean
 
-    readonly validation_schema?: z.ZodType
+    readonly validation?: std.FnPredicate<string>
 
     readonly st_notext?: boolean
     readonly st_mix?: EPInText_Mix
@@ -41,7 +40,7 @@ export const EPInText_AreaStrong: r.FC<EPInText__AreaStrong_Props> = props => {
 
     const status_error = Boolean(
         props.status_error
-        || props.validation_schema && std.zod_isnt(props.validation_schema, props.input_value)
+        || props.validation?.(props.input_value)
     )
 
     const crender_props = r.useMemo(() => {

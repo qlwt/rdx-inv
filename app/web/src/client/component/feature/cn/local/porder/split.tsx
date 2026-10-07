@@ -9,8 +9,7 @@ import cl from "classnames"
 import * as r from "react"
 import * as capi from "@ta/capi"
 import * as cst from "@ta/cst"
-import * as faw from "@fortawesome/react-fontawesome"
-import * as fas_arrow_left from "@fortawesome/free-solid-svg-icons/faArrowLeft"
+import { EPIcon_Svg, EPIcon_Svg_Kind } from "#/src/client/component/primitive/icon/element/svg"
 
 type SelectionState = {
     readonly id: std.Maybe<string>
@@ -143,7 +142,7 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
                         }))
                     }}
                 >
-                    <faw.FontAwesomeIcon icon={fas_arrow_left.faArrowLeft} />
+                    <EPIcon_Svg kind={EPIcon_Svg_Kind.ArrowLeft} />
                 </button>
 
                 <EPSwitch_Nullable

@@ -3,9 +3,8 @@ import ELCN_ProdCardFieldKind from "#/src/client/component/feature/cn/local/prod
 import { ELCN_ProdCardFieldPrice } from "#/src/client/component/feature/cn/local/prod/card/field_price"
 import { ELCN_ProdCardFieldTitle } from "#/src/client/component/feature/cn/local/prod/card/field_title"
 import { ELCN_ProdCardFieldWear } from "#/src/client/component/feature/cn/local/prod/card/field_wear"
+import { EPIcon_Svg, EPIcon_Svg_Kind } from "#/src/client/component/primitive/icon/element/svg"
 import st from "#client/component/feature/cn/style/prod/card/view.module.scss"
-import * as fas_check from "@fortawesome/free-solid-svg-icons/faCheck"
-import * as faw from "@fortawesome/react-fontawesome"
 import * as rfc from "@qyu/reactcmp-flow-control"
 import * as gs from "@ta/gstate"
 import { rem } from "@ta/gstate"
@@ -64,7 +63,7 @@ export const ELCN_ProdCardViewInOrder: r.FC<ELCN__ProdCardViewInOrder_Props> = p
                     }
                 }}
             >
-                <faw.FontAwesomeIcon icon={fas_check.faCheck} />
+                <EPIcon_Svg kind={EPIcon_Svg_Kind.Check} />
             </button>
         </div>
 

@@ -4,7 +4,14 @@ import * as cst from "@ta/cst"
 import * as gs from "@ta/gstate"
 import { rem } from "@ta/gstate"
 import * as r from "react"
-import * as z from "zod"
+
+const validator_title = (str: string) => {
+    return str.length <= cst.product_limits.title_mxlength
+}
+
+const validator_spec = (str: string) => {
+    return str.length <= cst.product_limits.spec_mxlength
+}
 
 export type ELCN__ProdCardFieldTitle_Props = {
     readonly node_id: string
@@ -19,7 +26,7 @@ export const ELCN_ProdCardFieldTitle: r.FC<ELCN__ProdCardFieldTitle_Props> = pro
         <EPEdViewText_View
             text={props.node_title}
             placeholder={`No Title`}
-            validation_schema={z.string().max(cst.product_limits.title_mxlength)}
+            validation={validator_title}
 
             st_notext
             st_size={`small`}
@@ -27,6 +34,8 @@ export const ELCN_ProdCardFieldTitle: r.FC<ELCN__ProdCardFieldTitle_Props> = pro
             cl_text_placeholder={st._placeholder}
 
             ev_change={tvalue => {
+                if (!validator_title(tvalue)) { return }
+
                 dispatch(rem.product.act.patch({
                     url: {
                         id: props.node_id,
@@ -41,8 +50,8 @@ export const ELCN_ProdCardFieldTitle: r.FC<ELCN__ProdCardFieldTitle_Props> = pro
 
         <EPEdViewText_View
             text={props.node_spec}
+            validation={validator_spec}
             placeholder={`No Specification`}
-            validation_schema={z.string().max(cst.product_limits.spec_mxlength)}
 
             st_notext
             st_size={`small`}
@@ -50,6 +59,8 @@ export const ELCN_ProdCardFieldTitle: r.FC<ELCN__ProdCardFieldTitle_Props> = pro
             cl_text_placeholder={st._placeholder}
 
             ev_change={tvalue => {
+                if (!validator_spec(tvalue)) { return }
+
                 dispatch(rem.product.act.patch({
                     url: {
                         id: props.node_id,

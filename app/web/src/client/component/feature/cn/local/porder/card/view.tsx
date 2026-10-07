@@ -1,9 +1,7 @@
 import ELCN_POrderCardFieldSent from "#/src/client/component/feature/cn/local/porder/card/field_sent"
 import ELCN_POrderCardFieldTitle from "#/src/client/component/feature/cn/local/porder/card/field_title"
+import { EPIcon_Svg, EPIcon_Svg_Kind } from "#/src/client/component/primitive/icon/element/svg"
 import st from "#client/component/feature/cn/style/porder/card/view.module.scss"
-import * as fas_play from "@fortawesome/free-solid-svg-icons/faPlay"
-import * as fas_trash from "@fortawesome/free-solid-svg-icons/faTrashCan"
-import * as faw from "@fortawesome/react-fontawesome"
 import * as rfc from "@qyu/reactcmp-flow-control"
 import * as gs from "@ta/gstate"
 import * as std from "@ta/std"
@@ -60,18 +58,14 @@ export const ELCN_POrderCardView: r.FC<ELCN__POrderCardView_Props> = props => {
                 )}
 
                 onClick={() => {
-                    r.startTransition(() => {
-                        if (props.status_selected) {
-                            props.selection_set(std.MNONE)
-                        } else {
-                            r.startTransition(() => {
-                                props.selection_set(std.maybe_new_some(rview.data.id))
-                            })
-                        }
-                    })
+                    if (props.status_selected) {
+                        props.selection_set(std.MNONE)
+                    } else {
+                        props.selection_set(std.maybe_new_some(rview.data.id))
+                    }
                 }}
             >
-                <faw.FontAwesomeIcon icon={fas_play.faPlay} />
+                <EPIcon_Svg kind={EPIcon_Svg_Kind.Play} />
             </button>
 
             <button
@@ -82,7 +76,7 @@ export const ELCN_POrderCardView: r.FC<ELCN__POrderCardView_Props> = props => {
                     props.deletion_set(std.maybe_new_some(rview.data.id))
                 }}
             >
-                <faw.FontAwesomeIcon icon={fas_trash.faTrashCan} />
+                <EPIcon_Svg kind={EPIcon_Svg_Kind.Trash} />
             </button>
         </div>
     </article>

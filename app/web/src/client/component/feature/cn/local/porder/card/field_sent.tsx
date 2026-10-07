@@ -1,12 +1,15 @@
 import EPEdViewText_View from "#/src/client/component/primitive/edview-text/element/view"
 import st from "#client/component/feature/cn/style/porder/card/view.module.scss"
+import * as rfc from "@qyu/reactcmp-flow-control"
 import * as cst from "@ta/cst"
 import * as gs from "@ta/gstate"
 import { rem } from "@ta/gstate"
-import * as r from "react"
-import * as z from "zod"
-import * as rfc from "@qyu/reactcmp-flow-control"
 import cl from "classnames"
+import * as r from "react"
+
+const validator_sent_to = (str: string) => {
+    return str.length <= cst.porder_limits.sent_to_mxlength
+}
 
 export type ELCN__POrderCardFieldSent_Props = {
     readonly node_id: string
@@ -79,9 +82,9 @@ export const ELCN_POrderCardFieldSent: r.FC<ELCN__POrderCardFieldSent_Props> = p
     >
         <rfc.CmpIf value={props.node_sent_at !== null}>
             {() => <EPEdViewText_View
-                text={props.node_sent_to ?? ""}
                 placeholder={`No Send Info`}
-                validation_schema={z.string().max(cst.porder_limits.sent_to_mxlength)}
+                validation={validator_sent_to}
+                text={props.node_sent_to ?? ""}
 
                 st_notext
                 st_size={`small`}
@@ -89,6 +92,8 @@ export const ELCN_POrderCardFieldSent: r.FC<ELCN__POrderCardFieldSent_Props> = p
                 cl_text_placeholder={st._placeholder}
 
                 ev_change={tvalue => {
+                    if (!validator_sent_to(tvalue)) { return }
+
                     dispatch(rem.porder.act.patch({
                         url: {
                             id: props.node_id,

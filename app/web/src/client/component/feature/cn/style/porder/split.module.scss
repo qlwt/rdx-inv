@@ -71,13 +71,13 @@
   align-items: center;
   justify-content: center;
 
-  font-size: std.rem(15);
+  font-size: std.rem(18);
   color: var(--p-text-secondary);
 
   border-radius: 4px;
   border: 1px solid var(--p-border-primary-m200);
 
-  padding: std.rem(10) std.rem(10);
+  padding: std.rem(6) std.rem(6);
   background-color: var(--p-bg-secondary);
 
   transition: color std.$trtime_fast, background-color std.$trtime_fast;

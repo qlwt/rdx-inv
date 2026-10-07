@@ -4,7 +4,12 @@ import st from "#client/component/feature/cn/style/prod/card/view.module.scss"
 import * as gs from "@ta/gstate"
 import { rem } from "@ta/gstate"
 import * as r from "react"
-import * as z from "zod"
+
+const validator_price = function(str: string) {
+    const num = Number.parseFloat(str)
+
+    return Number.isFinite(num) && num >= 0
+}
 
 export type ELCN__ProdCardFieldPrice_Props = {
     readonly node_id: string
@@ -17,8 +22,8 @@ export const ELCN_ProdCardFieldPrice: r.FC<ELCN__ProdCardFieldPrice_Props> = pro
 
     return <div className={st.field_price}>
         <EPEdViewText_View
+            validation={validator_price}
             text={props.node_price_usd.toString()}
-            validation_schema={z.coerce.number().gte(0)}
 
             st_notext
             st_size={`small`}
@@ -28,7 +33,7 @@ export const ELCN_ProdCardFieldPrice: r.FC<ELCN__ProdCardFieldPrice_Props> = pro
             ev_change={tvalue => {
                 const tvalue_num = Number.parseFloat(tvalue)
 
-                if (Number.isFinite(tvalue_num)) {
+                if (Number.isFinite(tvalue_num) && tvalue_num >= 0) {
                     dispatch(rem.product.act.patch({
                         url: {
                             id: props.node_id,
@@ -49,8 +54,8 @@ export const ELCN_ProdCardFieldPrice: r.FC<ELCN__ProdCardFieldPrice_Props> = pro
         />
 
         <EPEdViewText_View
+            validation={validator_price}
             text={props.node_price_uah.toString()}
-            validation_schema={z.coerce.number().gte(0)}
 
             st_notext
             st_size={`small`}
@@ -60,7 +65,7 @@ export const ELCN_ProdCardFieldPrice: r.FC<ELCN__ProdCardFieldPrice_Props> = pro
             ev_change={tvalue => {
                 const tvalue_num = Number.parseFloat(tvalue)
 
-                if (Number.isFinite(tvalue_num)) {
+                if (Number.isFinite(tvalue_num) && tvalue_num >= 0) {
                     dispatch(rem.product.act.patch({
                         url: {
                             id: props.node_id,

@@ -36,6 +36,8 @@ export default defineConfig({
         outDir: path.resolve("./build/client/"),
 
         rollupOptions: {
+            external: [],
+
             input: {
                 index: path.resolve("./src/index.html")
             },

@@ -3,9 +3,8 @@ import ELCN_ProdCardFieldKind from "#/src/client/component/feature/cn/local/prod
 import { ELCN_ProdCardFieldPrice } from "#/src/client/component/feature/cn/local/prod/card/field_price"
 import { ELCN_ProdCardFieldTitle } from "#/src/client/component/feature/cn/local/prod/card/field_title"
 import { ELCN_ProdCardFieldWear } from "#/src/client/component/feature/cn/local/prod/card/field_wear"
+import { EPIcon_Svg, EPIcon_Svg_Kind } from "#/src/client/component/primitive/icon/element/svg"
 import st from "#client/component/feature/cn/style/prod/card/view.module.scss"
-import * as fas from "@fortawesome/free-solid-svg-icons/faTrashCan"
-import * as faw from "@fortawesome/react-fontawesome"
 import * as rfc from "@qyu/reactcmp-flow-control"
 import * as cst from "@ta/cst"
 import * as gs from "@ta/gstate"
@@ -93,7 +92,7 @@ export const ELCN_ProdCardView: r.FC<ELCN__ProdCardView_Props> = props => {
                     props.deletion_set(std.maybe_new_some(rview.data.id))
                 }}
             >
-                <faw.FontAwesomeIcon icon={fas.faTrashCan} />
+                <EPIcon_Svg kind={EPIcon_Svg_Kind.Trash} />
             </button>
         </div>
     </article>

@@ -46,6 +46,7 @@ export * from "#src/time/format_ago"
 export * from "#src/abort/signal/new/merge"
 
 // json
+export * from "#src/json/parse_safe"
 export * from "#src/json/stringify_stable"
 
 // promise

@@ -4,7 +4,14 @@ import * as cst from "@ta/cst"
 import * as gs from "@ta/gstate"
 import { rem } from "@ta/gstate"
 import * as r from "react"
-import * as z from "zod"
+
+const validator_title = (str: string) => {
+    return str.length <= cst.porder_limits.title_mxlength
+}
+
+const validator_description = (str: string) => {
+    return str.length <= cst.porder_limits.description_mxlength
+}
 
 export type ELCN__POrderCardFieldTitle_Props = {
     readonly node_id: string
@@ -19,7 +26,7 @@ export const ELCN_POrderCardFieldTitle: r.FC<ELCN__POrderCardFieldTitle_Props> =
         <EPEdViewText_View
             text={props.node_title}
             placeholder={`No Title`}
-            validation_schema={z.string().max(cst.porder_limits.title_mxlength)}
+            validation={validator_title}
 
             st_notext
             st_size={`small`}
@@ -27,6 +34,8 @@ export const ELCN_POrderCardFieldTitle: r.FC<ELCN__POrderCardFieldTitle_Props> =
             cl_text_placeholder={st._placeholder}
 
             ev_change={tvalue => {
+                if (validator_title(tvalue)) { return }
+
                 dispatch(rem.porder.act.patch({
                     url: {
                         id: props.node_id,
@@ -42,7 +51,7 @@ export const ELCN_POrderCardFieldTitle: r.FC<ELCN__POrderCardFieldTitle_Props> =
         <EPEdViewText_View
             text={props.node_description}
             placeholder={`No Description`}
-            validation_schema={z.string().max(cst.porder_limits.description_mxlength)}
+            validation={validator_description}
 
             st_notext
             st_size={`small`}
@@ -50,6 +59,8 @@ export const ELCN_POrderCardFieldTitle: r.FC<ELCN__POrderCardFieldTitle_Props> =
             cl_text_placeholder={st._placeholder}
 
             ev_change={tvalue => {
+                if (validator_description(tvalue)) { return }
+
                 dispatch(rem.porder.act.patch({
                     url: {
                         id: props.node_id,

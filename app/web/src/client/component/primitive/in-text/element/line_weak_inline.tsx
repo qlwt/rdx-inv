@@ -6,7 +6,6 @@ import * as std from "@ta/std"
 import * as stdr from "@ta/std-react"
 import cl from "classnames"
 import * as r from "react"
-import type { z } from "zod"
 
 export type EPInText__LineWeakInline_Props = {
     readonly input_id?: string
@@ -22,7 +21,7 @@ export type EPInText__LineWeakInline_Props = {
     readonly status_success?: boolean
     readonly status_disabled?: boolean
 
-    readonly validation_schema?: z.ZodType
+    readonly valdation?: std.FnPredicate<string>
 
     readonly st_notext?: boolean
     readonly st_mix?: EPInText_Mix
@@ -46,7 +45,7 @@ export const EPInText_LineWeakInline: r.FC<EPInText__LineWeakInline_Props> = pro
     const [validation, validation_set] = r.useState<boolean>(() => {
         let status_error = false
 
-        if (props.validation_schema && std.zod_isnt(props.validation_schema, props.input_value)) {
+        if (props.valdation?.(props.input_value)) {
             status_error = true
         }
 
@@ -57,7 +56,7 @@ export const EPInText_LineWeakInline: r.FC<EPInText__LineWeakInline_Props> = pro
         validation_set(validation_old => {
             let status_error = false
 
-            if (props.validation_schema && std.zod_isnt(props.validation_schema, next_value)) {
+            if (props.valdation?.(next_value)) {
                 status_error = true
             }
 
@@ -67,7 +66,7 @@ export const EPInText_LineWeakInline: r.FC<EPInText__LineWeakInline_Props> = pro
 
             return validation_old
         })
-    }, [props.validation_schema])
+    }, [props.valdation])
 
     r.useLayoutEffect(() => {
         const input = ref_input.current

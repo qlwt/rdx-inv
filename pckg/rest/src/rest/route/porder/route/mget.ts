@@ -51,7 +51,7 @@ export const restroute_porder_mget_new = (params: RestRoutePOrderMGet_New_Params
                         .selectFrom("porder")
                         .orderBy("id", "desc")
                         .where("deleted_at", "is", null)
-                        .selectAll()
+                        .selectAll("porder")
                         .select([
                             ksly.sql<number>`(
                                 select
@@ -61,7 +61,27 @@ export const restroute_porder_mget_new = (params: RestRoutePOrderMGet_New_Params
                                     product.deleted_at is NULL
                                     and product.porder_id = porder.id
                                 )
-                            )`.as("product_count")
+                            )`.as("product_count"),
+
+                            ksly.sql<number>`(
+                                select
+                                    COALESCE(SUM(product.price_uah), 0)
+                                from product
+                                where (
+                                    product.deleted_at is NULL
+                                    and product.porder_id = porder.id
+                                )
+                            )`.as("product_price_uah"),
+
+                            ksly.sql<number>`(
+                                select
+                                    COALESCE(SUM(product.price_usd), 0)
+                                from product
+                                where (
+                                    product.deleted_at is NULL
+                                    and product.porder_id = porder.id
+                                )
+                            )`.as("product_price_usd"),
                         ])
                     )
 

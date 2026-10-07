@@ -1,21 +1,6 @@
+import type { GLReport_AAdd, GLReport_AAddConcrete } from "#src/gl/report/type/action"
+import type { GLReport_State } from "#src/gl/report/type/state"
 import * as rtk from "@reduxjs/toolkit"
-
-export type GLReport_Message = {
-    readonly kind: "info" | "error" | "success"
-    readonly text: string
-}
-
-export type GLReport_State = {
-    readonly msg_list: GLReport_Message[]
-}
-
-export type GLReport_AAdd = {
-    readonly msg: GLReport_Message
-}
-
-export type GLReport_AAddConcrete = {
-    readonly text: string
-}
 
 const slice = rtk.createSlice({
     name: "report",

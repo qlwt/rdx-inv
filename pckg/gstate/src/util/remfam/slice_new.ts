@@ -7,12 +7,19 @@ import * as rtk from "@reduxjs/toolkit"
 import * as std from "@ta/std"
 import { v7 as uuid_new } from "uuid"
 
-export type RemFam_Slice_New_Params<Key extends RemKey> = {
+export type RemFam_Slice_New_Params<
+    Key extends RemKey,
+    CaseReducers extends rtk.SliceCaseReducers<RemFam<Key>>
+> = {
     readonly thunk_std: RemSlice_ThunkDefStd<Key>
+    readonly reducer_hmap: rtk.ValidateSliceCaseReducers<RemFam<Key>, CaseReducers>
     readonly reducer_extra_add?: (builder: rtk.ActionReducerMapBuilder<RemFam<Key>>) => void
 }
 
-export const remfam_slice_new = function <Key extends RemKey>(key: Key, params: RemFam_Slice_New_Params<Key>): RemSliceDef<Key> {
+export const remfam_slice_new = function <
+    Key extends RemKey,
+    CaseReducers extends rtk.SliceCaseReducers<RemFam<Key>>
+>(key: Key, params: RemFam_Slice_New_Params<Key, CaseReducers>): RemSliceDef<Key, CaseReducers> {
     const { thunk_std } = params
 
     const adapter = rtk.createEntityAdapter({
@@ -32,8 +39,7 @@ export const remfam_slice_new = function <Key extends RemKey>(key: Key, params: 
                 ent: adapter.getInitialState(),
             } satisfies RemFam<Key> as RemFam<Key>,
 
-            reducers: {
-            },
+            reducers: params.reducer_hmap,
 
             extraReducers: builder => {
                 if (params.reducer_extra_add) {
@@ -80,7 +86,6 @@ export const remfam_slice_new = function <Key extends RemKey>(key: Key, params: 
                     // PATCH
                     .addCase(thunk_std.act.patch.pending, (state, { meta }) => {
                         const node_id = meta.arg.url.id
-
                         const node_remlog = std.object_upsert_lazy(state.remlog, node_id, remlog_node_new_wr)
 
                         if (node_remlog.patch) {

@@ -3,9 +3,9 @@ import type { RemFam } from "#src/util/remfam/type/fam";
 import type * as rtk from "@reduxjs/toolkit";
 import type * as capi from "@ta/capi";
 
-export type RemSlice<Key extends RemKey> = rtk.Slice<
+export type RemSlice<Key extends RemKey, CaseReducers extends rtk.SliceCaseReducers<RemFam<Key>>> = rtk.Slice<
     RemFam<Key>,
-    {},
+    CaseReducers,
     Key,
     Key,
     (
@@ -50,7 +50,7 @@ export type RemSlice_ThunkDefStd<Key extends RemKey> = {
     }
 }
 
-export type RemSliceDef<Key extends RemKey> = {
-    readonly slice: RemSlice<Key>
+export type RemSliceDef<Key extends RemKey, CaseReducers extends rtk.SliceCaseReducers<RemFam<Key>>> = {
+    readonly slice: RemSlice<Key, CaseReducers>
     readonly adapter: rtk.EntityAdapter<RemNode<Key>, string>
 }

@@ -21,7 +21,7 @@
   overflow: hidden;
 
   flex-basis: 0;
-  flex-grow: 1;
+  flex-grow: 3;
   flex-shrink: 1;
 
   transition: flex-grow std.$trtime_fast;
@@ -50,7 +50,7 @@
   transition: flex-grow std.$trtime_slow, flex-basis std.$trtime_slow;
 
   &._open {
-    flex-grow: 3;
+    flex-grow: 5;
 
     @include std.screen_lte("sm") {
       flex-basis: 0;

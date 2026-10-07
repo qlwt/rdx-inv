@@ -23,30 +23,32 @@ export const ELCN_POrderCardFieldTitle: r.FC<ELCN__POrderCardFieldTitle_Props> =
     const dispatch = gs.useDispatch()
 
     return <div className={st.field_title}>
-        <EPEdViewText_View
-            text={props.node_title}
-            placeholder={`No Title`}
-            validation={validator_title}
+        <div className={st.field_title__headc}>
+            <EPEdViewText_View
+                text={props.node_title}
+                placeholder={`No Title`}
+                validation={validator_title}
 
-            st_notext
-            st_size={`small`}
-            cl_text={st.field_title__head}
-            cl_text_placeholder={st._placeholder}
+                st_notext
+                st_size={`small`}
+                cl_text={st.field_title__head}
+                cl_text_placeholder={st._placeholder}
 
-            ev_change={tvalue => {
-                if (validator_title(tvalue)) { return }
+                ev_change={tvalue => {
+                    if (!validator_title(tvalue)) { return }
 
-                dispatch(rem.porder.act.patch({
-                    url: {
-                        id: props.node_id,
-                    },
+                    dispatch(rem.porder.act.patch({
+                        url: {
+                            id: props.node_id,
+                        },
 
-                    body: {
-                        title: tvalue,
-                    },
-                }))
-            }}
-        />
+                        body: {
+                            title: tvalue,
+                        },
+                    }))
+                }}
+            />
+        </div>
 
         <EPEdViewText_View
             text={props.node_description}
@@ -59,7 +61,7 @@ export const ELCN_POrderCardFieldTitle: r.FC<ELCN__POrderCardFieldTitle_Props> =
             cl_text_placeholder={st._placeholder}
 
             ev_change={tvalue => {
-                if (validator_description(tvalue)) { return }
+                if (!validator_description(tvalue)) { return }
 
                 dispatch(rem.porder.act.patch({
                     url: {

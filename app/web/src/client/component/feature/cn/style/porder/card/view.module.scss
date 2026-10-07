@@ -6,7 +6,7 @@
 
   display: grid;
   align-items: center;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 2fr) auto;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 2fr) auto auto;
 
   gap: std.rem(15);
   padding: std.rem(5) std.rem(15);
@@ -18,7 +18,7 @@
   transition: grid-template-columns std.$trtime_slow;
 
   &._compact {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 0fr) auto;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 0fr) auto auto;
   }
 }
 
@@ -39,6 +39,14 @@
   &._placeholder {
     color: var(--p-text-primary-m800);
   }
+}
+
+.field_title__headc {
+  display: grid;
+  align-items: center;
+  gap: std.rem(5);
+  grid-template-rows: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) auto;
 }
 
 .field_title__head {
@@ -117,6 +125,40 @@
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+.field_prodinfo {
+  display: grid;
+  align-items: center;
+  grid-template-columns: auto auto auto;
+
+  gap: std.rem(10);
+}
+
+.field_prodinfo__count {
+  font-weight: bold;
+  font-size: std.rem(16);
+  color: var(--p-text-primary);
+}
+
+.field_prodinfo__delim {
+  height: 100%;
+  width: std.rem(2);
+  background-color: var(--p-border-primary-m500);
+}
+
+.field_prodinfo__price {
+  text-align: start;
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.field_prodinfo__price__text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: hidden;
+  font-size: std.rem(16);
 }
 
 .field_act {

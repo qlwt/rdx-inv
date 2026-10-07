@@ -1,3 +1,4 @@
+import ELCN_POrderCardFieldProdInfo from "#/src/client/component/feature/cn/local/porder/card/field_prodinfo"
 import ELCN_POrderCardFieldSent from "#/src/client/component/feature/cn/local/porder/card/field_sent"
 import ELCN_POrderCardFieldTitle from "#/src/client/component/feature/cn/local/porder/card/field_title"
 import { EPIcon_Svg, EPIcon_Svg_Kind } from "#/src/client/component/primitive/icon/element/svg"
@@ -46,6 +47,12 @@ export const ELCN_POrderCardView: r.FC<ELCN__POrderCardView_Props> = props => {
             node_sent_to={rview.data.sent_to}
 
             status_compact={props.status_compact}
+        />
+
+        <ELCN_POrderCardFieldProdInfo
+            product_count={rview.data.product_count}
+            product_price_uah={rview.data.product_price_uah}
+            product_price_usd={rview.data.product_price_usd}
         />
 
         <div className={st.field_act}>

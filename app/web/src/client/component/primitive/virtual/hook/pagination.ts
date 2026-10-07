@@ -12,8 +12,6 @@ export const useEPVirtualPagination = function (params: UseEPVirtualPagination_P
         const pag = params.pagination
 
         if (pag) {
-            console.log(pag.status, params.grid_length, params.render_end, pag.threashhold)
-
             if (pag.status === "idle" && params.grid_length - params.render_end <= pag.threashhold) {
                 pag.load()
             }

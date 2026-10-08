@@ -1,5 +1,5 @@
 import { ELCN_ProdCardFieldAvail } from "#/src/client/component/feature/cn/local/prod/card/field_avail"
-import ELCN_ProdCardFieldKind from "#/src/client/component/feature/cn/local/prod/card/field_kind"
+import ELCN_ProdCardFieldPGroup from "#/src/client/component/feature/cn/local/prod/card/field_pgroup"
 import { ELCN_ProdCardFieldPrice } from "#/src/client/component/feature/cn/local/prod/card/field_price"
 import { ELCN_ProdCardFieldTitle } from "#/src/client/component/feature/cn/local/prod/card/field_title"
 import { ELCN_ProdCardFieldWear } from "#/src/client/component/feature/cn/local/prod/card/field_wear"
@@ -67,9 +67,9 @@ export const ELCN_ProdCardViewInOrder: r.FC<ELCN__ProdCardViewInOrder_Props> = p
             </button>
         </div>
 
-        <ELCN_ProdCardFieldKind
+        <ELCN_ProdCardFieldPGroup
             node_id={rview.data.id}
-            node_kind={rview.data.kind}
+            node_pgroup_id={rview.data.pgroup_id}
         />
 
         <ELCN_ProdCardFieldTitle

@@ -30,6 +30,16 @@ export const ELCN_SideNav: r.FC<ELCN_SideNav_Props> = props => {
                     ORDERS
                 </span>
             </rr.NavLink>
+
+            <rr.NavLink
+                viewTransition
+                to={urlmap.cn_pgroup()}
+                className={({ isActive }) => cl(st.link, isActive && st._active)}
+            >
+                <span className={st.link__text}>
+                    GROUPS
+                </span>
+            </rr.NavLink>
         </nav>
     </aside>
 }

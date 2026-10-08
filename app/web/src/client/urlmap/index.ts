@@ -1,4 +1,5 @@
 export const urlmap = {
-    cn_porder: () => `/`,
-    cn_product: () => `/product`,
+    cn_product: () => `/`,
+    cn_porder: () => `/porder`,
+    cn_pgroup: () => `/pgroup`,
 }

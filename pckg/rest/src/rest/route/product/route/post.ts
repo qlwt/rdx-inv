@@ -14,10 +14,10 @@ export const restroute_product_post_new = (params: RestRouteProductPost_New_Para
         price_uah: z.number().gte(0),
         price_usd: z.number().gte(0),
 
-        kind: z.enum(cst.ProductStatus_Kind),
         status_wear: z.enum(cst.ProductStatus_Wear),
         status_avail: z.enum(cst.ProductStatus_Avail),
 
+        pgroup_id: z.uuidv7().nullable(),
         porder_id: z.uuidv7().nullable(),
     })
 

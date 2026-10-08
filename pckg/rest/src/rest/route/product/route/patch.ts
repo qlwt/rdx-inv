@@ -17,10 +17,10 @@ export const restroute_product_patch_new = (params: RestRouteProductPatch_New_Pa
         spec: z.string().max(cst.product_limits.spec_mxlength).exactOptional(),
         title: z.string().max(cst.product_limits.title_mxlength).exactOptional(),
 
-        kind: z.enum(cst.ProductStatus_Kind).exactOptional(),
         status_wear: z.enum(cst.ProductStatus_Wear).exactOptional(),
         status_avail: z.enum(cst.ProductStatus_Avail).exactOptional(),
 
+        pgroup_id: z.uuidv7().nullable().exactOptional(),
         porder_id: z.uuidv7().nullable().exactOptional(),
     })
 

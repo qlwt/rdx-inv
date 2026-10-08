@@ -1,3 +1,4 @@
+import { rem_porder__adapter } from "#src/rem/porder/adapter";
 import { rem_porder__thunk_std } from "#src/rem/porder/thunk/std";
 import { remfam_slice_new } from "#src/util/remfam/slice_new";
 import * as rtk from "@reduxjs/toolkit";
@@ -17,6 +18,7 @@ type APatchAdd = {
 }
 
 export const rem_porder__slicedef = remfam_slice_new("porder", {
+    adapter: rem_porder__adapter,
     thunk_std: rem_porder__thunk_std,
 
     reducer_hmap: {

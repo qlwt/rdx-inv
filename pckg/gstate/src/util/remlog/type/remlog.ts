@@ -8,14 +8,16 @@ export type RemLogDelete = {
 }
 
 export type RemLogPatch<Node extends object> = {
+    name: string
     req_id: string
     data: Partial<Node>
 }
 
 export type RemLogNode<Node extends object> = {
-    del: RemLogDelete[]
     post: RemLogPost | null
-    patch: RemLogPatch<Node> | null
+
+    del: RemLogDelete[]
+    patch: RemLogPatch<Node>[]
 }
 
 export type RemLog<Node extends object> = {

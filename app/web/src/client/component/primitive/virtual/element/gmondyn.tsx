@@ -11,7 +11,7 @@ import * as r from "react"
 import * as rbs from "react-bootstrap"
 
 type Render_Reeval_Params = {
-    readonly src_length: number
+    readonly grid_length: number
     readonly dim: EPVirtual_Dim
     readonly container: HTMLElement | null
 
@@ -32,14 +32,14 @@ const render_reeval = function(params: Render_Reeval_Params) {
     }
 
     params.render_start_set(Math.min(
-        params.src_length,
+        params.grid_length,
         Math.floor(
             (Math.max(0, view_start) + params.dim.row_gap)
             / (params.dim.row_height + params.dim.row_gap)
         )
     ))
 
-    params.render_end_set(Math.min(params.src_length,
+    params.render_end_set(Math.min(params.grid_length,
         Math.ceil(
             (view_end + params.dim.row_gap)
             / (params.dim.row_height + params.dim.row_gap)
@@ -78,12 +78,15 @@ export const EPVirtual_GMonDyn: r.FC<EPVirtualt__GMonDyn_Props> = props => {
     const [dim, dim_set] = r.useState<EPVirtual_Dim>(() => ({
         row_gap: 0,
         padding: 0,
+        row_length: 1,
         row_height: 300,
     }))
 
+    const grid_length = Math.ceil(props.src_length / dim.row_length)
+
     useEPVirtualPagination({
-        pagination: props.pagination,
         render_end,
+        pagination: props.pagination,
         grid_length: props.src_length,
     })
 
@@ -98,15 +101,15 @@ export const EPVirtual_GMonDyn: r.FC<EPVirtualt__GMonDyn_Props> = props => {
     const element_items = r.useMemo(() => {
         const result: r.ReactNode[] = []
         const rwindow_first = Math.max(0, render_start - props.window_buffer)
-        const rwindow_end = Math.min(props.src_length, render_end + props.window_buffer)
+        const rwindow_end = Math.min(grid_length, render_end + props.window_buffer)
 
         {
-            let i = rwindow_first
+            let i = rwindow_first * dim.row_length
 
-            if (i < Math.min(props.src_length, rwindow_end)) {
+            if (i < Math.min(props.src_length, rwindow_end * dim.row_length)) {
                 result.push(props.src_render(i, refi_first))
 
-                for (++i; i < Math.min(props.src_length, rwindow_end); ++i) {
+                for (++i; i < Math.min(props.src_length, rwindow_end * dim.row_length); ++i) {
                     result.push(props.src_render(i, null))
                 }
             }
@@ -114,7 +117,7 @@ export const EPVirtual_GMonDyn: r.FC<EPVirtualt__GMonDyn_Props> = props => {
         }
 
         return result
-    }, [render_start, render_end, props.window_buffer, props.src_length, props.src_length, props.src_render])
+    }, [render_start, render_end, props.window_buffer, props.src_length, dim.row_length, grid_length, props.src_render, refi_first])
 
     const element_grid = r.useMemo(() => {
         return props.grid_render({
@@ -164,9 +167,9 @@ export const EPVirtual_GMonDyn: r.FC<EPVirtualt__GMonDyn_Props> = props => {
                     "scroll",
                     () => {
                         render_reeval({
+                            grid_length,
                             container,
-                            dim: dim,
-                            src_length: props.src_length,
+                            dim,
 
                             render_end_set,
                             render_start_set,
@@ -184,9 +187,9 @@ export const EPVirtual_GMonDyn: r.FC<EPVirtualt__GMonDyn_Props> = props => {
                 "resize",
                 () => {
                     render_reeval({
+                        grid_length,
                         container,
-                        dim: dim,
-                        src_length: props.src_length,
+                        dim,
 
                         render_end_set,
                         render_start_set,
@@ -199,9 +202,9 @@ export const EPVirtual_GMonDyn: r.FC<EPVirtualt__GMonDyn_Props> = props => {
         }
 
         render_reeval({
+            grid_length,
             container,
-            dim: dim,
-            src_length: props.src_length,
+            dim,
 
             render_end_set,
             render_start_set,
@@ -210,7 +213,7 @@ export const EPVirtual_GMonDyn: r.FC<EPVirtualt__GMonDyn_Props> = props => {
         return () => {
             abort_controller.abort()
         }
-    }, [dim, props.src_length])
+    }, [dim, grid_length, props.src_length])
 
     return nprop_container_render({
         ref: ref_container,

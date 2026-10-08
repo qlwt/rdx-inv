@@ -1,4 +1,5 @@
 import type { RemKey } from "#src/type/rem";
+import { gevent_def_remslice } from "#src/util/gevent/def/remslice";
 import type { RemSlice_ThunkDefStd } from "#src/util/remfam/type/slice";
 import * as rtk from "@reduxjs/toolkit";
 import * as capi from "@ta/capi";
@@ -70,7 +71,7 @@ export const remfam_thunk_new_std = function <Key extends RemKey>(key: Key): Rem
             pagload: rtk.createAsyncThunk(
                 `${key}/pagload`,
                 async (params: capi.SendMGet_Params<Key>, api) => {
-                    return await capi.send_mget(key, {
+                    const result = await capi.send_mget(key, {
                         ...params,
 
                         config: {
@@ -82,13 +83,21 @@ export const remfam_thunk_new_std = function <Key extends RemKey>(key: Key): Rem
                             ]),
                         },
                     })
+
+                    if (result.success) {
+                        api.dispatch(gevent_def_remslice({
+                            slice: result.body.slice
+                        }))
+                    }
+
+                    return result
                 },
             ),
 
             load: rtk.createAsyncThunk(
                 `${key}/load`,
                 async (params: capi.SendMGet_Params<Key>, api) => {
-                    return await capi.send_mget(key, {
+                    const result = await capi.send_mget(key, {
                         ...params,
 
                         config: {
@@ -100,6 +109,14 @@ export const remfam_thunk_new_std = function <Key extends RemKey>(key: Key): Rem
                             ]),
                         },
                     })
+
+                    if (result.success) {
+                        api.dispatch(gevent_def_remslice({
+                            slice: result.body.slice
+                        }))
+                    }
+
+                    return result
                 },
             ),
         },

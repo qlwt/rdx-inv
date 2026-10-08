@@ -63,7 +63,7 @@
   align-items: center;
 }
 
-.field_kind {
+.field_pgroup {
   grid-area: kind;
   cursor: pointer;
 
@@ -75,10 +75,24 @@
   height: std.rem(72);
 }
 
-.field_kind__img {
+.field_pgroup__img {
   display: flex;
   aspect-ratio: 1;
   object-fit: cover;
+}
+
+.field_pgroup__pending {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .field_title {

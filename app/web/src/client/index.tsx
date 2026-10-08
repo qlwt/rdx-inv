@@ -13,6 +13,7 @@ import * as r from "react";
 import * as rdom from "react-dom/client";
 import * as rtkr from "react-redux";
 import * as rr from "react-router";
+import EFCN_PagePGroup from "#/src/client/component/feature/cn/element/page_pgroup";
 
 document.body.appendChild(cst_root_app)
 document.body.appendChild(cst_root_modal)
@@ -32,12 +33,16 @@ const router = rr.createBrowserRouter([{
 
             children: [
                 {
+                    path: urlmap.cn_product(),
+                    Component: EFCN_PageProduct,
+                },
+                {
                     path: urlmap.cn_porder(),
                     Component: EFCN_PagePOrder,
                 },
                 {
-                    path: urlmap.cn_product(),
-                    Component: EFCN_PageProduct,
+                    path: urlmap.cn_pgroup(),
+                    Component: EFCN_PagePGroup,
                 },
             ],
         }

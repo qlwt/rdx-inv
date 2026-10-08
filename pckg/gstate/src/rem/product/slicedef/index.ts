@@ -1,4 +1,5 @@
 import { rem_porder__thunk_std } from "#src/rem/porder/thunk/std"
+import { rem_product__adapter } from "#src/rem/product/adapter"
 import { rem_product__thunk_std } from "#src/rem/product/thunk/std"
 import { remfam_slice_new } from "#src/util/remfam/slice_new"
 import { remlog_node_new_wr } from "#src/util/remlog/node_new"
@@ -6,6 +7,7 @@ import * as std from "@ta/std"
 
 export const rem_product__slicedef = remfam_slice_new("product", {
     reducer_hmap: {},
+    adapter: rem_product__adapter,
     thunk_std: rem_product__thunk_std,
 
     reducer_extra_add: builder => {

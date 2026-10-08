@@ -33,6 +33,7 @@
     "bootstrap": "^5.3.8",
     "react-bootstrap": "^2.10.10",
     "react-router": "^8.4.0",
+    "browser-image-compression": "^2.0.2",
     "classnames": "^2.5.1"
   },
   "devDependencies": {

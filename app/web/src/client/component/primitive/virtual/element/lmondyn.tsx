@@ -49,35 +49,38 @@ export const EPVirtual_LMonDyn: r.FC<EPVirtual__LMonDyn_Props> = props => {
     const [dim, dim_set] = r.useState<EPVirtual_Dim>(() => ({
         row_gap: 0,
         padding: 0,
+        row_length: 1,
         row_height: 300,
     }))
 
+    const grid_length = Math.ceil(props.src_length / dim.row_length)
+
     useEPVirtualPagination({
-        pagination: props.pagination,
         render_end,
-        grid_length: props.src_length,
+        grid_length,
+        pagination: props.pagination,
     })
 
     const padding = useEPVirtualPadding({
         dim,
         render_end,
         render_start,
-        grid_length: props.src_length,
+        grid_length: grid_length,
         window_buffer: props.window_buffer,
     })
 
     const element_items = r.useMemo(() => {
         const result: r.ReactNode[] = []
         const rwindow_first = Math.max(0, render_start - props.window_buffer)
-        const rwindow_end = Math.min(props.src_length, render_end + props.window_buffer)
+        const rwindow_end = Math.min(grid_length, render_end + props.window_buffer)
 
         {
-            let i = rwindow_first
+            let i = rwindow_first * dim.row_length
 
-            if (i < Math.min(props.src_length, rwindow_end)) {
+            if (i < Math.min(props.src_length, rwindow_end * dim.row_length)) {
                 result.push(props.src_render(i, refi_first))
 
-                for (++i; i < Math.min(props.src_length, rwindow_end); ++i) {
+                for (++i; i < Math.min(props.src_length, rwindow_end * dim.row_length); ++i) {
                     result.push(props.src_render(i, null))
                 }
             }
@@ -85,7 +88,7 @@ export const EPVirtual_LMonDyn: r.FC<EPVirtual__LMonDyn_Props> = props => {
         }
 
         return result
-    }, [render_start, render_end, props.window_buffer, props.src_length, props.src_length, props.src_render, refi_first])
+    }, [render_start, render_end, props.window_buffer, props.src_length, dim.row_length, grid_length, props.src_render, refi_first])
 
     const element_grid = r.useMemo(() => {
         return props.grid_render({
@@ -126,7 +129,7 @@ export const EPVirtual_LMonDyn: r.FC<EPVirtual__LMonDyn_Props> = props => {
             )
 
             const now_render_end = Math.min(
-                props.src_length,
+                grid_length,
                 now_render_start + Math.ceil(
                     (content_height + dim.row_gap)
                     / (dim.row_height + dim.row_gap)
@@ -139,7 +142,7 @@ export const EPVirtual_LMonDyn: r.FC<EPVirtual__LMonDyn_Props> = props => {
             render_start_set(now_render_start)
             render_end_set(now_render_start)
         }
-    }, [container_size, dim.padding, dim.row_gap, dim.row_height, props.src_length])
+    }, [container_size, dim.padding, dim.row_gap, dim.row_height, grid_length])
 
     r.useLayoutEffect(() => {
         const abort_controller = new AbortController()

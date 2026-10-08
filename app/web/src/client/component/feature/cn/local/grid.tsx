@@ -1,5 +1,6 @@
 import EPVirtual_LMonDyn from "#/src/client/component/primitive/virtual/element/lmondyn"
 import st from "#client/component/feature/cn/style/grid.module.scss"
+import * as rfc from "@qyu/reactcmp-flow-control"
 import * as capi from "@ta/capi"
 import * as gs from "@ta/gstate"
 import { rem } from "@ta/gstate"
@@ -7,7 +8,6 @@ import * as std from "@ta/std"
 import * as stdr from "@ta/std-react"
 import cl from "classnames"
 import * as r from "react"
-import * as rfc from "@qyu/reactcmp-flow-control"
 
 type PickMeta = {
     readonly cache: Map<string, boolean>
@@ -17,6 +17,7 @@ type PickMeta = {
 export type ELCN__Grid_Props<Target extends gs.RemKey> = {
     readonly target: Target
     readonly placeholder: string
+    readonly kind: "flex" | "pgroup"
     readonly pick: NonNullable<capi.SendMGet_Query<Target>["pick"]>
     readonly render_child: (remnode: gs.RemNode<Target>, refi: stdr.RefI<HTMLElement | null> | null) => r.ReactNode
 }
@@ -24,7 +25,7 @@ export type ELCN__Grid_Props<Target extends gs.RemKey> = {
 export const ELCN_Grid = function <Target extends gs.RemKey>(props: ELCN__Grid_Props<Target>): r.ReactNode {
     const dispatch = gs.useDispatch()
     const pagnode = gs.usePagNode(props.target, props.pick)
-    const remnode_list: gs.RemNode<Target>[] = gs.useSelect(rem[props.target as "product"].sel.selectAll)
+    const remnode_list = gs.useSelect(rem[props.target as "product"].sel.selectAll) as gs.RemNode<Target>[]
 
     const pick_meta = r.useMemo<PickMeta>(() => {
         const entry_list: PickMeta["entry_list"] = []
@@ -99,12 +100,12 @@ export const ELCN_Grid = function <Target extends gs.RemKey>(props: ELCN__Grid_P
             window_buffer={1}
             src_length={remnode_list_fit.length}
 
-            container_render={props => {
-                return <div {...props} className={cl(props.className, st.container)} />
+            container_render={lprops => {
+                return <div {...lprops} className={cl(lprops.className, st.container)} />
             }}
 
-            grid_render={props => {
-                return <div {...props} className={cl(props.className, st.root)} />
+            grid_render={lprops => {
+                return <div {...lprops} className={cl(lprops.className, st.root, st[`_${props.kind}`])} />
             }}
 
             src_render={(index, refi) => {

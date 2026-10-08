@@ -1,11 +1,22 @@
 @use "util:std" as std;
 
 .root {
-  display: flex;
-  flex-direction: column;
+  &._flex {
+    display: flex;
+    flex-direction: column;
 
-  gap: std.rem(10);
-  padding: std.rem(5) 0;
+    gap: std.rem(10);
+    padding: std.rem(5) 0;
+  }
+
+  &._pgroup {
+    display: grid;
+    grid-auto-rows: std.rem(250);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+
+    gap: std.rem(10);
+    padding: std.rem(5) 0;
+  }
 }
 
 .container {

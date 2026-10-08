@@ -2,6 +2,7 @@ import { gl_report, } from "#src/gl/report"
 import type { GLReport_State } from "#src/gl/report/type/state"
 import { gl_session } from "#src/gl/session"
 import type { GLSession_State } from "#src/gl/session/type/state"
+import { rem_pgroup } from "#src/rem/pgroup"
 import { rem_porder } from "#src/rem/porder"
 import { rem_product } from "#src/rem/product"
 import { store_connect_ws_gen } from "#src/store/connect/ws_gen"
@@ -20,6 +21,7 @@ export const store = rtk.configureStore({
 
         product: rem_product.reducer,
         porder: rem_porder.reducer,
+        pgroup: rem_pgroup.reducer,
     },
 })
 

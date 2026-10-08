@@ -1,6 +1,15 @@
 import { env_client_host, env_port } from "#src/env"
 import * as rest from "@ta/rest"
 import express from "express"
+import fs from "node:fs/promises"
+import path from "node:path"
+
+const storage_init = async function() {
+    try {
+        await fs.mkdir(path.resolve("./storage"))
+    } catch (error) {
+    }
+}
 
 type Server_New_Params = {
     readonly origin_list: readonly string[]
@@ -23,6 +32,10 @@ const app_new = async function(params: Server_New_Params) {
         next()
     })
 
+    for (const cluster of Object.values(rest.rxapi)) {
+        app.use(rest.cluster_compose(cluster))
+    }
+
     for (const cluster of Object.values(rest.rapi)) {
         app.use(rest.cluster_compose(cluster))
     }
@@ -39,6 +52,8 @@ const server_init = async function(app: express.Express) {
 }
 
 const main = async function() {
+    await storage_init()
+
     const app = await app_new({
         origin_list: [
             env_client_host,

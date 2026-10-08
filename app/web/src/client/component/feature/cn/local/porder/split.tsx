@@ -98,6 +98,7 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
         >
             <ELCN_Grid
                 pick={{}}
+                kind={`flex`}
                 target={"porder"}
                 placeholder={`No Active Orders`}
 
@@ -183,6 +184,7 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
 
             <rfc.CmpRequire value={[std.maybe_unpack(selection.id, null)] as const}>
                 {([selection]) => <ELCN_Grid
+                    kind={`flex`}
                     target={"product"}
                     pick={pick_product}
                     placeholder={`No Products in Order`}

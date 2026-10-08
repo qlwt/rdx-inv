@@ -1,4 +1,4 @@
-import { db } from "#src/db/init";
+import { db, type DatabaseSlice } from "#src/db/init";
 import type { Cluster_Route } from "#src/util/cluster/type/cluster";
 import * as eu from "@ta/express-utils";
 import * as std from "@ta/std";
@@ -116,9 +116,12 @@ export const restroute_porder_mget_new = (params: RestRoutePOrderMGet_New_Params
                         ] as const)
 
                         return {
-                            node_list: res_nodes,
                             count: Number(res_count.count),
                             cursor: res_cursor?.id ?? null,
+
+                            slice: {
+                                porder: res_nodes,
+                            } satisfies DatabaseSlice as DatabaseSlice,
                         }
                     } else {
                         const [res_count, res_nodes] = await Promise.all([
@@ -128,8 +131,11 @@ export const restroute_porder_mget_new = (params: RestRoutePOrderMGet_New_Params
 
                         return {
                             cursor: null,
-                            node_list: res_nodes,
                             count: Number(res_count.count),
+
+                            slice: {
+                                porder: res_nodes,
+                            } satisfies DatabaseSlice as DatabaseSlice,
                         }
                     }
                 })

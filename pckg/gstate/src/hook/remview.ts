@@ -4,14 +4,20 @@ import type { RemLogNode } from "#src/util/remlog/type/remlog"
 import * as r from "react"
 
 export const rview_data_new = function <Node extends object>(rnode: Node, rlog: RemLogNode<Node>): Node {
-    if (rlog.patch) {
+    if (rlog.patch.length === 0) {
+        return rnode
+    }
+
+    if (rlog.patch.length === 1) {
         return {
             ...rnode,
-            ...rlog.patch.data,
+            ...rlog.patch[0]!.data,
         }
     }
 
-    return rnode
+    return Object.assign({
+        ...rnode,
+    }, ...rlog.patch.map(p => p.data))
 }
 
 export type RemView<Key extends RemKey> = {
@@ -24,7 +30,7 @@ export type RemView<Key extends RemKey> = {
 }
 
 export const useRemView = function <Key extends RemKey>(key: Key, entry: RemNode<Key>): RemView<Key> {
-    const remlog = useSelect(state => state[key as "product"].remlog[entry.id])
+    const remlog = useSelect(state => state[key].remlog[entry.id]) as RemLogNode<RemNode<Key>> | undefined
 
     return r.useMemo(() => {
         if (!remlog) {
@@ -47,4 +53,34 @@ export const useRemView = function <Key extends RemKey>(key: Key, entry: RemNode
             },
         }
     }, [remlog, entry])
+}
+
+export const useRemViewFallback = function <Key extends RemKey, F>(fallback: F, key: Key, entry: RemNode<Key> | null): RemView<Key> | F {
+    const remlog = useSelect(state => entry ? state[key].remlog[entry.id] : null) as RemLogNode<RemNode<Key>> | null | undefined
+
+    return r.useMemo(() => {
+        if (!entry) {
+            return fallback
+        }
+
+        if (!remlog) {
+            return {
+                data: entry,
+
+                pending: {
+                    del: false,
+                    post: false,
+                }
+            }
+        }
+
+        return {
+            data: rview_data_new(entry, remlog),
+
+            pending: {
+                del: remlog.del.length >= 1,
+                post: Boolean(remlog.post),
+            },
+        }
+    }, [remlog, entry, fallback])
 }

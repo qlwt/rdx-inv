@@ -22,14 +22,18 @@
 }
 
 .list {
+  position: relative;
+  height: 40vh;
+  overflow: auto;
+
   border-radius: 4px;
   background-color: var(--p-bg-primary-m300);
 
   padding: std.rem(10);
   display: grid;
   gap: std.rem(20);
-  grid-template-columns: repeat(3, std.rem(96));
   grid-auto-rows: std.rem(96);
+  grid-template-columns: repeat(3, std.rem(96));
 }
 
 .item {

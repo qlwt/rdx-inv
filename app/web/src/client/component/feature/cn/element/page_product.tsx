@@ -40,7 +40,6 @@ export const EFCN_PageProduct: r.FC<EFCN_PageProduct_Props> = props => {
             ev_post={() => {
                 dispatch(rem.product.act.post({
                     body: {
-                        kind: cst.ProductStatus_Kind.CPU,
                         status_wear: std.maybe_unpack(pick_wear, cst.ProductStatus_Wear.New),
                         status_avail: std.maybe_unpack(pick_avail, cst.ProductStatus_Avail.Free),
 
@@ -49,6 +48,7 @@ export const EFCN_PageProduct: r.FC<EFCN_PageProduct_Props> = props => {
                         price_uah: 100,
                         price_usd: 100,
 
+                        pgroup_id: null,
                         porder_id: null,
                     },
                 }))
@@ -102,6 +102,7 @@ export const EFCN_PageProduct: r.FC<EFCN_PageProduct_Props> = props => {
 
         <ELCN_Grid
             pick={pick}
+            kind={`flex`}
             target={"product"}
             placeholder={`No Products Added`}
 

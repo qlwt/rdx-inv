@@ -10,6 +10,16 @@ export const rem_product__slicedef = remfam_slice_new("product", {
     adapter: rem_product__adapter,
     thunk_std: rem_product__thunk_std,
 
+    node_new_post: (id, body) => {
+        return {
+            id,
+            deleted_at: null,
+            created_at: Date.now(),
+
+            ...body,
+        }
+    },
+
     reducer_extra_add: builder => {
         return (builder
             .addCase(rem_porder__thunk_std.act.delete.pending, (state, { meta, }) => {

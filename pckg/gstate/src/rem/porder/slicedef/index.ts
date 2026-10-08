@@ -21,6 +21,20 @@ export const rem_porder__slicedef = remfam_slice_new("porder", {
     adapter: rem_porder__adapter,
     thunk_std: rem_porder__thunk_std,
 
+    node_new_post: (id, body) => {
+        return {
+            id,
+            deleted_at: null,
+            created_at: Date.now(),
+
+            product_count: 0,
+            product_price_uah: 0,
+            product_price_usd: 0,
+
+            ...body,
+        }
+    },
+
     reducer_hmap: {
         path_add: (state, { payload }: rtk.PayloadAction<APatchAdd>) => {
             const entity = state.ent.entities[payload.id]

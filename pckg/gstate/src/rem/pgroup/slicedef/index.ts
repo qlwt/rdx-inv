@@ -15,6 +15,17 @@ export const rem_pgroup__slicedef = remfam_slice_new("pgroup", {
     adapter: rem_pgroup__adapter,
     thunk_std: rem_pgroup__thunk_std,
 
+    node_new_post: (id, body) => {
+        return {
+            id,
+            url_raw: null,
+            deleted_at: null,
+            created_at: Date.now(),
+
+            ...body,
+        }
+    },
+
     reducer_extra_add: builder => {
         return (builder
             .addCase(rem_pgroup__thunk_post_img.pending, (state, { meta }) => {

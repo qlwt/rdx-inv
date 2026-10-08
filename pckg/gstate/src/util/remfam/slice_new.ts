@@ -5,6 +5,8 @@ import type { RemSlice_ThunkDefStd, RemSliceDef } from "#src/util/remfam/type/sl
 import { remlog_node_new_wr } from "#src/util/remlog/node_new"
 import { rempag_node_new } from "#src/util/rempag/node_new"
 import * as rtk from "@reduxjs/toolkit"
+import * as capi from "@ta/capi"
+import type * as rest from "@ta/rest"
 import * as std from "@ta/std"
 import { v7 as uuid_new } from "uuid"
 
@@ -18,6 +20,8 @@ export type RemFam_Slice_New_Params<
     readonly adapter: rtk.EntityAdapter<RemNode<Key>, string>
     readonly reducer_hmap: rtk.ValidateSliceCaseReducers<RemFam<Key>, CaseReducers>
     readonly reducer_extra_add?: (builder: rtk.ActionReducerMapBuilder<RemFam<Key>>) => void
+
+    readonly node_new_post: (id: string, body: capi.SendPost_Body<Key>) => rest.DatabaseOut[Key]
 }
 
 export const remfam_slice_new = function <
@@ -182,13 +186,7 @@ export const remfam_slice_new = function <
                             node_id,
                         }
 
-                        adapter.addOne(state.ent, {
-                            ...meta.arg.body as any,
-
-                            id: node_id,
-                            deleted_at: null,
-                            created_at: Date.now(),
-                        } as RemNode<Key>)
+                        adapter.addOne(state.ent, params.node_new_post(node_id, meta.arg.body))
                     })
                     .addCase(thunk_std.act.post.rejected, (state, { meta, }) => {
                         const temp_remlog = std.object_upsert_lazy(state.remlog, meta.requestId, remlog_node_new_wr)
@@ -207,23 +205,24 @@ export const remfam_slice_new = function <
                         const temp_remlog = std.object_upsert_lazy(state.remlog, meta.requestId, remlog_node_new_wr)
                         const log_temp = temp_remlog.post
 
-
                         if (log_temp) {
                             const node_id = log_temp.node_id
+                            const temp_remnode = state.ent.entities[node_id]
 
                             delete state.remlog[node_id]
                             delete state.remlog[meta.requestId]
 
-                            adapter.removeOne(state.ent, node_id)
+                            if (temp_remnode) {
+                                adapter.removeOne(state.ent, node_id)
 
-                            if (payload.success) {
-                                adapter.addOne(state.ent, {
-                                    ...meta.arg.body as any,
+                                if (payload.success) {
+                                    adapter.addOne(state.ent, {
+                                        ...temp_remnode,
 
-                                    deleted_at: null,
-                                    id: payload.body.id,
-                                    created_at: payload.body.created_at,
-                                } as RemNode<Key>)
+                                        id: payload.body.id,
+                                        created_at: payload.body.created_at,
+                                    } as RemNode<Key>)
+                                }
                             }
                         }
                     })

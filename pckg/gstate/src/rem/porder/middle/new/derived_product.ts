@@ -97,7 +97,6 @@ export const rem_porder__middle_new_derived_product = function() {
         effect: ({ meta, }, api) => {
             const state_next = api.getState() as State
             const state_past = api.getOriginalState() as State
-            console.log("middleware::product::patch::pending")
 
             if (state_next !== state_past) {
                 patch_effect(api.dispatch.bind(api), state_past, state_next, meta.arg.url.id)
@@ -111,7 +110,6 @@ export const rem_porder__middle_new_derived_product = function() {
         effect: ({ meta, }, api) => {
             const state_next = api.getState() as State
             const state_past = api.getOriginalState() as State
-            console.log("middleware::product::patch::rejected")
 
             if (state_next !== state_past) {
                 patch_effect(api.dispatch.bind(api), state_past, state_next, meta.arg.url.id)
@@ -124,7 +122,6 @@ export const rem_porder__middle_new_derived_product = function() {
 
         effect: ({ meta, payload }, api) => {
             if (payload.success) { return }
-            console.log("middleware::product::patch::fulfilled")
 
             const state_next = api.getState() as State
             const state_past = api.getOriginalState() as State

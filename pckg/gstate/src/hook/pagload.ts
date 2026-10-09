@@ -21,9 +21,9 @@ export const usePagLoad = function <Key extends RemKey>(key: Key, params: UsePag
 
         const pagnode = store.getState()[key].rempag[hash]
 
-        // if (pagnode && (pagnode.status_pending || std.maybe_is(pagnode.cursor, null))) {
-        //     return
-        // }
+        if (pagnode && (pagnode.status_pending || std.maybe_is(pagnode.cursor, null))) {
+            return
+        }
 
         const abort_controller = new AbortController()
 
@@ -53,10 +53,6 @@ export const usePagLoader = function <Key extends RemKey>(key: Key, params: UseP
         if (!params.status_active) { return }
 
         const pagnode = store.getState()[key].rempag[hash]
-
-        // if (pagnode && (pagnode.status_pending || std.maybe_is(pagnode.cursor, null))) {
-        //     return
-        // }
 
         const abort_controller = new AbortController()
 

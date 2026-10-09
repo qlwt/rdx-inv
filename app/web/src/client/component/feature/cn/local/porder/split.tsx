@@ -137,66 +137,70 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
         </div>
 
         <div className={cl(st.split__right, status_open && st._open)}>
-            <div className={st.filter_list}>
-                <button
-                    className={st.act}
+            <div className={st.filter_row}>
+                <div className={st.filter_list}>
+                    <button
+                        className={st.act}
 
-                    onClick={() => {
-                        selection_set(selection_old => ({
-                            ...selection_old,
+                        onClick={() => {
+                            selection_set(selection_old => ({
+                                ...selection_old,
 
-                            status_closing: true,
-                        }))
-                    }}
-                >
-                    <EPIcon_Svg kind={EPIcon_Svg_Kind.ArrowLeft} />
-                </button>
+                                status_closing: true,
+                            }))
+                        }}
+                    >
+                        <EPIcon_Svg kind={EPIcon_Svg_Kind.ArrowLeft} />
+                    </button>
 
-                <EPSwitch_Nullable
-                    root_className={st_switch.root}
+                    <EPSwitch_Nullable
+                        root_className={st_switch.root}
 
-                    option_now={pick_avail}
-                    option_set={pick_avail_set}
-                    option_list={[cst.ProductStatus_Avail.Free] as const}
+                        option_now={pick_avail}
+                        option_set={pick_avail_set}
+                        option_list={[cst.ProductStatus_Avail.Free] as const}
 
-                    option_children_new={() => {
-                        return "Available"
-                    }}
-                />
+                        option_children_new={() => {
+                            return "Available"
+                        }}
+                    />
 
-                <EPSwitch_Nullable
-                    root_className={st_switch.root}
+                    <EPSwitch_Nullable
+                        root_className={st_switch.root}
 
-                    option_now={pick_wear}
-                    option_set={pick_wear_set}
-                    option_list={[cst.ProductStatus_Wear.New, cst.ProductStatus_Wear.Used] as const}
+                        option_now={pick_wear}
+                        option_set={pick_wear_set}
+                        option_list={[cst.ProductStatus_Wear.New, cst.ProductStatus_Wear.Used] as const}
 
-                    option_children_new={option => {
-                        switch (option) {
-                            case cst.ProductStatus_Wear.New:
-                                return "New"
-                            case cst.ProductStatus_Wear.Used:
-                                return "Used"
-                        }
-                    }}
-                />
+                        option_children_new={option => {
+                            switch (option) {
+                                case cst.ProductStatus_Wear.New:
+                                    return "New"
+                                case cst.ProductStatus_Wear.Used:
+                                    return "Used"
+                            }
+                        }}
+                    />
 
-                <EPSwitch_Nullable
-                    root_className={st_switch.root}
+                    <EPSwitch_Nullable
+                        root_className={st_switch.root}
 
-                    option_now={pick_instock}
-                    option_set={pick_instock_set}
-                    option_list={[true] as const}
+                        option_now={pick_instock}
+                        option_set={pick_instock_set}
+                        option_list={[true] as const}
 
-                    option_children_new={() => {
-                        return "Add Items"
-                    }}
-                />
+                        option_children_new={() => {
+                            return "Add Items"
+                        }}
+                    />
+                </div>
 
-                <ELCN_FilterPGroup
-                    selection={pick_pgroup}
-                    selection_set={pick_pgroup_set}
-                />
+                <div className={st.filter_list}>
+                    <ELCN_FilterPGroup
+                        selection={pick_pgroup}
+                        selection_set={pick_pgroup_set}
+                    />
+                </div>
             </div>
 
             <rfc.CmpRequire value={[std.maybe_unpack(selection.id, null)] as const}>

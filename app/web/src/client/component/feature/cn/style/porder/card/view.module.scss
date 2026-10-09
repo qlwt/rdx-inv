@@ -6,7 +6,7 @@
 
   display: grid;
   align-items: center;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 2fr) auto auto;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 2fr) minmax(0, 1fr) auto;
 
   gap: std.rem(15);
   padding: std.rem(5) std.rem(15);
@@ -18,7 +18,7 @@
   transition: grid-template-columns std.$trtime_slow;
 
   &._compact {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 0fr) auto auto;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 0fr) minmax(0, 3fr) auto;
   }
 }
 
@@ -148,17 +148,31 @@
 }
 
 .field_prodinfo__price {
-  text-align: start;
   display: grid;
+  text-align: start;
   grid-template-rows: auto auto;
   grid-template-columns: minmax(0, 1fr);
 }
 
 .field_prodinfo__price__text {
+  display: grid;
+  gap: std.rem(3);
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.field_prodinfo__price__digits {
+  min-width: 0;
+  text-align: end;
+  font-size: std.rem(14);
+
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: hidden;
-  font-size: std.rem(16);
+  text-overflow: ellipsis;
+}
+
+.field_prodinfo__price__sign {
+  white-space: nowrap;
+  font-size: std.rem(14);
 }
 
 .field_act {

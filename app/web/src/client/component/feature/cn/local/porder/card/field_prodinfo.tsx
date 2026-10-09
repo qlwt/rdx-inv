@@ -16,13 +16,25 @@ export const ELCN_POrderCardFieldProdInfo: r.FC<ELCN__POrderCardFieldProdInfo_Pr
         <div className={st.field_prodinfo__delim} />
 
         <div className={st.field_prodinfo__price}>
-            <span className={st.field_prodinfo__price__text}>
-                {props.product_price_usd}$
-            </span>
+            <div className={st.field_prodinfo__price__text}>
+                <span className={st.field_prodinfo__price__digits}>
+                    {props.product_price_usd}
+                </span>
 
-            <span className={st.field_prodinfo__price__text}>
-                {props.product_price_uah}₴
-            </span>
+                <span className={st.field_prodinfo__price__sign}>
+                    $
+                </span>
+            </div>
+
+            <div className={st.field_prodinfo__price__text}>
+                <span className={st.field_prodinfo__price__digits}>
+                    {props.product_price_uah}
+                </span>
+
+                <span className={st.field_prodinfo__price__sign}>
+                    ₴
+                </span>
+            </div>
         </div>
     </div>
 }

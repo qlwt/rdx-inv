@@ -1,15 +1,17 @@
 import ELCN_Grid from "#/src/client/component/feature/cn/local/grid"
 import ELCN_POrderCardView from "#/src/client/component/feature/cn/local/porder/card/view"
 import ELCN_ProdCardViewInOrder from "#/src/client/component/feature/cn/local/prod/card/view_inorder"
+import { EPIcon_Svg, EPIcon_Svg_Kind } from "#/src/client/component/primitive/icon/element/svg"
 import EPSwitch_Nullable from "#/src/client/component/primitive/switch/element/nullable"
 import st from "#client/component/feature/cn/style/porder/split.module.scss"
 import * as rfc from "@qyu/reactcmp-flow-control"
+import * as capi from "@ta/capi"
+import * as cst from "@ta/cst"
 import * as std from "@ta/std"
 import cl from "classnames"
 import * as r from "react"
-import * as capi from "@ta/capi"
-import * as cst from "@ta/cst"
-import { EPIcon_Svg, EPIcon_Svg_Kind } from "#/src/client/component/primitive/icon/element/svg"
+
+const pick_none = {}
 
 type SelectionState = {
     readonly id: std.Maybe<string>
@@ -97,8 +99,8 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
             }}
         >
             <ELCN_Grid
-                pick={{}}
                 kind={`flex`}
+                pick={pick_none}
                 target={"porder"}
                 placeholder={`No Active Orders`}
 

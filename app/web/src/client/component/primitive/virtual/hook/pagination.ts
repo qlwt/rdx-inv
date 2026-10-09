@@ -7,20 +7,33 @@ export type UseEPVirtualPagination_Params = {
     readonly render_end: number
 }
 
-export const useEPVirtualPagination = function (params: UseEPVirtualPagination_Params) {
-    r.useEffect(() => {
-        const pag = params.pagination
+export const useEPVirtualPagination = function(params: UseEPVirtualPagination_Params) {
+    const cleanup = r.useRef<VoidFunction | null>(null)
+    const deps = params.pagination?.deps ?? []
 
-        if (pag) {
-            if (pag.status === "idle" && params.grid_length - params.render_end <= pag.threashhold) {
-                pag.load()
+    r.useEffect((): VoidFunction => {
+        return () => {
+            if (cleanup.current) {
+                cleanup.current()
+
+                cleanup.current = null
             }
         }
+    }, deps)
+
+    r.useEffect((): VoidFunction | void => {
+        const pag = params.pagination
+
+        if (pag && pag.status === "idle" && params.grid_length - params.render_end <= pag.threashhold) {
+            cleanup.current?.()
+
+            cleanup.current = pag.load() ?? null
+        }
     }, [
+        ...deps,
         params.grid_length,
         params.render_end,
+        params.pagination?.status,
         params.pagination?.threashhold,
-        params.pagination?.load,
-        params.pagination?.status
     ])
 }

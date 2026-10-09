@@ -5,7 +5,8 @@ export type EPVirtual_PaginationStatus = (
 )
 
 export type EPVirtual_Pagination = {
-    readonly load: VoidFunction
+    readonly deps: any[]
     readonly threashhold: number
+    readonly load: () => VoidFunction | void
     readonly status: EPVirtual_PaginationStatus
 }

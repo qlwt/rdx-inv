@@ -23,7 +23,6 @@ export type ELCN__Grid_Props<Target extends gs.RemKey> = {
 }
 
 export const ELCN_Grid = function <Target extends gs.RemKey>(props: ELCN__Grid_Props<Target>): r.ReactNode {
-    const dispatch = gs.useDispatch()
     const pagnode = gs.usePagNode(props.target, props.pick)
     const remnode_list = gs.useSelect(rem[props.target as "product"].sel.selectAll) as gs.RemNode<Target>[]
 
@@ -89,6 +88,12 @@ export const ELCN_Grid = function <Target extends gs.RemKey>(props: ELCN__Grid_P
         return result
     }, [remnode_list, pick_meta, pagnode, props.render_child])
 
+    const pagination_loader = gs.usePagLoader(props.target, {
+        limit: 20,
+        pick: props.pick,
+        status_active: true,
+    })
+
     return <>
         <rfc.CmpIf value={remnode_list_fit.length === 0 && pagnode && std.maybe_is(pagnode.cursor, null)}>
             <div className={st.placeholder}>
@@ -114,16 +119,8 @@ export const ELCN_Grid = function <Target extends gs.RemKey>(props: ELCN__Grid_P
 
             pagination={{
                 threashhold: 1,
-
-                load: () => {
-                    dispatch(rem[props.target as "product"].act.pagload({
-                        query: {
-                            cursor: pagnode ? std.maybe_unpack(pagnode.cursor, null) : null,
-                            pick: props.pick,
-                            limit: 20,
-                        },
-                    }))
-                },
+                deps: [props.pick],
+                load: pagination_loader,
 
                 status: (() => {
                     if (!pagnode || !pagnode.cursor.kind) { return "idle" }

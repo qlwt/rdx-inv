@@ -1,5 +1,5 @@
 import { useStore } from "#src/hook/core";
-import * as rem from "#src/rem"
+import * as rem from "#src/rem";
 import type { RemKey } from "#src/type/rem";
 import * as capi from "@ta/capi";
 import * as std from "@ta/std";
@@ -19,11 +19,11 @@ export const usePagLoad = function <Key extends RemKey>(key: Key, params: UsePag
     r.useEffect(() => {
         if (!params.status_active) { return }
 
-        const pagnode = store.getState().pgroup.rempag[std.object_hash_stable({})]
+        const pagnode = store.getState()[key].rempag[hash]
 
-        if (pagnode && (pagnode.status_pending || std.maybe_is(pagnode.cursor, null))) {
-            return
-        }
+        // if (pagnode && (pagnode.status_pending || std.maybe_is(pagnode.cursor, null))) {
+        //     return
+        // }
 
         const abort_controller = new AbortController()
 
@@ -37,7 +37,7 @@ export const usePagLoad = function <Key extends RemKey>(key: Key, params: UsePag
             config: {
                 abort_signal: abort_controller.signal,
             },
-        }))
+        }, { signal: abort_controller.signal, }))
 
         return () => {
             abort_controller.abort("aborted")
@@ -52,11 +52,11 @@ export const usePagLoader = function <Key extends RemKey>(key: Key, params: UseP
     return r.useCallback(() => {
         if (!params.status_active) { return }
 
-        const pagnode = store.getState().pgroup.rempag[std.object_hash_stable({})]
+        const pagnode = store.getState()[key].rempag[hash]
 
-        if (pagnode && (pagnode.status_pending || std.maybe_is(pagnode.cursor, null))) {
-            return
-        }
+        // if (pagnode && (pagnode.status_pending || std.maybe_is(pagnode.cursor, null))) {
+        //     return
+        // }
 
         const abort_controller = new AbortController()
 
@@ -70,7 +70,7 @@ export const usePagLoader = function <Key extends RemKey>(key: Key, params: UseP
             config: {
                 abort_signal: abort_controller.signal,
             },
-        }))
+        }, { signal: abort_controller.signal, }))
 
         return () => {
             abort_controller.abort("aborted")

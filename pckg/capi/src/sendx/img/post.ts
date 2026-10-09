@@ -4,8 +4,8 @@ import { res_event } from "#src/res/event"
 import { res_new_json } from "#src/res/new/json"
 import type { ApiResponse } from "#src/res/type/ApiResponse"
 import type { SendConfig } from "#src/type/config"
-import * as cst from "@inv/cst"
-import type * as rest from "@inv/rest"
+import * as cst from "@ta/cst"
+import type * as rest from "@ta/rest"
 import type { rxapi } from "@ta/rest"
 
 export type SendXImgPost_Body = (

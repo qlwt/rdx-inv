@@ -18,6 +18,8 @@ RUN bun run --filter "./pckg/std" build
 RUN bun run --filter "./pckg/std-react" build
 RUN bun run --filter "./pckg/express-utils" build
 RUN bun run --filter "./pckg/rest" build
+RUN bun run --filter "./pckg/capi" build
+RUN bun run --filter "./pckg/gstate" build
 RUN bun run --filter "./app/api" build
 
 EXPOSE 8200

@@ -34,7 +34,8 @@
         "react": "19.3.0",
         "react-dom": "19.3.0",
         "react-redux": "^9.3.0",
-        "@reduxjs/toolkit": "^2.13.0"
+        "@reduxjs/toolkit": "^2.13.0",
+        "browser-image-compression": "^2.0.2"
     },
     "exports": {
         ".": {

@@ -1,7 +1,7 @@
 import type { ImgUrl_Attr } from "#/src/client/util/imgurl/type/attr";
 import type { ImgUrl_TName } from "#/src/client/util/imgurl/type/tname";
-import * as cst from "@inv/cst";
-import type * as rest from "@inv/rest";
+import * as cst from "@ta/cst";
+import type * as rest from "@ta/rest";
 import type { rxapi } from "@ta/rest";
 
 type Query = rest.Cluster_Schema<(typeof rxapi)["img"], "get", "query">

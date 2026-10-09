@@ -36,7 +36,6 @@ export const restroute_product_mget_new = (params: RestRouteProductMGet_New_Para
             ],
 
             handler: async ctx => {
-                schema_query.parse(ctx.req.query)
                 const query = eu.input_parse_zod(schema_query, ctx.req.query)
 
                 const result = await db.transaction().execute(async trx => {

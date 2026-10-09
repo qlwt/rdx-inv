@@ -1,11 +1,11 @@
-import st from "#client/component/feature/cn/style/prod/card/view.module.scss"
 import st_ddn from "#client/component/feature/cn/style/prod/card/option_line.module.scss"
+import st from "#client/component/feature/cn/style/prod/card/view.module.scss"
 import * as rddn from "@qyu/reactcmp-dropdown"
 import * as cst from "@ta/cst"
 import * as gs from "@ta/gstate"
 import { rem } from "@ta/gstate"
-import cl from "classnames"
 import * as r from "react"
+import cl from "classnames"
 
 const wear_text_new = function(status_wear: cst.ProductStatus_Wear): string {
     switch (status_wear) {
@@ -27,7 +27,7 @@ export const ELCN_ProdCardFieldWear: r.FC<ELCN__ProdCardFieldWear_Props> = props
 
     return <div className={st.field_wear}>
         <rddn.CmpContainerVirtual open={open} open_set={open_set}>
-            <rddn.CmpButton className={cl(st.field_wear__text, st_ddn.btn)}>
+            <rddn.CmpButton className={cl(st.field_wear__btn, st.field_wear__text)}>
                 {wear_text_new(props.node_wear)}
             </rddn.CmpButton>
 

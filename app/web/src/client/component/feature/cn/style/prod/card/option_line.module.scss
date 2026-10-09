@@ -1,21 +1,5 @@
 @use "util:std" as std;
 
-.btn {
-  outline: none;
-  background-color: transparent;
-
-  border-radius: 4px;
-  border: 1px solid transparent;
-  padding: std.rem(5) std.rem(10);
-
-  transition: background-color std.$trtime_fast, border-color std.$trtime_fast;
-
-  &:hover, &:focus {
-    border-color: var(--p-border-primary);
-    background-color: var(--p-bg-primary);
-  }
-}
-
 .listc {
   border-radius: 4px;
   box-shadow: 0 0 std.rem(5) 0 var(--p-border-primary);

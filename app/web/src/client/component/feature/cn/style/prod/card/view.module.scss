@@ -64,6 +64,7 @@
 }
 
 .field_pgroup {
+  outline: none;
   grid-area: kind;
   cursor: pointer;
 
@@ -73,6 +74,17 @@
 
   overflow: hidden;
   height: std.rem(72);
+  background-color: transparent;
+
+  padding: 0;
+  border-radius: 4px;
+  border: 1px solid transparent;
+
+  transition: border-color std.$trtime_fast;
+
+  &:hover, &:focus {
+    border-color: var(--p-border-primary);
+  }
 }
 
 .field_pgroup__img {
@@ -168,6 +180,22 @@
   text-align: center;
 }
 
+.field_avail__btn {
+  outline: none;
+  background-color: transparent;
+
+  border-radius: 4px;
+  border: 1px solid transparent;
+  padding: std.rem(5) std.rem(10);
+
+  transition: background-color std.$trtime_fast, border-color std.$trtime_fast;
+
+  &:hover, &:focus {
+    border-color: var(--p-border-primary);
+    background-color: var(--p-bg-primary);
+  }
+}
+
 .field_avail__text {
   font-size: std.rem(16);
 
@@ -183,6 +211,22 @@
 .field_wear {
   grid-area: wear;
   text-align: center;
+}
+
+.field_wear__btn {
+  outline: none;
+  background-color: transparent;
+
+  border-radius: 4px;
+  border: 1px solid transparent;
+  padding: std.rem(5) std.rem(10);
+
+  transition: background-color std.$trtime_fast, border-color std.$trtime_fast;
+
+  &:hover, &:focus {
+    border-color: var(--p-border-primary);
+    background-color: var(--p-bg-primary);
+  }
 }
 
 .field_wear__text {
@@ -220,6 +264,14 @@
   &:hover, &:focus {
     background-color: var(--p-bg-primary);
   }
+}
+
+.placeholder {
+  padding: std.rem(25) 25%;
+
+  text-align: center;
+  font-size: std.rem(28);
+  color: var(--p-text-primary-m600);
 }
 
 .pending {

@@ -61,6 +61,7 @@
 
 .filter_list {
   display: flex;
+  flex-wrap: wrap;
   gap: std.rem(10);
 }
 
@@ -77,7 +78,7 @@
   border-radius: 4px;
   border: 1px solid var(--p-border-primary-m200);
 
-  padding: std.rem(6) std.rem(6);
+  padding: std.rem(6) std.rem(8);
   background-color: var(--p-bg-secondary);
 
   transition: color std.$trtime_fast, background-color std.$trtime_fast;

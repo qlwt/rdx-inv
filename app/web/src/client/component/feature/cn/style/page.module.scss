@@ -16,6 +16,7 @@
 
 .filter_list {
   display: flex;
+  flex-wrap: wrap;
 
   gap: std.rem(15);
   padding: std.rem(5) 0;

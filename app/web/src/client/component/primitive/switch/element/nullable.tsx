@@ -5,6 +5,9 @@ import cl from "classnames"
 import * as r from "react"
 
 export type EPSwitch__Nullable_Props<T> = {
+    readonly root_className?: string
+    readonly case_className?: string
+
     readonly option_now: std.Maybe<T>
     readonly option_list: readonly T[]
     readonly option_set: std.FnSetterStateles<std.Maybe<T>>
@@ -12,7 +15,7 @@ export type EPSwitch__Nullable_Props<T> = {
 }
 
 export const EPSwitch_Nullable = function <T>(props: EPSwitch__Nullable_Props<T>): r.ReactNode {
-    return <div className={st.root}>
+    return <div className={cl(st.root, props.root_className)}>
         <rfc.CmpLoop data={props.option_list}>
             {option => {
                 const status_active = std.maybe_is(props.option_now, option)

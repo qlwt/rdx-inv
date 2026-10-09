@@ -1,0 +1,75 @@
+@use "util:std" as std;
+
+.btn {
+  flex-grow: 1;
+
+  outline: none;
+  overflow: hidden;
+
+  display: grid;
+  grid-template-rows: std.rem(48);
+  grid-template-columns: std.rem(48) std.rem(256);
+
+  padding: 0;
+  gap: std.rem(10);
+  background-color: var(--p-bg-primary-m300);
+
+  border-radius: 4px;
+  border: 1px solid var(--p-border-primary);
+
+  transition: background-color std.$trtime_fast;
+
+  &:hover, &:focus {
+    background-color: var(--p-bg-primary);
+  }
+}
+
+.imgc {
+  display: flex;
+  overflow: hidden;
+}
+
+.img {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.title {
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+}
+
+.title__text {
+  min-width: 0;
+  font-size: std.rem(16);
+  color: var(--p-text-primary);
+}
+
+.card_empty {
+  outline: none;
+  border-radius: 2px;
+
+  text-align: center;
+
+  padding: std.rem(10) std.rem(15);
+  border: 1px solid var(--p-border-primary-m400);
+
+  transition: color std.$trtime_fast, background-color std.$trtime_fast;
+
+  &:not(:disabled) {
+    color: var(--p-text-primary);
+    background-color: var(--p-bg-primary-m300);
+
+    &:hover, &:focus {
+      background-color: var(--p-bg-primary-m100);
+    }
+  }
+
+  &:disabled {
+    color: var(--p-text-primary-m600);
+    background-color: var(--p-bg-primary-h100);
+  }
+}

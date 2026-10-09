@@ -4,12 +4,14 @@ import ELCN_ProdCardViewInOrder from "#/src/client/component/feature/cn/local/pr
 import { EPIcon_Svg, EPIcon_Svg_Kind } from "#/src/client/component/primitive/icon/element/svg"
 import EPSwitch_Nullable from "#/src/client/component/primitive/switch/element/nullable"
 import st from "#client/component/feature/cn/style/porder/split.module.scss"
+import st_switch from "#/src/client/component/feature/cn/style/filter/switch.module.scss"
 import * as rfc from "@qyu/reactcmp-flow-control"
 import * as capi from "@ta/capi"
 import * as cst from "@ta/cst"
 import * as std from "@ta/std"
 import cl from "classnames"
 import * as r from "react"
+import ELCN_FilterPGroup from "#/src/client/component/feature/cn/local/filter/pgroup"
 
 const pick_none = {}
 
@@ -28,11 +30,13 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
     const [pick_instock, pick_instock_set] = r.useState<std.Maybe<true>>(std.MNONE)
     const [pick_wear, pick_wear_set] = r.useState<std.Maybe<cst.ProductStatus_Wear>>(std.MNONE)
     const [pick_avail, pick_avail_set] = r.useState<std.Maybe<cst.ProductStatus_Avail>>(std.MNONE)
+    const [pick_pgroup, pick_pgroup_set] = r.useState<std.Maybe<string>>(std.MNONE)
 
     const status_open = selection.id.kind && !selection.status_closing
 
     const pick_product = r.useMemo(() => {
         return {
+            pgroup_id: std.maybe_unpack(pick_pgroup, undefined),
             status_wear: std.maybe_unpack(pick_wear, undefined),
             status_avail: std.maybe_unpack(pick_avail, undefined),
 
@@ -41,7 +45,7 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
                 std.maybe_unpack(selection.id, undefined)
             ),
         } satisfies NonNullable<capi.SendMGet_Query<"product">["pick"]>
-    }, [pick_avail, pick_wear, pick_instock, selection.id])
+    }, [pick_avail, pick_wear, pick_instock, pick_pgroup, selection.id])
 
     const [left_hide, left_hide_set] = r.useState(false)
 
@@ -149,6 +153,8 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
                 </button>
 
                 <EPSwitch_Nullable
+                    root_className={st_switch.root}
+
                     option_now={pick_avail}
                     option_set={pick_avail_set}
                     option_list={[cst.ProductStatus_Avail.Free] as const}
@@ -159,6 +165,8 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
                 />
 
                 <EPSwitch_Nullable
+                    root_className={st_switch.root}
+
                     option_now={pick_wear}
                     option_set={pick_wear_set}
                     option_list={[cst.ProductStatus_Wear.New, cst.ProductStatus_Wear.Used] as const}
@@ -174,6 +182,8 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
                 />
 
                 <EPSwitch_Nullable
+                    root_className={st_switch.root}
+
                     option_now={pick_instock}
                     option_set={pick_instock_set}
                     option_list={[true] as const}
@@ -181,6 +191,11 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
                     option_children_new={() => {
                         return "Add Items"
                     }}
+                />
+
+                <ELCN_FilterPGroup
+                    selection={pick_pgroup}
+                    selection_set={pick_pgroup_set}
                 />
             </div>
 

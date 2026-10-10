@@ -21,7 +21,12 @@ const expect_typeof = function(value, type) {
 }
 
 export default defineConfig({
-    input: path.resolve("./src/index.ts"),
+    input: {
+        index: path.resolve("./src/index.ts"),
+        env_client: path.resolve("./src/env_client.ts"),
+        env_api: path.resolve("./src/env_api.ts"),
+        env_web: path.resolve("./src/env_web.ts"),
+    },
 
     external: [
         /node_modules/i,

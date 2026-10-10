@@ -1,4 +1,5 @@
-import { env_client_host, env_port } from "#src/env"
+import "#src/env"
+import * as env_api from "@ta/cst/env_api"
 import * as rest from "@ta/rest"
 import express from "express"
 import fs from "node:fs/promises"
@@ -42,8 +43,8 @@ const app_new = async function(params: Server_New_Params) {
 }
 
 const server_init = async function(app: express.Express) {
-    const server = app.listen(env_port, () => {
-        console.log(`Api server initialized on port ${env_port}`)
+    const server = app.listen(env_api.api_port, () => {
+        console.log(`Api server initialized on port ${env_api.api_port}`)
     })
 
     rest.wss_new_gen(server)
@@ -54,7 +55,7 @@ const main = async function() {
 
     const app = await app_new({
         origin_list: [
-            env_client_host,
+            env_api.web_url,
         ]
     })
 

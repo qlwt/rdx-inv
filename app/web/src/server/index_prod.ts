@@ -1,4 +1,5 @@
-import { env_port_public } from "#src/env"
+import "#src/env"
+import * as env_web from "@ta/cst/env_web"
 import compression from "compression"
 import express from "express"
 import fs from "node:fs"
@@ -48,11 +49,11 @@ export const domain_pubprod = async function(): Promise<void> {
         path_statics: path.resolve("./build/client/"),
         path_html: path.resolve("./build/client/index.html"),
 
-        origins: [`http://localhost:${env_port_public}`]
+        origins: [`http://localhost:${env_web.web_port}`]
     })
 
-    app_public.listen(env_port_public, () => {
-        console.log(`App Public initialized on port ${env_port_public}`)
+    app_public.listen(env_web.web_port, () => {
+        console.log(`App Public initialized on port ${env_web.web_port}`)
     })
 }
 

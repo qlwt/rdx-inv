@@ -10,7 +10,7 @@ services:
         API_URL: http://localhost:8200
 
     env_file: 
-      - ./app/web/.docker.env
+      - ./pckg/cst/.docker.env
 
     ports:
       - 8080:8080
@@ -29,7 +29,7 @@ services:
         API_URL: http://localhost:8200
 
     env_file: 
-      - ./app/api/.docker.env
+      - ./pckg/cst/.docker.env
 
     ports:
       - 8200:8200
@@ -42,7 +42,7 @@ services:
     image: postgres:18.3
 
     env_file:
-      - ./db/.docker.env
+      - ./pckg/cst/.docker.env
 
     volumes:
       - pgdata:/var/lib/postgresql

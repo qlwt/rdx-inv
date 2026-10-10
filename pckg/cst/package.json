@@ -31,6 +31,21 @@
         ".": {
             "import": "./build/entry/index.js",
             "types": "./build/declaration/index.d.ts"
+        },
+
+        "./env_client": {
+            "import": "./build/entry/env_client.js",
+            "types": "./build/declaration/env_client.d.ts"
+        },
+
+        "./env_api": {
+            "import": "./build/entry/env_api.js",
+            "types": "./build/declaration/env_api.d.ts"
+        },
+
+        "./env_web": {
+            "import": "./build/entry/env_web.js",
+            "types": "./build/declaration/env_web.d.ts"
         }
     }
 }

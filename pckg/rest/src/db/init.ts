@@ -1,8 +1,8 @@
-import { env_db_host, env_db_name, env_db_password, env_db_port, env_db_user } from "#src/env"
 import * as cst from "@ta/cst"
 import * as ksly from "kysely"
 import * as pg from "pg"
 import dbdef from "./db.sql"
+import * as env_api from "@ta/cst/env_api"
 
 export type Database = {
     img: {
@@ -84,11 +84,11 @@ export type DatabaseSlice = {
 export const db = new ksly.Kysely<Database>({
     dialect: new ksly.PostgresDialect({
         pool: new pg.Pool({
-            password: env_db_password,
-            database: env_db_name,
-            host: env_db_host,
-            user: env_db_user,
-            port: env_db_port,
+            password: env_api.db_password,
+            database: env_api.db_name,
+            host: env_api.db_host,
+            user: env_api.db_user,
+            port: env_api.db_port,
         }),
     }),
 })

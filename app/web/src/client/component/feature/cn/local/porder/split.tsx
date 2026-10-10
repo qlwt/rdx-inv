@@ -5,6 +5,7 @@ import { EPIcon_Svg, EPIcon_Svg_Kind } from "#/src/client/component/primitive/ic
 import EPSwitch_Nullable from "#/src/client/component/primitive/switch/element/nullable"
 import st from "#client/component/feature/cn/style/porder/split.module.scss"
 import st_switch from "#/src/client/component/feature/cn/style/filter/switch.module.scss"
+import st_filter from "#client/component/feature/cn/style/filter/view.module.scss"
 import * as rfc from "@qyu/reactcmp-flow-control"
 import * as capi from "@ta/capi"
 import * as cst from "@ta/cst"
@@ -25,14 +26,13 @@ export type ELCN__POrderSplit_Props = {
 }
 
 export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
+    const [left_hide, left_hide_set] = r.useState(false)
     const [selection, selection_set] = r.useState<SelectionState>({ id: std.MNONE, status_closing: false, })
 
     const [pick_instock, pick_instock_set] = r.useState<std.Maybe<true>>(std.MNONE)
     const [pick_wear, pick_wear_set] = r.useState<std.Maybe<cst.ProductStatus_Wear>>(std.MNONE)
     const [pick_avail, pick_avail_set] = r.useState<std.Maybe<cst.ProductStatus_Avail>>(std.MNONE)
     const [pick_pgroup, pick_pgroup_set] = r.useState<std.Maybe<string>>(std.MNONE)
-
-    const status_open = selection.id.kind && !selection.status_closing
 
     const pick_product = r.useMemo(() => {
         return {
@@ -47,7 +47,10 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
         } satisfies NonNullable<capi.SendMGet_Query<"product">["pick"]>
     }, [pick_avail, pick_wear, pick_instock, pick_pgroup, selection.id])
 
-    const [left_hide, left_hide_set] = r.useState(false)
+    const status_open = (
+        selection.id.kind
+        && !selection.status_closing
+    )
 
     return <div
         className={cl(st.split, status_open && st._open)}
@@ -137,8 +140,8 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
         </div>
 
         <div className={cl(st.split__right, status_open && st._open)}>
-            <div className={st.filter_row}>
-                <div className={st.filter_list}>
+            <div className={st_filter.row}>
+                <div className={st_filter.list}>
                     <button
                         className={st.act}
 
@@ -195,7 +198,7 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
                     />
                 </div>
 
-                <div className={st.filter_list}>
+                <div className={st_filter.list}>
                     <ELCN_FilterPGroup
                         selection={pick_pgroup}
                         selection_set={pick_pgroup_set}

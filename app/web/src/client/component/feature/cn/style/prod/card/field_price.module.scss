@@ -1,0 +1,23 @@
+@use "util:std" as std;
+
+.root {
+  grid-area: price;
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: minmax(0, 1fr);
+
+  justify-content: end;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.text {
+  font-size: std.rem(14);
+
+  text-align: end;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

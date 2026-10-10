@@ -1,0 +1,49 @@
+@use "util:std" as std;
+
+.root {
+  display: grid;
+  align-items: center;
+  grid-template-columns: auto auto auto;
+
+  gap: std.rem(10);
+}
+
+.count {
+  font-weight: bold;
+  font-size: std.rem(16);
+  color: var(--p-text-primary);
+}
+
+.delim {
+  height: 100%;
+  width: std.rem(2);
+  background-color: var(--p-border-primary-m500);
+}
+
+.price {
+  display: grid;
+  text-align: start;
+  grid-template-rows: auto auto;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.price__text {
+  display: grid;
+  gap: std.rem(3);
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.price__digits {
+  min-width: 0;
+  text-align: end;
+  font-size: std.rem(14);
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.price__sign {
+  white-space: nowrap;
+  font-size: std.rem(14);
+}

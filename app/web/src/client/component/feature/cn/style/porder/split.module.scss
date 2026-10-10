@@ -59,17 +59,6 @@
   }
 }
 
-.filter_row {
-  display: flex;
-  gap: std.rem(10);
-  flex-direction: column;
-}
-
-.filter_list {
-  display: flex;
-  gap: std.rem(10);
-}
-
 .act {
   outline: none;
 

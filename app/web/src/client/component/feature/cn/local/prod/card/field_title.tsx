@@ -1,5 +1,5 @@
 import EPEdViewText_View from "#/src/client/component/primitive/edview-text/element/view"
-import st from "#client/component/feature/cn/style/prod/card/view.module.scss"
+import st from "#client/component/feature/cn/style/prod/card/field_title.module.scss"
 import * as cst from "@ta/cst"
 import * as gs from "@ta/gstate"
 import { rem } from "@ta/gstate"
@@ -22,7 +22,7 @@ export type ELCN__ProdCardFieldTitle_Props = {
 export const ELCN_ProdCardFieldTitle: r.FC<ELCN__ProdCardFieldTitle_Props> = props => {
     const dispatch = gs.useDispatch()
 
-    return <div className={st.field_title}>
+    return <div className={st.root}>
         <EPEdViewText_View
             text={props.node_title}
             placeholder={`No Title`}
@@ -30,7 +30,7 @@ export const ELCN_ProdCardFieldTitle: r.FC<ELCN__ProdCardFieldTitle_Props> = pro
 
             st_notext
             st_size={`small`}
-            cl_text={st.field_title__head}
+            cl_text={st.head}
             cl_text_placeholder={st._placeholder}
 
             ev_change={tvalue => {
@@ -55,7 +55,7 @@ export const ELCN_ProdCardFieldTitle: r.FC<ELCN__ProdCardFieldTitle_Props> = pro
 
             st_notext
             st_size={`small`}
-            cl_text={st.field_title__spec}
+            cl_text={st.spec}
             cl_text_placeholder={st._placeholder}
 
             ev_change={tvalue => {

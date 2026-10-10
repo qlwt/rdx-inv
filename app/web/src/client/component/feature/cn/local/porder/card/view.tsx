@@ -2,13 +2,13 @@ import ELCN_POrderCardFieldProdInfo from "#/src/client/component/feature/cn/loca
 import ELCN_POrderCardFieldSent from "#/src/client/component/feature/cn/local/porder/card/field_sent"
 import ELCN_POrderCardFieldTitle from "#/src/client/component/feature/cn/local/porder/card/field_title"
 import { EPIcon_Svg, EPIcon_Svg_Kind } from "#/src/client/component/primitive/icon/element/svg"
+import EPPending_Screen from "#/src/client/component/primitive/pending/element/screen"
 import st from "#client/component/feature/cn/style/porder/card/view.module.scss"
 import * as rfc from "@qyu/reactcmp-flow-control"
 import * as gs from "@ta/gstate"
 import * as std from "@ta/std"
 import cl from "classnames"
 import * as r from "react"
-import * as rbs from "react-bootstrap"
 
 export type ELCN__POrderCardView_Props = {
     readonly ref?: r.Ref<HTMLElement>
@@ -30,9 +30,7 @@ export const ELCN_POrderCardView: r.FC<ELCN__POrderCardView_Props> = props => {
 
     return <article ref={props.ref} className={cl(st.root, props.status_compact && st._compact)}>
         <rfc.CmpIf value={status_pending}>
-            {() => <div className={st.pending}>
-                <rbs.Spinner variant={"white"} />
-            </div>}
+            {() => <EPPending_Screen />}
         </rfc.CmpIf>
 
         <ELCN_POrderCardFieldTitle

@@ -1,5 +1,5 @@
 import EPEdViewText_View from "#/src/client/component/primitive/edview-text/element/view"
-import st from "#client/component/feature/cn/style/pgroup/card/view.module.scss"
+import st from "#client/component/feature/cn/style/pgroup/card/field_title.module.scss"
 import * as cst from "@ta/cst"
 import * as gs from "@ta/gstate"
 import { rem } from "@ta/gstate"
@@ -17,7 +17,7 @@ export type ELCN__PGroupCardFieldTitle_Props = {
 export const ELCN_PGroupCardFieldTitle: r.FC<ELCN__PGroupCardFieldTitle_Props> = props => {
     const dispatch = gs.useDispatch()
 
-    return <div className={st.field_title}>
+    return <div className={st.root}>
         <EPEdViewText_View
             text={props.node_title}
             placeholder={`No Title`}
@@ -25,7 +25,7 @@ export const ELCN_PGroupCardFieldTitle: r.FC<ELCN__PGroupCardFieldTitle_Props> =
 
             st_notext
             st_size={`small`}
-            cl_text={st.field_title__text}
+            cl_text={st.text}
             cl_text_placeholder={st._placeholder}
 
             ev_change={tvalue => {

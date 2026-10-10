@@ -1,0 +1,65 @@
+@use "util:std" as std;
+
+.root {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: minmax(0, 1fr);
+
+  opacity: 1;
+
+  transition: opacity std.$trtime_slow;
+
+  &._compact {
+    opacity: 0;
+  }
+
+  &._hidden {
+    visibility: hidden;
+  }
+}
+
+.to {
+  min-width: 0;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+
+  font-size: std.rem(13);
+  color: var(--p-text-primary-m200);
+}
+
+.at {
+  position: relative;
+
+  outline: none;
+  border-radius: 2px;
+  border: 1px solid transparent;
+
+  background-color: transparent;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: std.rem(16);
+  color: var(--p-text-primary-m200);
+
+  transition: border-color std.$trtime_fast, background-color std.$trtime_fast;
+
+  &:hover, &:focus {
+    border-color: var(--p-bg-secondary);
+    background-color: var(--p-bg-primary);
+  }
+}
+
+.at__input {
+  contain: size;
+  user-select: none;
+  visibility: hidden;
+  pointer-events: none;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

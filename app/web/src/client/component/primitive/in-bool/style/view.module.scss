@@ -1,0 +1,37 @@
+@use "util:std" as std;
+
+.root {
+  padding: 0;
+  outline: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: std.rem(26);
+  height: std.rem(26);
+  font-size: std.rem(16);
+
+  border-radius: 2px;
+  border: 1px solid var(--p-border-primary);
+
+  transition: color std.$trtime_fast, background-color std.$trtime_fast;
+
+  &:not(._active) {
+    color: var(--p-text-primary);
+    background-color: var(--p-bg-primary-m200);
+
+    &:hover, &:focus {
+      background-color: var(--p-bg-primary);
+    }
+  }
+
+  &._active {
+    color: var(--p-text-secondary);
+    background-color: var(--p-bg-secondary);
+
+    &:hover, &:focus {
+      background-color: var(--p-bg-secondary);
+    }
+  }
+}

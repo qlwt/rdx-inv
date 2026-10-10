@@ -1,5 +1,5 @@
-import st_ddn from "#client/component/feature/cn/style/prod/card/option_line.module.scss"
-import st from "#client/component/feature/cn/style/prod/card/view.module.scss"
+import st_ddn from "#client/component/feature/cn/style/ddn/line.module.scss"
+import st from "#client/component/feature/cn/style/prod/card/field_avail.module.scss"
 import * as rddn from "@qyu/reactcmp-dropdown"
 import * as cst from "@ta/cst"
 import * as gs from "@ta/gstate"
@@ -27,14 +27,14 @@ export const ELCN_ProdCardFieldAvail: r.FC<ELCN__ProdCardFieldAvail_Props> = pro
     const dispatch = gs.useDispatch()
     const [open, open_set] = r.useState(false)
 
-    return <div className={st.field_avail}>
+    return <div className={st.root}>
         <rddn.CmpContainerVirtual open={open} open_set={open_set}>
             <rddn.CmpButton
                 className={cl(
-                    st.field_avail__btn,
-                    st.field_avail__text,
-                    props.node_avail === cst.ProductStatus_Avail.Free && st._avail_free,
-                    props.node_avail === cst.ProductStatus_Avail.Broken && st._avail_broken,
+                    st.btn,
+                    st.text,
+                    props.node_avail === cst.ProductStatus_Avail.Free && st._free,
+                    props.node_avail === cst.ProductStatus_Avail.Broken && st._broken,
                 )}
             >
                 {avail_text_new(props.node_avail)}

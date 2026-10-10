@@ -1,0 +1,34 @@
+@use "util:std" as std;
+
+.root {
+  grid-area: title;
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.spec {
+  font-size: std.rem(14);
+  color: var(--p-text-primary-m600);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &._placeholder {
+    color: var(--p-text-primary-m800);
+  }
+}
+
+.head {
+  font-size: std.rem(18);
+  color: var(--p-text-primary-h200);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: underline;
+
+  &._placeholder {
+    text-decoration: none;
+    color: var(--p-text-primary-m800);
+  }
+}

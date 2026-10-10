@@ -1,6 +1,6 @@
-import ELCN_DDNListPGroup from "#/src/client/component/feature/cn/local/ddnlist_pgroup"
+import ELCN_DDNListPGroup from "#/src/client/component/feature/cn/local/ddn/list_pgroup"
 import { imgurl_attr_new_wrapper } from "#/src/client/util/imgurl/attr_new_wrapper"
-import st from "#client/component/feature/cn/style/prod/card/view.module.scss"
+import st from "#client/component/feature/cn/style/prod/card/field_pgroup.module.scss"
 import * as rddn from "@qyu/reactcmp-dropdown"
 import * as gs from "@ta/gstate"
 import { rem } from "@ta/gstate"
@@ -30,10 +30,10 @@ export const ELCN_ProdCardFieldPGroup: r.FC<ELCN__ProdCardFieldPGroup_Props> = p
     })
 
     return <rddn.CmpContainerVirtual open={open} open_set={open_set}>
-        <rddn.CmpButton className={st.field_pgroup}>
+        <rddn.CmpButton className={st.root}>
             <img
                 draggable={false}
-                className={st.field_pgroup__img}
+                className={st.img}
 
                 {...imgurl_attr_new_wrapper("pgroup", rview_pgroup?.data ?? null)}
             />

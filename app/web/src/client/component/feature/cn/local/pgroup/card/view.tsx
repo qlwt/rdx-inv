@@ -1,13 +1,13 @@
 import { ELCN_PGroupCardFieldImg } from "#/src/client/component/feature/cn/local/pgroup/card/field_img"
 import { ELCN_PGroupCardFieldTitle } from "#/src/client/component/feature/cn/local/pgroup/card/field_title"
 import { EPIcon_Svg, EPIcon_Svg_Kind } from "#/src/client/component/primitive/icon/element/svg"
+import EPPending_Screen from "#/src/client/component/primitive/pending/element/screen"
 import st from "#client/component/feature/cn/style/pgroup/card/view.module.scss"
 import * as rfc from "@qyu/reactcmp-flow-control"
 import * as gs from "@ta/gstate"
 import * as std from "@ta/std"
 import cl from "classnames"
 import * as r from "react"
-import * as rbs from "react-bootstrap"
 
 export type ELCN__PGroupCardView_Props = {
     readonly ref?: r.Ref<HTMLElement | null>
@@ -25,9 +25,7 @@ export const ELCN_PGroupCardView: r.FC<ELCN__PGroupCardView_Props> = props => {
 
     return <article ref={props.ref} className={cl(st.root, status_pending && st._pending)}>
         <rfc.CmpIf value={status_pending}>
-            {() => <div className={st.pending}>
-                <rbs.Spinner variant={"white"} />
-            </div>}
+            {() => <EPPending_Screen />}
         </rfc.CmpIf>
 
         <ELCN_PGroupCardFieldImg

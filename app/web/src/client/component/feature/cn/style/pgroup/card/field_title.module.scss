@@ -1,0 +1,14 @@
+@use "util:std" as std;
+
+.root {
+  padding: std.rem(5) std.rem(5);
+}
+
+.text {
+  font-size: std.rem(16);
+  color: var(--p-text-primary);
+
+  &._placeholder {
+    color: var(--p-text-primary-m600);
+  }
+}

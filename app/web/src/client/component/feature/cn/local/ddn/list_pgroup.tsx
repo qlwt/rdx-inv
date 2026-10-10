@@ -1,5 +1,6 @@
+import EPPending_Screen from "#/src/client/component/primitive/pending/element/screen"
 import { imgurl_attr_new_wrapper } from "#/src/client/util/imgurl/attr_new_wrapper"
-import st_ddn from "#client/component/feature/cn/style/prod/card/option_grid.module.scss"
+import st_ddn from "#client/component/feature/cn/style/ddn/grid.module.scss"
 import st from "#client/component/feature/cn/style/filter/pgroup.module.scss"
 import * as rddn from "@qyu/reactcmp-dropdown"
 import * as rfc from "@qyu/reactcmp-flow-control"
@@ -7,7 +8,6 @@ import * as gs from "@ta/gstate"
 import { rem } from "@ta/gstate"
 import * as std from "@ta/std"
 import * as r from "react"
-import * as rbs from "react-bootstrap"
 
 type EL__GroupCard_Props = {
     readonly selection: string | null
@@ -88,9 +88,7 @@ export const ELCN_DDNListPGroup: r.FC<ELCN__DDNListPGroup_Props> = props => {
     >
         <rddn.CmpContent className={st_ddn.list}>
             <rfc.CmpIf value={!pagnode || pagnode.status_pending || pagnode.cursor.kind === false}>
-                <div className={st_ddn.pending}>
-                    <rbs.Spinner variant="light" />
-                </div>
+                {() => <EPPending_Screen />}
             </rfc.CmpIf>
 
             <rfc.CmpIf value={rnode_list.length === 0 && pagnode && std.maybe_is(pagnode.cursor, null)}>

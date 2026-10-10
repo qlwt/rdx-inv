@@ -1,5 +1,5 @@
 import EPEdViewText_View from "#/src/client/component/primitive/edview-text/element/view"
-import st from "#client/component/feature/cn/style/porder/card/view.module.scss"
+import st from "#client/component/feature/cn/style/porder/card/field_sent.module.scss"
 import * as rfc from "@qyu/reactcmp-flow-control"
 import * as cst from "@ta/cst"
 import * as gs from "@ta/gstate"
@@ -47,7 +47,7 @@ export const ELCN_POrderCardFieldSent: r.FC<ELCN__POrderCardFieldSent_Props> = p
 
     return <div
         className={cl(
-            st.field_sent,
+            st.root,
             status_hidden && st._hidden,
             props.status_compact && st._compact,
         )}
@@ -88,7 +88,7 @@ export const ELCN_POrderCardFieldSent: r.FC<ELCN__POrderCardFieldSent_Props> = p
 
                 st_notext
                 st_size={`small`}
-                cl_text={st.field_sent__to}
+                cl_text={st.to}
                 cl_text_placeholder={st._placeholder}
 
                 ev_change={tvalue => {
@@ -108,7 +108,7 @@ export const ELCN_POrderCardFieldSent: r.FC<ELCN__POrderCardFieldSent_Props> = p
         </rfc.CmpIf>
 
         <button
-            className={st.field_sent__at}
+            className={st.at}
 
             onClick={() => {
                 const clockin = ref_clock.current
@@ -124,7 +124,7 @@ export const ELCN_POrderCardFieldSent: r.FC<ELCN__POrderCardFieldSent_Props> = p
                 ref={ref_clock}
 
                 type={`date`}
-                className={st.field_sent__at__input}
+                className={st.at__input}
                 value={date_value}
 
                 onChange={ev => {

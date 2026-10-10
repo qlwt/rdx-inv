@@ -1,15 +1,17 @@
 import ELCN_FilterPGroup from "#/src/client/component/feature/cn/local/filter/pgroup"
-import st_switch from "#/src/client/component/feature/cn/style/filter/switch.module.scss"
 import ELCN_Grid from "#/src/client/component/feature/cn/local/grid"
 import ELCN_Head from "#/src/client/component/feature/cn/local/head"
 import ELCN_ProdCardView from "#/src/client/component/feature/cn/local/prod/card/view"
+import st_switch from "#/src/client/component/feature/cn/style/filter/switch.module.scss"
 import EPSwitch_Nullable from "#/src/client/component/primitive/switch/element/nullable"
+import st_filter from "#client/component/feature/cn/style/filter/view.module.scss"
 import st from "#client/component/feature/cn/style/page.module.scss"
 import * as capi from "@ta/capi"
 import * as cst from "@ta/cst"
 import * as gs from "@ta/gstate"
 import { rem } from "@ta/gstate"
 import * as std from "@ta/std"
+import cl from "classnames"
 import * as r from "react"
 import * as rbs from "react-bootstrap"
 
@@ -21,8 +23,8 @@ export const EFCN_PageProduct: r.FC<EFCN_PageProduct_Props> = props => {
     const dispatch = gs.useDispatch()
     const [deletion, deletion_set] = r.useState<std.Maybe<string>>(std.MNONE)
 
-    const [pick_pgroup, pick_pgroup_set] = r.useState<std.Maybe<string>>(std.MNONE)
     const [pick_porder, pick_porder_set] = r.useState<std.Maybe<null>>(std.MNONE)
+    const [pick_pgroup, pick_pgroup_set] = r.useState<std.Maybe<string>>(std.MNONE)
     const [pick_wear, pick_wear_set] = r.useState<std.Maybe<cst.ProductStatus_Wear>>(std.MNONE)
     const [pick_avail, pick_avail_set] = r.useState<std.Maybe<cst.ProductStatus_Avail>>(std.MNONE)
 
@@ -59,7 +61,7 @@ export const EFCN_PageProduct: r.FC<EFCN_PageProduct_Props> = props => {
             }}
         />
 
-        <div className={st.filter_list}>
+        <div className={cl(st_filter.list, st_filter._wrapping)}>
             <EPSwitch_Nullable
                 root_className={st_switch.root}
                 option_now={pick_avail}

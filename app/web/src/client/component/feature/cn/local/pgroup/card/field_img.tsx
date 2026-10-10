@@ -1,5 +1,5 @@
 import { imgurl_attr_new_wrapper } from "#/src/client/util/imgurl/attr_new_wrapper"
-import st from "#client/component/feature/cn/style/pgroup/card/view.module.scss"
+import st from "#client/component/feature/cn/style/pgroup/card/field_img.module.scss"
 import * as capi from "@ta/capi"
 import * as cst from "@ta/cst"
 import * as gs from "@ta/gstate"
@@ -18,7 +18,7 @@ export const ELCN_PGroupCardFieldImg: r.FC<ELCN__PGroupCardFieldImg_Props> = pro
     const ref_input = r.useRef<HTMLInputElement | null>(null)
 
     return <button
-        className={st.field_img}
+        className={st.root}
 
         onClick={() => {
             ref_input.current?.click()
@@ -26,7 +26,7 @@ export const ELCN_PGroupCardFieldImg: r.FC<ELCN__PGroupCardFieldImg_Props> = pro
     >
         <img
             draggable={false}
-            className={st.field_img__img}
+            className={st.img}
 
             {...imgurl_attr_new_wrapper(
                 "pgroup",
@@ -40,7 +40,7 @@ export const ELCN_PGroupCardFieldImg: r.FC<ELCN__PGroupCardFieldImg_Props> = pro
         <input
             type={`file`}
             ref={ref_input}
-            className={st.field_img__input}
+            className={st.input}
 
             onInput={ev => {
                 const file = ev.currentTarget.files?.[0]

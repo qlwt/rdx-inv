@@ -1,0 +1,25 @@
+@use "util:std" as std;
+
+.root {
+  grid-area: wear;
+  text-align: center;
+}
+
+.btn {
+  outline: none;
+  background-color: transparent;
+
+  border-radius: 4px;
+  border: 1px solid transparent;
+  padding: std.rem(5) std.rem(10);
+
+  font-size: std.rem(16);
+  color: var(--p-text-primary-m800);
+
+  transition: background-color std.$trtime_fast, border-color std.$trtime_fast;
+
+  &:hover, &:focus {
+    border-color: var(--p-border-primary);
+    background-color: var(--p-bg-primary);
+  }
+}

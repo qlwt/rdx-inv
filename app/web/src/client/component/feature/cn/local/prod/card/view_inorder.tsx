@@ -3,14 +3,14 @@ import ELCN_ProdCardFieldPGroup from "#/src/client/component/feature/cn/local/pr
 import { ELCN_ProdCardFieldPrice } from "#/src/client/component/feature/cn/local/prod/card/field_price"
 import { ELCN_ProdCardFieldTitle } from "#/src/client/component/feature/cn/local/prod/card/field_title"
 import { ELCN_ProdCardFieldWear } from "#/src/client/component/feature/cn/local/prod/card/field_wear"
-import { EPIcon_Svg, EPIcon_Svg_Kind } from "#/src/client/component/primitive/icon/element/svg"
+import EPInBool_Strong from "#/src/client/component/primitive/in-bool/element/strong"
+import EPPending_Screen from "#/src/client/component/primitive/pending/element/screen"
 import st from "#client/component/feature/cn/style/prod/card/view.module.scss"
 import * as rfc from "@qyu/reactcmp-flow-control"
 import * as gs from "@ta/gstate"
 import { rem } from "@ta/gstate"
 import cl from "classnames"
 import * as r from "react"
-import * as rbs from "react-bootstrap"
 
 export type ELCN__ProdCardViewInOrder_Props = {
     readonly ref?: r.Ref<HTMLElement | null>
@@ -23,48 +23,29 @@ export const ELCN_ProdCardViewInOrder: r.FC<ELCN__ProdCardViewInOrder_Props> = p
     const dispatch = gs.useDispatch()
     const rview = gs.useRemView("product", props.remnode)
 
-    const status_pending = (
-        rview.pending.del
-        || rview.pending.post
-    )
+    const status_pending = rview.pending.del || rview.pending.post
 
     return <article ref={props.ref} className={cl(st.root, st._inorder, status_pending && st._pending)}>
         <rfc.CmpIf value={status_pending}>
-            {() => <div className={st.pending}>
-                <rbs.Spinner variant={"white"} />
-            </div>}
+            {() => <EPPending_Screen />}
         </rfc.CmpIf>
 
         <div className={cl(st.field_check)}>
-            <button
-                className={cl(st.inbool, rview.data.porder_id !== null && st._active)}
+            <EPInBool_Strong 
+                value={rview.data.porder_id !== null}
 
-                onClick={() => {
-                    if (rview.data.porder_id === null) {
-                        dispatch(rem.product.act.patch({
-                            url: {
-                                id: rview.data.id,
-                            },
+                ev_change={value => {
+                    dispatch(rem.product.act.patch({
+                        url: {
+                            id: rview.data.id,
+                        },
 
-                            body: {
-                                porder_id: props.porder_id,
-                            },
-                        }))
-                    } else {
-                        dispatch(rem.product.act.patch({
-                            url: {
-                                id: rview.data.id,
-                            },
-
-                            body: {
-                                porder_id: null,
-                            },
-                        }))
-                    }
+                        body: {
+                            porder_id: value ? props.porder_id : null,
+                        },
+                    }))
                 }}
-            >
-                <EPIcon_Svg kind={EPIcon_Svg_Kind.Check} />
-            </button>
+            />
         </div>
 
         <ELCN_ProdCardFieldPGroup

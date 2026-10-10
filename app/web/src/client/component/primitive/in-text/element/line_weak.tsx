@@ -9,6 +9,7 @@ import * as r from "react"
 export type EPInText__LineWeak_Props = {
     readonly input_id?: string
     readonly input_value: string
+    readonly input_autofocus?: boolean
     readonly input_placeholder?: string
     readonly input_type?: "text" | "password"
     readonly input_ref?: stdr.RefI<HTMLInputElement | null>
@@ -108,6 +109,7 @@ export const EPInText_LineWeak: r.FC<EPInText__LineWeak_Props> = props => {
             className={cl(st.line, props.cl_input)}
 
             defaultValue={value_default}
+            autoFocus={props.input_autofocus}
             placeholder={props.input_placeholder}
 
             disabled={props.status_disabled}

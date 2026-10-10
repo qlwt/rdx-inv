@@ -3,7 +3,6 @@ import type { EPInText_CRenderProps } from "#/src/client/component/primitive/in-
 import type { EPInText_Size } from "#/src/client/component/primitive/in-text/type/st"
 import st from "#client/component/primitive/edview-text/style/view.module.scss"
 import * as std from "@ta/std"
-import * as stdr from "@ta/std-react"
 import cl from "classnames"
 import * as r from "react"
 
@@ -28,18 +27,9 @@ export type EPEdViewText__View_Props = {
 export const EPEdViewText_View: r.FC<EPEdViewText__View_Props> = props => {
     const nprop_st_size = props.st_size ?? "normal"
 
-    const ref_input = r.useRef<HTMLInputElement | null>(null)
-    const iref_input = stdr.useRefI(ref_input)
-
     const [edit, edit_set] = r.useState(false)
 
     const text_trimmed = props.text.trim()
-
-    r.useLayoutEffect(() => {
-        if (edit) {
-            ref_input.current?.focus()
-        }
-    }, [edit])
 
     return <div
         tabIndex={edit ? -1 : 0}
@@ -57,7 +47,7 @@ export const EPEdViewText_View: r.FC<EPEdViewText__View_Props> = props => {
     >
         {edit
             ? <EPInText_LineWeak
-                input_ref={iref_input}
+                input_autofocus
                 input_value={props.text}
 
                 ev_change={props.ev_change}

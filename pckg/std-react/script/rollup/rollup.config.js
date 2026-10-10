@@ -12,7 +12,7 @@ export default defineConfig({
 
     external: [
         /node_modules/i,
-        /interview-t3\/pckg\/(?!std-react)/
+        /pckg\/(?!std-react)/
     ],
 
     plugins: [

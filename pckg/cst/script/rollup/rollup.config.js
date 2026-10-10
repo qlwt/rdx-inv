@@ -25,7 +25,7 @@ export default defineConfig({
 
     external: [
         /node_modules/i,
-        /interview-t3\/pckg\/(?!cst)/
+        /pckg\/(?!cst)/
     ],
 
     plugins: [

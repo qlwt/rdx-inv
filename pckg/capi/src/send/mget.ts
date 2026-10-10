@@ -32,14 +32,10 @@ export const send_mget = function <Key extends SendKey>(
     }
 
     const request = res_new_json<SendMGet_Result<Key>>({
-        source: new Promise(res => {
-            setTimeout(() => {
-                res(fetch(url, {
-                    method: "GET",
-                    credentials: "include",
-                    signal: params.config?.abort_signal,
-                }))
-            }, 1000)
+        source: fetch(url, {
+            method: "GET",
+            credentials: "include",
+            signal: params.config?.abort_signal,
         }),
     })
 

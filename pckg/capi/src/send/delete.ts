@@ -26,19 +26,15 @@ export const send_delete = function <K extends SendKey>(
     const url = new URL(`${cst.urlbase_api}/rest/${key}/${params.url.id}`)
 
     const request = res_new_json<SendDelete_Result<K>>({
-        source: new Promise(res => {
-            setTimeout(() => {
-                res(fetch(url, {
-                    method: "DELETE",
-                    credentials: "include",
-                    signal: params.config?.abort_signal,
+        source: fetch(url, {
+            method: "DELETE",
+            credentials: "include",
+            signal: params.config?.abort_signal,
 
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                }))
-            }, 1000)
-        })
+            headers: {
+                "Content-Type": "application/json"
+            },
+        }),
     })
 
     if (params.config?.events) {

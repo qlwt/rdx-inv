@@ -19,9 +19,7 @@ const app_new = async function(params: Server_New_Params) {
     const app = express()
 
     app.use((req, res, next) => {
-        // if (req.headers.origin && params.origin_list.includes(req.headers.origin)) {
-        // TODO REPLACE WITH NORMAL ORIGIN
-        if (req.headers.origin) {
+        if (req.headers.origin && params.origin_list.includes(req.headers.origin)) {
             res.setHeader("Access-Control-Allow-Origin", req.headers.origin)
         }
 

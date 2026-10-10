@@ -25,26 +25,22 @@ export type SendPatch_Params<Key extends SendKey> = {
     readonly config?: SendConfig<SendPatch_Result<Key>>
 }
 
-export const send_patch = function<Key extends SendKey>(
+export const send_patch = function <Key extends SendKey>(
     key: Key, params: SendPatch_Params<Key>
 ): Promise<ApiResponse<SendPatch_Result<Key>>> {
     const url = new URL(`${cst.urlbase_api}/rest/${key}/${params.url.id}`)
 
     const request = res_new_json<SendPatch_Result<Key>>({
-        source: new Promise(res => {
-            setTimeout(() => {
-                res(fetch(url, {
-                    method: "PATCH",
-                    credentials: "include",
-                    body: JSON.stringify(params.body),
-                    signal: params.config?.abort_signal,
+        source: fetch(url, {
+            method: "PATCH",
+            credentials: "include",
+            body: JSON.stringify(params.body),
+            signal: params.config?.abort_signal,
 
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                }))
-            }, 1000)
-        })
+            headers: {
+                "Content-Type": "application/json"
+            },
+        }),
     })
 
     if (params.config?.events) {

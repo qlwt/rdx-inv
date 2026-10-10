@@ -54,8 +54,8 @@ export const EFCN_PageProduct: r.FC<EFCN_PageProduct_Props> = props => {
                         price_uah: 100,
                         price_usd: 100,
 
-                        pgroup_id: null,
                         porder_id: null,
+                        pgroup_id: std.maybe_unpack(pick_pgroup, null),
                     },
                 }))
             }}

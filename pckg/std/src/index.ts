@@ -1,6 +1,5 @@
 // linklist
 export * from "#src/linklist/type/LinkList"
-
 export * from "#src/linklist/build"
 
 // map
@@ -69,3 +68,7 @@ export * from "#src/deferred/type/deferred"
 
 // array
 export * from "#src/array/mapf"
+
+// callbatcher
+export * from "#src/callbatcher/throttler/new/delay"
+export * from "#src/callbatcher/type/callbatcher"

@@ -26,7 +26,7 @@ const dprop_container_render: NonNullable<EPVirtual__LMonDyn_Props["container_re
     return <div {...props} />
 }
 
-export const EPVirtual_LMonDyn: r.FC<EPVirtual__LMonDyn_Props> = props => {
+export const EPVirtual_LMonDyn: r.FC<EPVirtual__LMonDyn_Props> = r.memo(props => {
     const nprop_container_render = props.container_render ?? dprop_container_render
 
     const ref_container = r.useRef<HTMLDivElement | null>(null)
@@ -207,6 +207,6 @@ export const EPVirtual_LMonDyn: r.FC<EPVirtual__LMonDyn_Props> = props => {
             </rfc.CmpIf>
         </>
     })
-}
+})
 
 export default EPVirtual_LMonDyn

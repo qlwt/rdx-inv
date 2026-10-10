@@ -1,5 +1,4 @@
 import type { EPVirtual_Dim } from "#/src/client/component/primitive/virtual/util/dim"
-import * as r from "react"
 
 export type UseEPVirtualPadding_Params = {
     readonly grid_length: number
@@ -13,37 +12,19 @@ export type UseEPVirtualPadding_Params = {
 export const useEPVirtualPadding = function(params: UseEPVirtualPadding_Params) {
     const dim = params.dim
 
+    const rwindow_first = Math.max(0, params.render_start - params.window_buffer)
+    const rwindow_end = Math.min(params.grid_length, params.render_end + params.window_buffer)
+    const bottom_length = params.grid_length - rwindow_end
+
     return {
-        top: r.useMemo(() => {
-            const rwindow_first = Math.max(0, params.render_start - params.window_buffer)
+        top: (
+            + rwindow_first * dim.row_gap
+            + rwindow_first * dim.row_height
+        ),
 
-            return (
-                + rwindow_first * dim.row_gap
-                + rwindow_first * dim.row_height
-            )
-        }, [
-            dim.row_gap,
-            dim.row_height,
-            params.grid_length,
-            params.render_start,
-            params.window_buffer,
-        ]),
-
-        bottom: r.useMemo(() => {
-            const rwindow_end = Math.min(params.grid_length, params.render_end + params.window_buffer)
-
-            const bottom_length = params.grid_length - rwindow_end
-
-            return (
-                + bottom_length * dim.row_height
-                + bottom_length * dim.row_gap
-            )
-        }, [
-            dim.row_gap,
-            dim.row_height,
-            params.render_end,
-            params.grid_length,
-            params.window_buffer,
-        ]),
+        bottom: (
+            + bottom_length * dim.row_height
+            + bottom_length * dim.row_gap
+        ),
     } as const
 }

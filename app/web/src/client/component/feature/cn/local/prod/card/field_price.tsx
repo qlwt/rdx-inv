@@ -3,6 +3,8 @@ import { EPInText_Decoration } from "#/src/client/component/primitive/in-text/el
 import st from "#client/component/feature/cn/style/prod/card/field_price.module.scss"
 import * as gs from "@ta/gstate"
 import { rem } from "@ta/gstate"
+import * as std from "@ta/std"
+import * as stdr from "@ta/std-react"
 import * as r from "react"
 
 const validator_price = function(str: string) {
@@ -20,6 +22,11 @@ export type ELCN__ProdCardFieldPrice_Props = {
 export const ELCN_ProdCardFieldPrice: r.FC<ELCN__ProdCardFieldPrice_Props> = props => {
     const dispatch = gs.useDispatch()
 
+    const throttle = stdr.useConstLazy(() => ({
+        usd: std.throttler_new_delay(500),
+        uah: std.throttler_new_delay(500),
+    }))
+
     return <div className={st.root}>
         <EPEdViewText_View
             validation={validator_price}
@@ -34,16 +41,22 @@ export const ELCN_ProdCardFieldPrice: r.FC<ELCN__ProdCardFieldPrice_Props> = pro
                 const tvalue_num = Number.parseFloat(tvalue)
 
                 if (Number.isFinite(tvalue_num) && tvalue_num >= 0) {
-                    dispatch(rem.product.act.patch({
-                        url: {
-                            id: props.node_id,
-                        },
+                    throttle.usd.emit(() => {
+                        dispatch(rem.product.act.patch({
+                            url: {
+                                id: props.node_id,
+                            },
 
-                        body: {
-                            price_usd: tvalue_num,
-                        },
-                    }))
+                            body: {
+                                price_usd: tvalue_num,
+                            },
+                        }))
+                    })
                 }
+            }}
+
+            ev_blur={() => {
+                throttle.usd.flush()
             }}
 
             render_after={cprops => {
@@ -66,16 +79,22 @@ export const ELCN_ProdCardFieldPrice: r.FC<ELCN__ProdCardFieldPrice_Props> = pro
                 const tvalue_num = Number.parseFloat(tvalue)
 
                 if (Number.isFinite(tvalue_num) && tvalue_num >= 0) {
-                    dispatch(rem.product.act.patch({
-                        url: {
-                            id: props.node_id,
-                        },
+                    throttle.uah.emit(() => {
+                        dispatch(rem.product.act.patch({
+                            url: {
+                                id: props.node_id,
+                            },
 
-                        body: {
-                            price_uah: tvalue_num,
-                        },
-                    }))
+                            body: {
+                                price_uah: tvalue_num,
+                            },
+                        }))
+                    })
                 }
+            }}
+
+            ev_blur={() => {
+                throttle.uah.flush()
             }}
 
             render_after={cprops => {

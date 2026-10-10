@@ -4,6 +4,8 @@ import * as cst from "@ta/cst"
 import * as gs from "@ta/gstate"
 import { rem } from "@ta/gstate"
 import * as r from "react"
+import * as stdr from "@ta/std-react"
+import * as std from "@ta/std"
 
 const validator_title = (str: string) => {
     return str.length <= cst.porder_limits.title_mxlength
@@ -22,6 +24,11 @@ export type ELCN__POrderCardFieldTitle_Props = {
 export const ELCN_POrderCardFieldTitle: r.FC<ELCN__POrderCardFieldTitle_Props> = props => {
     const dispatch = gs.useDispatch()
 
+    const throttle = stdr.useConstLazy(() => ({
+        title: std.throttler_new_delay(500),
+        description: std.throttler_new_delay(500),
+    }))
+
     return <div className={st.root}>
         <EPEdViewText_View
             text={props.node_title}
@@ -36,15 +43,21 @@ export const ELCN_POrderCardFieldTitle: r.FC<ELCN__POrderCardFieldTitle_Props> =
             ev_change={tvalue => {
                 if (!validator_title(tvalue)) { return }
 
-                dispatch(rem.porder.act.patch({
-                    url: {
-                        id: props.node_id,
-                    },
+                throttle.title.emit(() => {
+                    dispatch(rem.porder.act.patch({
+                        url: {
+                            id: props.node_id,
+                        },
 
-                    body: {
-                        title: tvalue,
-                    },
-                }))
+                        body: {
+                            title: tvalue,
+                        },
+                    }))
+                })
+            }}
+
+            ev_blur={() => {
+                throttle.title.flush()
             }}
         />
 
@@ -61,15 +74,21 @@ export const ELCN_POrderCardFieldTitle: r.FC<ELCN__POrderCardFieldTitle_Props> =
             ev_change={tvalue => {
                 if (!validator_description(tvalue)) { return }
 
-                dispatch(rem.porder.act.patch({
-                    url: {
-                        id: props.node_id,
-                    },
+                throttle.description.emit(() => {
+                    dispatch(rem.porder.act.patch({
+                        url: {
+                            id: props.node_id,
+                        },
 
-                    body: {
-                        description: tvalue,
-                    },
-                }))
+                        body: {
+                            description: tvalue,
+                        },
+                    }))
+                })
+            }}
+
+            ev_blur={() => {
+                throttle.description.flush()
             }}
         />
     </div>

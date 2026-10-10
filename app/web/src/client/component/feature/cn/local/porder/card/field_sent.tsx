@@ -4,6 +4,8 @@ import * as rfc from "@qyu/reactcmp-flow-control"
 import * as cst from "@ta/cst"
 import * as gs from "@ta/gstate"
 import { rem } from "@ta/gstate"
+import * as std from "@ta/std"
+import * as stdr from "@ta/std-react"
 import cl from "classnames"
 import * as r from "react"
 
@@ -20,9 +22,10 @@ export type ELCN__POrderCardFieldSent_Props = {
 }
 
 export const ELCN_POrderCardFieldSent: r.FC<ELCN__POrderCardFieldSent_Props> = props => {
-    const ref_clock = r.useRef<HTMLInputElement | null>(null)
-
     const dispatch = gs.useDispatch()
+
+    const ref_clock = r.useRef<HTMLInputElement | null>(null)
+    const throttle_sent_to = stdr.useConstLazy(() => std.throttler_new_delay(500))
 
     const [status_hidden, status_hidden_set] = r.useState(false)
 
@@ -94,15 +97,21 @@ export const ELCN_POrderCardFieldSent: r.FC<ELCN__POrderCardFieldSent_Props> = p
                 ev_change={tvalue => {
                     if (!validator_sent_to(tvalue)) { return }
 
-                    dispatch(rem.porder.act.patch({
-                        url: {
-                            id: props.node_id,
-                        },
+                    throttle_sent_to.emit(() => {
+                        dispatch(rem.porder.act.patch({
+                            url: {
+                                id: props.node_id,
+                            },
 
-                        body: {
-                            sent_to: tvalue,
-                        },
-                    }))
+                            body: {
+                                sent_to: tvalue,
+                            },
+                        }))
+                    })
+                }}
+
+                ev_blur={() => {
+                    throttle_sent_to.flush()
                 }}
             />}
         </rfc.CmpIf>

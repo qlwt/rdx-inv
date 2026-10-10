@@ -19,7 +19,9 @@ export type EPEdViewText__View_Props = {
 
     readonly validation?: std.FnPredicate<string>
 
+    readonly ev_blur?: VoidFunction
     readonly ev_change: std.FnSetterStateles<string>
+
     readonly render_before?: (cprops: null | EPInText_CRenderProps) => r.ReactNode
     readonly render_after?: (cprops: null | EPInText_CRenderProps) => r.ReactNode
 }
@@ -51,7 +53,11 @@ export const EPEdViewText_View: r.FC<EPEdViewText__View_Props> = props => {
                 input_value={props.text}
 
                 ev_change={props.ev_change}
-                ev_blur={() => edit_set(false)}
+
+                ev_blur={() => {
+                    edit_set(false)
+                    props.ev_blur?.()
+                }}
 
                 st_size={props.st_size}
                 cl_input={props.cl_text}

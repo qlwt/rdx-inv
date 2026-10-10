@@ -3,6 +3,7 @@ import { gevent_def_remslice } from "#src/util/gevent/def/remslice"
 import type { RemFam } from "#src/util/remfam/type/fam"
 import type { RemSlice_ThunkDefStd, RemSliceDef } from "#src/util/remfam/type/slice"
 import { remlog_node_new_wr } from "#src/util/remlog/node_new"
+import type { RemLogPatch } from "#src/util/remlog/type/remlog"
 import { rempag_node_new } from "#src/util/rempag/node_new"
 import * as rtk from "@reduxjs/toolkit"
 import * as capi from "@ta/capi"
@@ -95,16 +96,27 @@ export const remfam_slice_new = function <
                         const pending_idx = node_remlog.patch.findIndex(n => n.name === NAME_PATCH)
 
                         if (pending_idx !== -1) {
+                            const pending_pnode = node_remlog.patch[pending_idx]! as RemLogPatch<RemNode<Key>>
+
                             thunk_std.reqmap.get(node_remlog.patch[pending_idx]!.req_id)?.()
 
-                            node_remlog.patch.splice(pending_idx, 1)
-                        }
+                            node_remlog.patch.push({
+                                name: NAME_PATCH,
+                                req_id: meta.requestId,
 
-                        node_remlog.patch.push({
-                            name: NAME_PATCH,
-                            req_id: meta.requestId,
-                            data: meta.arg.body satisfies Partial<RemNode<"product">> as any,
-                        })
+                                data: {
+                                    ...meta.arg.body,
+                                    ...pending_pnode.data,
+                                } satisfies Partial<RemNode<"product">> as any,
+                            })
+                            node_remlog.patch.splice(pending_idx, 1)
+                        } else {
+                            node_remlog.patch.push({
+                                name: NAME_PATCH,
+                                req_id: meta.requestId,
+                                data: meta.arg.body satisfies Partial<RemNode<"product">> as any,
+                            })
+                        }
                     })
                     .addCase(thunk_std.act.patch.rejected, (state, { meta }) => {
                         const node_id = meta.arg.url.id

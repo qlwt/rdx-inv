@@ -1,4 +1,5 @@
-import type { RemKey } from "#src/type/rem";
+import type { State } from "#src/store";
+import type { RemKey, RemNode } from "#src/type/rem";
 import { gevent_def_remslice } from "#src/util/gevent/def/remslice";
 import type { RemSlice_ThunkDefStd } from "#src/util/remfam/type/slice";
 import * as rtk from "@reduxjs/toolkit";
@@ -51,10 +52,15 @@ export const remfam_thunk_new_std = function <Key extends RemKey>(key: Key): Rem
             patch: rtk.createAsyncThunk(
                 `${key}/patch`,
                 async (params: capi.SendPatch_Params<Key>, api) => {
+                    const state = api.getState() as State
+                    const state_remlog = state[key].remlog[params.url.id]!
+
                     reqmap.set(api.requestId, api.abort)
 
                     return await capi.send_patch(key, {
                         ...params,
+
+                        body: state_remlog.patch.find(p => p.req_id === api.requestId)!.data as any,
 
                         config: {
                             ...params.config,

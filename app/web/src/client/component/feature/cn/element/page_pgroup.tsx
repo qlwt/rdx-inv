@@ -1,7 +1,6 @@
 import ELCN_Grid from "#/src/client/component/feature/cn/local/grid"
 import ELCN_Head from "#/src/client/component/feature/cn/local/head"
 import ELCN_PGroupCardView from "#/src/client/component/feature/cn/local/pgroup/card/view"
-import st from "#client/component/feature/cn/style/page.module.scss"
 import * as capi from "@ta/capi"
 import * as gs from "@ta/gstate"
 import { rem } from "@ta/gstate"
@@ -19,7 +18,7 @@ export const EFCN_PagePGroup: r.FC<EFCN_PagePGroup_Props> = props => {
     const dispatch = gs.useDispatch()
     const [deletion, deletion_set] = r.useState<std.Maybe<string>>(std.MNONE)
 
-    return <main className={st.root}>
+    return <>
         <ELCN_Head
             pick={pick}
             target={"pgroup"}
@@ -87,7 +86,7 @@ export const EFCN_PagePGroup: r.FC<EFCN_PagePGroup_Props> = props => {
                 </rbs.Button>
             </rbs.Modal.Footer>
         </rbs.Modal>
-    </main>
+    </>
 }
 
 export default EFCN_PagePGroup

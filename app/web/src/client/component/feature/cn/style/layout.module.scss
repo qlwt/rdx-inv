@@ -15,3 +15,19 @@
     grid-template-rows: auto minmax(0, 1fr);
   }
 }
+
+.main {
+  position: relative;
+
+  display: flex;
+  gap: std.rem(10);
+  flex-direction: column;
+
+  background-color: var(--p-bg-primary);
+
+  padding: std.rem(30) std.rem(30);
+
+  @include std.screen_lte("xsm") {
+    padding: std.rem(20) std.rem(20);
+  }
+}

@@ -5,7 +5,6 @@ import ELCN_ProdCardView from "#/src/client/component/feature/cn/local/prod/card
 import st_switch from "#/src/client/component/feature/cn/style/filter/switch.module.scss"
 import EPSwitch_Nullable from "#/src/client/component/primitive/switch/element/nullable"
 import st_filter from "#client/component/feature/cn/style/filter/view.module.scss"
-import st from "#client/component/feature/cn/style/page.module.scss"
 import * as capi from "@ta/capi"
 import * as cst from "@ta/cst"
 import * as gs from "@ta/gstate"
@@ -37,7 +36,7 @@ export const EFCN_PageProduct: r.FC<EFCN_PageProduct_Props> = props => {
         } satisfies capi.SendMGet_Query<"product">["pick"]
     }, [pick_wear, pick_avail, pick_porder, pick_pgroup])
 
-    return <main className={st.root}>
+    return <>
         <ELCN_Head
             pick={pick}
             target={"product"}
@@ -166,7 +165,7 @@ export const EFCN_PageProduct: r.FC<EFCN_PageProduct_Props> = props => {
                 </rbs.Button>
             </rbs.Modal.Footer>
         </rbs.Modal>
-    </main>
+    </>
 }
 
 export default EFCN_PageProduct

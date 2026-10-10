@@ -1,6 +1,5 @@
 import ELCN_Head from "#/src/client/component/feature/cn/local/head"
 import ELCN_POrderSplit from "#/src/client/component/feature/cn/local/porder/split"
-import st from "#client/component/feature/cn/style/page.module.scss"
 import * as gs from "@ta/gstate"
 import { rem } from "@ta/gstate"
 import * as std from "@ta/std"
@@ -15,7 +14,7 @@ export const EFCN_PagePOrder: r.FC<EFCN_PagePOrder_Props> = props => {
     const dispatch = gs.useDispatch()
     const [deletion, deletion_set] = r.useState<std.Maybe<string>>(std.MNONE)
 
-    return <main className={st.root}>
+    return <>
         <ELCN_Head
             pick={{}}
             target={"porder"}
@@ -73,7 +72,7 @@ export const EFCN_PagePOrder: r.FC<EFCN_PagePOrder_Props> = props => {
                 </rbs.Button>
             </rbs.Modal.Footer>
         </rbs.Modal>
-    </main>
+    </>
 }
 
 export default EFCN_PagePOrder

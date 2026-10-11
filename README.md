@@ -9,7 +9,8 @@ The App itself is a simple Inventory Management App
 
 - clone
 - fill in .env files in `/pckg/cst` and `/compose.yaml`, following `.env.example` files
-- run docker container
+- install necessary docker images from `/app/web/Dockerfile` and `/app/api/Dockerfile` if needed
+- run `sudo docker compose up --build`
 
 ## Project Structure
 

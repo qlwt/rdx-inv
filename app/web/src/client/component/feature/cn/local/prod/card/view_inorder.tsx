@@ -19,7 +19,7 @@ export type ELCN__ProdCardViewInOrder_Props = {
     readonly remnode: gs.RemNode<"product">
 }
 
-export const ELCN_ProdCardViewInOrder: r.FC<ELCN__ProdCardViewInOrder_Props> = props => {
+export const ELCN_ProdCardViewInOrder: r.FC<ELCN__ProdCardViewInOrder_Props> = r.memo(props => {
     const dispatch = gs.useDispatch()
     const rview = gs.useRemView("product", props.remnode)
 
@@ -75,6 +75,6 @@ export const ELCN_ProdCardViewInOrder: r.FC<ELCN__ProdCardViewInOrder_Props> = p
             node_wear={rview.data.status_wear}
         />
     </article>
-}
+})
 
 export default ELCN_ProdCardViewInOrder

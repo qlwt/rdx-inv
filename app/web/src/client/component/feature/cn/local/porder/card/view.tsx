@@ -20,7 +20,7 @@ export type ELCN__POrderCardView_Props = {
     readonly selection_set: (id: std.Maybe<string>) => void
 }
 
-export const ELCN_POrderCardView: r.FC<ELCN__POrderCardView_Props> = props => {
+export const ELCN_POrderCardView: r.FC<ELCN__POrderCardView_Props> = r.memo(props => {
     const rview = gs.useRemView("porder", props.remnode)
 
     const status_pending = (
@@ -85,6 +85,6 @@ export const ELCN_POrderCardView: r.FC<ELCN__POrderCardView_Props> = props => {
             </button>
         </div>
     </article>
-}
+})
 
 export default ELCN_POrderCardView

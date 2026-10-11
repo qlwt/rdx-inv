@@ -20,7 +20,7 @@ export type ELCN__ProdCardView_Props = {
     readonly deletion_set: (id: std.Maybe<string>) => void
 }
 
-export const ELCN_ProdCardView: r.FC<ELCN__ProdCardView_Props> = props => {
+export const ELCN_ProdCardView: r.FC<ELCN__ProdCardView_Props> = r.memo(props => {
     const { t } = ri18.useTranslation()
     const rview = gs.useRemView("product", props.remnode)
 
@@ -96,6 +96,6 @@ export const ELCN_ProdCardView: r.FC<ELCN__ProdCardView_Props> = props => {
             </button>
         </div>
     </article>
-}
+})
 
 export default ELCN_ProdCardView

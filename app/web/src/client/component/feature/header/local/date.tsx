@@ -1,7 +1,7 @@
 import st from "#client/component/feature/header/style/date.module.scss"
+import * as i18 from "i18next"
 import * as r from "react"
 import * as ri18 from "react-i18next"
-import * as i18 from "i18next"
 
 const day_name = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] as const
 const month_name = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] as const
@@ -114,11 +114,11 @@ export const ELHeader_Date: r.FC<ELHeader__Date_Props> = props => {
             const date_bottom = ref_date_bottom.current
 
             if (date_top) {
-                date_top.textContent = text_new_day()
+                date_top.textContent = text_new_day(t)
             }
 
             if (date_bottom) {
-                date_bottom.textContent = text_new_date()
+                date_bottom.textContent = text_new_date(t)
             }
         })
 
@@ -143,7 +143,7 @@ export const ELHeader_Date: r.FC<ELHeader__Date_Props> = props => {
             clean_hour()
             clean_second()
         }
-    }, [])
+    }, [t])
 
     return <div className={st.root}>
         <div className={st.time}>

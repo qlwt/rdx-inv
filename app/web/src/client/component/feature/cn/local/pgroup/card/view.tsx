@@ -15,7 +15,7 @@ export type ELCN__PGroupCardView_Props = {
     readonly deletion_set: (id: std.Maybe<string>) => void
 }
 
-export const ELCN_PGroupCardView: r.FC<ELCN__PGroupCardView_Props> = props => {
+export const ELCN_PGroupCardView: r.FC<ELCN__PGroupCardView_Props> = r.memo(props => {
     const rview = gs.useRemView("pgroup", props.remnode)
 
     const status_pending = (
@@ -54,6 +54,6 @@ export const ELCN_PGroupCardView: r.FC<ELCN__PGroupCardView_Props> = props => {
             </div>
         </div>
     </article>
-}
+})
 
 export default ELCN_PGroupCardView

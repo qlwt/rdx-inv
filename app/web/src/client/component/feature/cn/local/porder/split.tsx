@@ -14,6 +14,7 @@ import * as std from "@ta/std"
 import cl from "classnames"
 import * as r from "react"
 import * as ri18 from "react-i18next"
+import * as stdr from "@ta/std-react"
 
 const pick_none = {}
 
@@ -28,6 +29,15 @@ export type ELCN__POrderSplit_Props = {
 
 export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
     const { t } = ri18.useTranslation()
+
+    const ref_container = r.useRef<HTMLDivElement | null>(null)
+    const container_size = stdr.useSizeObserver({
+        refo_target: stdr.useRefO(ref_container),
+
+        ignore: {
+            height: true,
+        },
+    })
 
     const [left_hide, left_hide_set] = r.useState(false)
     const [selection, selection_set] = r.useState<SelectionState>({ id: std.MNONE, status_closing: false, })
@@ -56,7 +66,12 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
     )
 
     return <div
+        ref={ref_container}
         className={cl(st.split, status_open && st._open)}
+
+        style={{
+            ["--cn-porder-split-width" as never]: `${container_size?.width ?? 1000}px`
+        }}
 
         onTransitionEnd={ev => {
             if (ev.currentTarget !== ev.target) { return }
@@ -143,90 +158,92 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
         </div>
 
         <div className={cl(st.split__right, status_open && st._open)}>
-            <div className={st_filter.row}>
-                <div className={st_filter.list}>
-                    <button
-                        className={st.act}
+            <div className={st.split__right__container}>
+                <div className={st_filter.row}>
+                    <div className={st_filter.list}>
+                        <button
+                            className={st.act}
 
-                        onClick={() => {
-                            selection_set(selection_old => ({
-                                ...selection_old,
+                            onClick={() => {
+                                selection_set(selection_old => ({
+                                    ...selection_old,
 
-                                status_closing: true,
-                            }))
-                        }}
-                    >
-                        <EPIcon_Svg kind={EPIcon_Svg_Kind.ArrowLeft} />
-                    </button>
+                                    status_closing: true,
+                                }))
+                            }}
+                        >
+                            <EPIcon_Svg kind={EPIcon_Svg_Kind.ArrowLeft} />
+                        </button>
 
-                    <EPSwitch_Nullable
-                        root_className={st_switch.root}
+                        <EPSwitch_Nullable
+                            root_className={st_switch.root}
 
-                        option_now={pick_avail}
-                        option_set={pick_avail_set}
-                        option_list={[cst.ProductStatus_Avail.Free] as const}
+                            option_now={pick_avail}
+                            option_set={pick_avail_set}
+                            option_list={[cst.ProductStatus_Avail.Free] as const}
 
-                        option_children_new={() => {
-                            return t(`cn.grid.filter.avail_free`)
-                        }}
-                    />
-
-                    <EPSwitch_Nullable
-                        root_className={st_switch.root}
-
-                        option_now={pick_wear}
-                        option_set={pick_wear_set}
-                        option_list={[cst.ProductStatus_Wear.New, cst.ProductStatus_Wear.Used] as const}
-
-                        option_children_new={option => {
-                            switch (option) {
-                                case cst.ProductStatus_Wear.New:
-                                    return t(`cn.grid.filter.wear_new`)
-                                case cst.ProductStatus_Wear.Used:
-                                    return t(`cn.grid.filter.wear_used`)
-                            }
-                        }}
-                    />
-
-                    <EPSwitch_Nullable
-                        root_className={st_switch.root}
-
-                        option_now={pick_instock}
-                        option_set={pick_instock_set}
-                        option_list={[true] as const}
-
-                        option_children_new={() => {
-                            return t(`cn.grid.filter.add_products`)
-                        }}
-                    />
-                </div>
-
-                <div className={st_filter.list}>
-                    <ELCN_FilterPGroup
-                        selection={pick_pgroup}
-                        selection_set={pick_pgroup_set}
-                    />
-                </div>
-            </div>
-
-            <rfc.CmpRequire value={[std.maybe_unpack(selection.id, null)] as const}>
-                {([selection]) => <ELCN_Grid
-                    kind={`flex`}
-                    target={"product"}
-                    pick={pick_product}
-                    placeholder={t(`cn.grid.ph_product`)}
-
-                    render_child={(remnode, refi) => {
-                        return <ELCN_ProdCardViewInOrder
-                            ref={refi}
-                            key={remnode.id}
-
-                            remnode={remnode}
-                            porder_id={selection}
+                            option_children_new={() => {
+                                return t(`cn.grid.filter.avail_free`)
+                            }}
                         />
-                    }}
-                />}
-            </rfc.CmpRequire>
+
+                        <EPSwitch_Nullable
+                            root_className={st_switch.root}
+
+                            option_now={pick_wear}
+                            option_set={pick_wear_set}
+                            option_list={[cst.ProductStatus_Wear.New, cst.ProductStatus_Wear.Used] as const}
+
+                            option_children_new={option => {
+                                switch (option) {
+                                    case cst.ProductStatus_Wear.New:
+                                        return t(`cn.grid.filter.wear_new`)
+                                    case cst.ProductStatus_Wear.Used:
+                                        return t(`cn.grid.filter.wear_used`)
+                                }
+                            }}
+                        />
+
+                        <EPSwitch_Nullable
+                            root_className={st_switch.root}
+
+                            option_now={pick_instock}
+                            option_set={pick_instock_set}
+                            option_list={[true] as const}
+
+                            option_children_new={() => {
+                                return t(`cn.grid.filter.add_products`)
+                            }}
+                        />
+                    </div>
+
+                    <div className={st_filter.list}>
+                        <ELCN_FilterPGroup
+                            selection={pick_pgroup}
+                            selection_set={pick_pgroup_set}
+                        />
+                    </div>
+                </div>
+
+                <rfc.CmpRequire value={[std.maybe_unpack(selection.id, null)] as const}>
+                    {([selection]) => <ELCN_Grid
+                        kind={`flex`}
+                        target={"product"}
+                        pick={pick_product}
+                        placeholder={t(`cn.grid.ph_product`)}
+
+                        render_child={(remnode, refi) => {
+                            return <ELCN_ProdCardViewInOrder
+                                ref={refi}
+                                key={remnode.id}
+
+                                remnode={remnode}
+                                porder_id={selection}
+                            />
+                        }}
+                    />}
+                </rfc.CmpRequire>
+            </div>
         </div>
     </div>
 }

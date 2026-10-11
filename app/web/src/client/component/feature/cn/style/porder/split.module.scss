@@ -3,16 +3,20 @@
 .split {
   flex: 1 1 0;
   min-height: 0;
-  display: flex;
+  display: grid;
   gap: std.rem(0);
 
-  transition: gap std.$trtime_slow;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 0fr);
+
+  transition: gap std.$trtime_slow, grid-template-columns std.$trtime_slow;
 
   &._open {
     gap: std.rem(20);
+    grid-template-columns: minmax(0, 3fr) minmax(0, 5fr);
 
     @include std.screen_lte("sm") {
       gap: 0;
+      grid-template-columns: minmax(0, 0fr) minmax(0, 1fr);
     }
   }
 }
@@ -20,20 +24,10 @@
 .split__left {
   overflow: hidden;
 
-  flex-basis: 0;
-  flex-grow: 3;
-  flex-shrink: 1;
-
   transition: flex-grow std.$trtime_fast;
 
   display: grid;
   grid-template-rows: minmax(0, 1fr);
-
-  &._open {
-    @include std.screen_lte("sm") {
-      flex-grow: 0;
-    }
-  }
 
   &._hide {
     visibility: hidden;
@@ -41,21 +35,20 @@
 }
 
 .split__right {
-  flex: 0 1 0;
-
   display: grid;
   overflow: hidden;
-  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
 
   transition: flex-grow std.$trtime_slow, flex-basis std.$trtime_slow;
+}
 
-  &._open {
-    flex-grow: 5;
+.split__right__container {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  width: calc((var(--cn-porder-split-width) - #{std.rem(20)}) * 5 / 8);
 
-    @include std.screen_lte("sm") {
-      flex-basis: 0;
-      flex-grow: 3;
-    }
+  @include std.screen_lte("sm") {
+    width: calc(var(--cn-porder-split-width));
   }
 }
 

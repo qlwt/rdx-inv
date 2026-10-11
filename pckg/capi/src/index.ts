@@ -15,7 +15,7 @@ export * from "#src/send/mget"
 export * from "#src/sendx/img/post"
 export * from "#src/sendx/pgroup/post_img"
 
-export * from "#src/ws/con"
+export * from "#src/ws/conn"
 export * from "#src/ws/new/gen"
 
 export * from "#src/file/type/def"

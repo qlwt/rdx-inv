@@ -1,0 +1,173 @@
+{
+    "en": {
+        "translation": {
+            "month": {
+                "Jan": "Jan",
+                "Feb": "Feb",
+                "Mar": "Mar",
+                "Apr": "Apr",
+                "May": "May",
+                "Jun": "Jun",
+                "Jul": "Jul",
+                "Aug": "Aug",
+                "Sep": "Sep",
+                "Oct": "Oct",
+                "Nov": "Nov",
+                "Dec": "Dec"
+            },
+
+            "day": {
+                "Monday": "Monday",
+                "Tuesday": "Tuesday",
+                "Wednesday": "Wednesday",
+                "Thursday": "Thursday",
+                "Friday": "Friday",
+                "Saturday": "Saturday",
+                "Sunday": "Sunday"
+            },
+
+            "header": {
+                "counter_loading": "loading...",
+                "counter_active": "{{count}} onpage"
+            },
+
+            "cn": {
+                "head": {
+                    "pgroup": "Product Groups",
+                    "product": "Products",
+                    "porder": "Orders"
+                },
+
+                "sidenav": {
+                    "link_product": "PRODUCTS",
+                    "link_porder": "ORDERS",
+                    "link_pgroup": "GROUPS"
+                },
+
+                "grid": {
+                    "ph_pgroup": "No Groups Added",
+                    "ph_porder": "No Orders Added",
+                    "ph_product": "No Products Added",
+
+                    "filter": {
+                        "no_group": "No Group",
+                        "avail_broken": "In Repair",
+                        "avail_free": "Available",
+
+                        "wear_new": "New",
+                        "wear_used": "Used",
+
+                        "order_none": "In Stock",
+                        "order_placed": "Ordered",
+
+                        "add_products": "Add Products"
+                    },
+
+                    "modal": {
+                        "del_pgroup": "Do you really want to delete that Group?",
+                        "del_product": "Do you really want to delete that Product?",
+                        "del_porder": "Do you really want to delete that Order and ordered Items?",
+
+                        "cancel": "Cancel",
+                        "confirm": "Confirm"
+                    },
+
+                    "card": {
+                        "ph_title": "No Title",
+                        "ph_desc": "No Description",
+                        "ph_spec": "No Specification",
+
+                        "ph_sent_at": "Not Sent Yet",
+                        "ph_sent_to": "No Send Info"
+                    }
+                }
+            }
+        }
+    },
+
+    "ru": {
+        "translation": {
+            "month": {
+                "Jan": "Янв",
+                "Feb": "Фев",
+                "Mar": "Мар",
+                "Apr": "Апр",
+                "May": "Май",
+                "Jun": "Июн",
+                "Jul": "Июл",
+                "Aug": "Авг",
+                "Sep": "Сен",
+                "Oct": "Окт",
+                "Nov": "Ноя",
+                "Dec": "Дек"
+            },
+
+            "day": {
+                "Monday": "Понедельник",
+                "Tuesday": "Вторник",
+                "Wednesday": "Среда",
+                "Thursday": "Четверг",
+                "Friday": "Пятница",
+                "Saturday": "Суббота",
+                "Sunday": "Воскресенье"
+            },
+
+            "header": {
+                "counter_loading": "загрузка...",
+                "counter_active": "{{count}} на странице"
+            },
+
+            "cn": {
+                "head": {
+                    "pgroup": "Группы продуктов",
+                    "product": "Продукты",
+                    "porder": "Заказы"
+                },
+
+                "sidenav": {
+                    "link_product": "ПРОДУКТЫ",
+                    "link_porder": "ЗАКАЗЫ",
+                    "link_pgroup": "ГРУППЫ"
+                },
+
+                "grid": {
+                    "ph_pgroup": "Группы не добавлены",
+                    "ph_porder": "Заказы не добавлены",
+                    "ph_product": "Продукты не добавлены",
+
+                    "filter": {
+                        "no_group": "Без группы",
+                        "avail_broken": "В ремонте",
+                        "avail_free": "Доступно",
+
+                        "wear_new": "Новый",
+                        "wear_used": "Б/у",
+
+                        "order_none": "В наличии",
+                        "order_placed": "Заказано",
+
+                        "add_products": "Добавить продукты"
+                    },
+
+                    "modal": {
+                        "del_pgroup": "Вы действительно хотите удалить эту группу?",
+                        "del_product": "Вы действительно хотите удалить этот продукт?",
+                        "del_porder": "Вы действительно хотите удалить этот заказ и заказанные позиции?",
+
+                        "cancel": "Отмена",
+                        "confirm": "Подтвердить"
+                    },
+
+                    "card": {
+                        "ph_title": "Без названия",
+                        "ph_desc": "Нет описания",
+                        "ph_spec": "Нет спецификации",
+
+                        "ph_sent_at": "Еще не отправлено",
+                        "ph_sent_to": "Нет информации об отправке"
+                    }
+                }
+            }
+        }
+    }
+}

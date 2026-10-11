@@ -3,12 +3,15 @@ import st from "#client/component/feature/cn/style/sidenav.module.scss"
 import * as r from "react"
 import * as rr from "react-router"
 import cl from "classnames"
+import * as ri18 from "react-i18next"
 
 export type ELCN_SideNav_Props = {
 
 }
 
 export const ELCN_SideNav: r.FC<ELCN_SideNav_Props> = props => {
+    const { t } = ri18.useTranslation()
+
     return <aside className={st.root}>
         <nav className={st.nav}>
             <rr.NavLink
@@ -17,7 +20,7 @@ export const ELCN_SideNav: r.FC<ELCN_SideNav_Props> = props => {
                 className={({ isActive }) => cl(st.link, isActive && st._active)}
             >
                 <span className={st.link__text}>
-                    PRODUCTS
+                    {t(`cn.sidenav.link_product`)}
                 </span>
             </rr.NavLink>
 
@@ -27,7 +30,7 @@ export const ELCN_SideNav: r.FC<ELCN_SideNav_Props> = props => {
                 className={({ isActive }) => cl(st.link, isActive && st._active)}
             >
                 <span className={st.link__text}>
-                    ORDERS
+                    {t(`cn.sidenav.link_porder`)}
                 </span>
             </rr.NavLink>
 
@@ -37,7 +40,7 @@ export const ELCN_SideNav: r.FC<ELCN_SideNav_Props> = props => {
                 className={({ isActive }) => cl(st.link, isActive && st._active)}
             >
                 <span className={st.link__text}>
-                    GROUPS
+                    {t(`cn.sidenav.link_pgroup`)}
                 </span>
             </rr.NavLink>
         </nav>

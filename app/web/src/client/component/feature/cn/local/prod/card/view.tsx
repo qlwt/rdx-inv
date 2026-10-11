@@ -12,6 +12,7 @@ import * as gs from "@ta/gstate"
 import * as std from "@ta/std"
 import cl from "classnames"
 import * as r from "react"
+import * as ri18 from "react-i18next"
 
 export type ELCN__ProdCardView_Props = {
     readonly ref?: r.Ref<HTMLElement | null>
@@ -20,6 +21,7 @@ export type ELCN__ProdCardView_Props = {
 }
 
 export const ELCN_ProdCardView: r.FC<ELCN__ProdCardView_Props> = props => {
+    const { t } = ri18.useTranslation()
     const rview = gs.useRemView("product", props.remnode)
 
     const status_free = (
@@ -68,7 +70,7 @@ export const ELCN_ProdCardView: r.FC<ELCN__ProdCardView_Props> = props => {
                 rview.data.porder_id !== null && st._ordered,
             )}
         >
-            {rview.data.porder_id === null ? "In Stock" : "Ordered"}
+            {rview.data.porder_id === null ? t("cn.grid.filter.order_none") : t("cn.grid.filter.order_placed")}
         </div>
 
         <ELCN_ProdCardFieldAvail

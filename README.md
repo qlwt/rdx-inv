@@ -86,6 +86,7 @@ The App itself is a simple Inventory Management App
 - `component/*/*/local/*.tsx` conatins local components for the scope
 - `component/*/*/style/*.module.scss` conatins styles for the scope
 
+- i18 is used for internationalisation
 - Uses `react-router` in data mode, uses `Lazy Loading` for absolutely no reason and no benefit
 - Does not use `SSR`, I tried to make it work with `Lazy Loading` without switching to big framework, but figgured I have to choose one
 - `Products` page

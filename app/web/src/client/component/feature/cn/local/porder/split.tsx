@@ -1,18 +1,19 @@
+import ELCN_FilterPGroup from "#/src/client/component/feature/cn/local/filter/pgroup"
 import ELCN_Grid from "#/src/client/component/feature/cn/local/grid"
 import ELCN_POrderCardView from "#/src/client/component/feature/cn/local/porder/card/view"
 import ELCN_ProdCardViewInOrder from "#/src/client/component/feature/cn/local/prod/card/view_inorder"
+import st_switch from "#/src/client/component/feature/cn/style/filter/switch.module.scss"
 import { EPIcon_Svg, EPIcon_Svg_Kind } from "#/src/client/component/primitive/icon/element/svg"
 import EPSwitch_Nullable from "#/src/client/component/primitive/switch/element/nullable"
-import st from "#client/component/feature/cn/style/porder/split.module.scss"
-import st_switch from "#/src/client/component/feature/cn/style/filter/switch.module.scss"
 import st_filter from "#client/component/feature/cn/style/filter/view.module.scss"
+import st from "#client/component/feature/cn/style/porder/split.module.scss"
 import * as rfc from "@qyu/reactcmp-flow-control"
 import * as capi from "@ta/capi"
 import * as cst from "@ta/cst"
 import * as std from "@ta/std"
 import cl from "classnames"
 import * as r from "react"
-import ELCN_FilterPGroup from "#/src/client/component/feature/cn/local/filter/pgroup"
+import * as ri18 from "react-i18next"
 
 const pick_none = {}
 
@@ -26,6 +27,8 @@ export type ELCN__POrderSplit_Props = {
 }
 
 export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
+    const { t } = ri18.useTranslation()
+
     const [left_hide, left_hide_set] = r.useState(false)
     const [selection, selection_set] = r.useState<SelectionState>({ id: std.MNONE, status_closing: false, })
 
@@ -109,7 +112,7 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
                 kind={`flex`}
                 pick={pick_none}
                 target={"porder"}
-                placeholder={`No Active Orders`}
+                placeholder={t(`cn.grid.ph_porder`)}
 
                 render_child={(remnode, refi) => {
                     return <ELCN_POrderCardView
@@ -164,7 +167,7 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
                         option_list={[cst.ProductStatus_Avail.Free] as const}
 
                         option_children_new={() => {
-                            return "Available"
+                            return t(`cn.grid.filter.avail_free`)
                         }}
                     />
 
@@ -178,9 +181,9 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
                         option_children_new={option => {
                             switch (option) {
                                 case cst.ProductStatus_Wear.New:
-                                    return "New"
+                                    return t(`cn.grid.filter.wear_new`)
                                 case cst.ProductStatus_Wear.Used:
-                                    return "Used"
+                                    return t(`cn.grid.filter.wear_used`)
                             }
                         }}
                     />
@@ -193,7 +196,7 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
                         option_list={[true] as const}
 
                         option_children_new={() => {
-                            return "Add Items"
+                            return t(`cn.grid.filter.add_products`)
                         }}
                     />
                 </div>
@@ -211,7 +214,7 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
                     kind={`flex`}
                     target={"product"}
                     pick={pick_product}
-                    placeholder={`No Products in Order`}
+                    placeholder={t(`cn.grid.ph_product`)}
 
                     render_child={(remnode, refi) => {
                         return <ELCN_ProdCardViewInOrder

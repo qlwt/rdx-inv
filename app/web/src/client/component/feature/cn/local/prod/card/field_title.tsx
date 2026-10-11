@@ -6,6 +6,7 @@ import { rem } from "@ta/gstate"
 import * as r from "react"
 import * as stdr from "@ta/std-react"
 import * as std from "@ta/std"
+import * as ri18 from "react-i18next"
 
 const validator_title = (str: string) => {
     return str.length <= cst.product_limits.title_mxlength
@@ -22,6 +23,7 @@ export type ELCN__ProdCardFieldTitle_Props = {
 }
 
 export const ELCN_ProdCardFieldTitle: r.FC<ELCN__ProdCardFieldTitle_Props> = props => {
+    const { t } = ri18.useTranslation()
     const dispatch = gs.useDispatch()
 
     const throttle = stdr.useConstLazy(() => ({
@@ -32,8 +34,8 @@ export const ELCN_ProdCardFieldTitle: r.FC<ELCN__ProdCardFieldTitle_Props> = pro
     return <div className={st.root}>
         <EPEdViewText_View
             text={props.node_title}
-            placeholder={`No Title`}
             validation={validator_title}
+            placeholder={t(`cn.grid.card.ph_title`)}
 
             st_notext
             st_size={`small`}
@@ -64,7 +66,7 @@ export const ELCN_ProdCardFieldTitle: r.FC<ELCN__ProdCardFieldTitle_Props> = pro
         <EPEdViewText_View
             text={props.node_spec}
             validation={validator_spec}
-            placeholder={`No Specification`}
+            placeholder={t(`cn.grid.card.ph_spec`)}
 
             st_notext
             st_size={`small`}

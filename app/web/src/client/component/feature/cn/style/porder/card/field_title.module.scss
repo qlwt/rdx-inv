@@ -1,13 +1,13 @@
 @use "util:std" as std;
 
-.field_title {
+.root {
   text-align: start;
   display: grid;
   grid-template-rows: auto auto;
   grid-template-columns: minmax(0, 1fr);
 }
 
-.field_title__desc {
+.desc {
   font-size: std.rem(14);
   color: var(--p-text-primary-m600);
 
@@ -19,7 +19,7 @@
   }
 }
 
-.field_title__head {
+.head {
   font-size: std.rem(18);
   color: var(--p-text-primary-h200);
 

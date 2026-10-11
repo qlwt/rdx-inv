@@ -13,12 +13,14 @@ import * as std from "@ta/std"
 import cl from "classnames"
 import * as r from "react"
 import * as rbs from "react-bootstrap"
+import * as ri18 from "react-i18next"
 
 export type EFCN_PageProduct_Props = {
 
 }
 
 export const EFCN_PageProduct: r.FC<EFCN_PageProduct_Props> = props => {
+    const { t } = ri18.useTranslation()
     const dispatch = gs.useDispatch()
     const [deletion, deletion_set] = r.useState<std.Maybe<string>>(std.MNONE)
 
@@ -40,7 +42,7 @@ export const EFCN_PageProduct: r.FC<EFCN_PageProduct_Props> = props => {
         <ELCN_Head
             pick={pick}
             target={"product"}
-            title={`Products`}
+            title={t(`cn.head.product`)}
 
             ev_post={() => {
                 dispatch(rem.product.act.post({
@@ -48,10 +50,10 @@ export const EFCN_PageProduct: r.FC<EFCN_PageProduct_Props> = props => {
                         status_wear: std.maybe_unpack(pick_wear, cst.ProductStatus_Wear.New),
                         status_avail: std.maybe_unpack(pick_avail, cst.ProductStatus_Avail.Free),
 
-                        title: "New Product",
+                        title: "",
                         spec: "",
-                        price_uah: 100,
-                        price_usd: 100,
+                        price_uah: 0,
+                        price_usd: 0,
 
                         porder_id: null,
                         pgroup_id: std.maybe_unpack(pick_pgroup, null),
@@ -70,9 +72,9 @@ export const EFCN_PageProduct: r.FC<EFCN_PageProduct_Props> = props => {
                 option_children_new={option => {
                     switch (option) {
                         case cst.ProductStatus_Avail.Free:
-                            return "Available"
+                            return t(`cn.grid.filter.avail_free`)
                         case cst.ProductStatus_Avail.Broken:
-                            return "In Repair"
+                            return t(`cn.grid.filter.avail_broken`)
                     }
                 }}
             />
@@ -86,9 +88,9 @@ export const EFCN_PageProduct: r.FC<EFCN_PageProduct_Props> = props => {
                 option_children_new={option => {
                     switch (option) {
                         case cst.ProductStatus_Wear.New:
-                            return "New"
+                            return t(`cn.grid.filter.wear_new`)
                         case cst.ProductStatus_Wear.Used:
-                            return "Used"
+                            return t(`cn.grid.filter.wear_used`)
                     }
                 }}
             />
@@ -102,7 +104,7 @@ export const EFCN_PageProduct: r.FC<EFCN_PageProduct_Props> = props => {
                 option_children_new={option => {
                     switch (option) {
                         case null:
-                            return "In Stock"
+                            return t(`cn.grid.filter.order_none`)
                     }
                 }}
             />
@@ -117,7 +119,7 @@ export const EFCN_PageProduct: r.FC<EFCN_PageProduct_Props> = props => {
             pick={pick}
             kind={`flex`}
             target={"product"}
-            placeholder={`No Products Added`}
+            placeholder={t(`cn.grid.ph_product`)}
 
             render_child={(remnode, refi) => {
                 return <ELCN_ProdCardView
@@ -132,7 +134,7 @@ export const EFCN_PageProduct: r.FC<EFCN_PageProduct_Props> = props => {
 
         <rbs.Modal show={deletion.kind} onHide={() => deletion_set(std.MNONE)}>
             <rbs.Modal.Header>
-                Do you really want to delete that item?
+                {t(`cn.grid.modal.del_product`)}
             </rbs.Modal.Header>
 
             <rbs.Modal.Footer>
@@ -143,7 +145,7 @@ export const EFCN_PageProduct: r.FC<EFCN_PageProduct_Props> = props => {
                         deletion_set(std.MNONE)
                     }}
                 >
-                    Cancel
+                    {t(`cn.grid.modal.cancel`)}
                 </rbs.Button>
 
                 <rbs.Button
@@ -161,7 +163,7 @@ export const EFCN_PageProduct: r.FC<EFCN_PageProduct_Props> = props => {
                         deletion_set(std.MNONE)
                     }}
                 >
-                    Delete
+                    {t(`cn.grid.modal.confirm`)}
                 </rbs.Button>
             </rbs.Modal.Footer>
         </rbs.Modal>

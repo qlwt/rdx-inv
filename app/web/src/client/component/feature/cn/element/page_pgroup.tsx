@@ -7,6 +7,7 @@ import { rem } from "@ta/gstate"
 import * as std from "@ta/std"
 import * as r from "react"
 import * as rbs from "react-bootstrap"
+import * as ri18 from "react-i18next"
 
 const pick = {} satisfies capi.SendMGet_Query<"pgroup">["pick"]
 
@@ -15,6 +16,7 @@ export type EFCN_PagePGroup_Props = {
 }
 
 export const EFCN_PagePGroup: r.FC<EFCN_PagePGroup_Props> = props => {
+    const { t } = ri18.useTranslation()
     const dispatch = gs.useDispatch()
     const [deletion, deletion_set] = r.useState<std.Maybe<string>>(std.MNONE)
 
@@ -22,13 +24,13 @@ export const EFCN_PagePGroup: r.FC<EFCN_PagePGroup_Props> = props => {
         <ELCN_Head
             pick={pick}
             target={"pgroup"}
-            title={`Product Group`}
+            title={t(`cn.head.pgroup`)}
 
             ev_post={() => {
                 dispatch(rem.pgroup.act.post({
                     body: {
                         img_id: null,
-                        title: "New Group",
+                        title: "",
                     },
                 }))
             }}
@@ -38,7 +40,7 @@ export const EFCN_PagePGroup: r.FC<EFCN_PagePGroup_Props> = props => {
             pick={pick}
             kind={`pgroup`}
             target={"pgroup"}
-            placeholder={`No Products Added`}
+            placeholder={t(`cn.grid.ph_pgroup`)}
 
             render_child={(remnode, refi) => {
                 return <ELCN_PGroupCardView
@@ -53,7 +55,7 @@ export const EFCN_PagePGroup: r.FC<EFCN_PagePGroup_Props> = props => {
 
         <rbs.Modal show={deletion.kind} onHide={() => deletion_set(std.MNONE)}>
             <rbs.Modal.Header>
-                Do you really want to delete that item?
+                ${t(`cn.grid.modal.del_pgroup`)}
             </rbs.Modal.Header>
 
             <rbs.Modal.Footer>
@@ -64,7 +66,7 @@ export const EFCN_PagePGroup: r.FC<EFCN_PagePGroup_Props> = props => {
                         deletion_set(std.MNONE)
                     }}
                 >
-                    Cancel
+                    {t(`cn.grid.modal.cancel`)}
                 </rbs.Button>
 
                 <rbs.Button
@@ -82,7 +84,7 @@ export const EFCN_PagePGroup: r.FC<EFCN_PagePGroup_Props> = props => {
                         deletion_set(std.MNONE)
                     }}
                 >
-                    Delete
+                    {t(`cn.grid.modal.confirm`)}
                 </rbs.Button>
             </rbs.Modal.Footer>
         </rbs.Modal>

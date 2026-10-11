@@ -5,6 +5,7 @@ import { rem } from "@ta/gstate"
 import * as std from "@ta/std"
 import * as r from "react"
 import * as rbs from "react-bootstrap"
+import * as ri18 from "react-i18next"
 
 export type EFCN_PagePOrder_Props = {
 
@@ -12,19 +13,20 @@ export type EFCN_PagePOrder_Props = {
 
 export const EFCN_PagePOrder: r.FC<EFCN_PagePOrder_Props> = props => {
     const dispatch = gs.useDispatch()
+    const { t } = ri18.useTranslation()
     const [deletion, deletion_set] = r.useState<std.Maybe<string>>(std.MNONE)
 
     return <>
         <ELCN_Head
             pick={{}}
             target={"porder"}
-            title={`Orders`}
+            title={t(`cn.head.porder`)}
 
             ev_post={() => {
                 dispatch(rem.porder.act.post({
                     body: {
-                        title: "New Order",
-                        description: "New Description",
+                        title: "",
+                        description: "",
 
                         sent_at: null,
                         sent_to: null,
@@ -39,7 +41,7 @@ export const EFCN_PagePOrder: r.FC<EFCN_PagePOrder_Props> = props => {
 
         <rbs.Modal show={deletion.kind} onHide={() => deletion_set(std.MNONE)}>
             <rbs.Modal.Header>
-                Do you really want to delete that order?
+                {t(`cn.grid.modal.del_porder`)}
             </rbs.Modal.Header>
 
             <rbs.Modal.Footer>
@@ -50,7 +52,7 @@ export const EFCN_PagePOrder: r.FC<EFCN_PagePOrder_Props> = props => {
                         deletion_set(std.MNONE)
                     }}
                 >
-                    Cancel
+                    {t(`cn.grid.modal.cancel`)}
                 </rbs.Button>
 
                 <rbs.Button
@@ -68,7 +70,7 @@ export const EFCN_PagePOrder: r.FC<EFCN_PagePOrder_Props> = props => {
                         deletion_set(std.MNONE)
                     }}
                 >
-                    Delete
+                    {t(`cn.grid.modal.confirm`)}
                 </rbs.Button>
             </rbs.Modal.Footer>
         </rbs.Modal>

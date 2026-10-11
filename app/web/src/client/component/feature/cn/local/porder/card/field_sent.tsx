@@ -8,6 +8,7 @@ import * as std from "@ta/std"
 import * as stdr from "@ta/std-react"
 import cl from "classnames"
 import * as r from "react"
+import * as ri18 from "react-i18next"
 
 const validator_sent_to = (str: string) => {
     return str.length <= cst.porder_limits.sent_to_mxlength
@@ -23,6 +24,7 @@ export type ELCN__POrderCardFieldSent_Props = {
 
 export const ELCN_POrderCardFieldSent: r.FC<ELCN__POrderCardFieldSent_Props> = props => {
     const dispatch = gs.useDispatch()
+    const { t } = ri18.useTranslation()
 
     const ref_clock = r.useRef<HTMLInputElement | null>(null)
     const throttle_sent_to = stdr.useConstLazy(() => std.throttler_new_delay(500))
@@ -32,7 +34,7 @@ export const ELCN_POrderCardFieldSent: r.FC<ELCN__POrderCardFieldSent_Props> = p
     const [date_text, date_value] = r.useMemo(() => {
         if (props.node_sent_at === null) {
             return [
-                "Not Sent Yet",
+                t(`cn.grid.card.ph_sent_at`),
                 "",
             ] as const
         }
@@ -85,7 +87,7 @@ export const ELCN_POrderCardFieldSent: r.FC<ELCN__POrderCardFieldSent_Props> = p
     >
         <rfc.CmpIf value={props.node_sent_at !== null}>
             {() => <EPEdViewText_View
-                placeholder={`No Send Info`}
+                placeholder={t(`cn.grid.card.ph_sent_to`)}
                 validation={validator_sent_to}
                 text={props.node_sent_to ?? ""}
 

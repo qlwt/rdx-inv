@@ -5,15 +5,17 @@ import * as cst from "@ta/cst"
 import * as gs from "@ta/gstate"
 import { rem } from "@ta/gstate"
 import cl from "classnames"
+import * as i18 from "i18next"
 import * as r from "react"
+import * as ri18 from "react-i18next"
 
-const avail_text_new = function(status_avail: cst.ProductStatus_Avail): string {
+const avail_text_new = function(t: i18.TFunction, status_avail: cst.ProductStatus_Avail): string {
     switch (status_avail) {
         case cst.ProductStatus_Avail.Free: {
-            return "Available"
+            return t(`cn.grid.filter.avail_free`)
         }
         case cst.ProductStatus_Avail.Broken: {
-            return "In Repair"
+            return t(`cn.grid.filter.avail_broken`)
         }
     }
 }
@@ -24,6 +26,7 @@ export type ELCN__ProdCardFieldAvail_Props = {
 }
 
 export const ELCN_ProdCardFieldAvail: r.FC<ELCN__ProdCardFieldAvail_Props> = props => {
+    const { t } = ri18.useTranslation()
     const dispatch = gs.useDispatch()
     const [open, open_set] = r.useState(false)
 
@@ -37,7 +40,7 @@ export const ELCN_ProdCardFieldAvail: r.FC<ELCN__ProdCardFieldAvail_Props> = pro
                     props.node_avail === cst.ProductStatus_Avail.Broken && st._broken,
                 )}
             >
-                {avail_text_new(props.node_avail)}
+                {avail_text_new(t, props.node_avail)}
             </rddn.CmpButton>
 
             <rddn.CmpListPortal portal={`dropdown-root`} align={"center"} gap={3} className={st_ddn.listc}>
@@ -60,7 +63,7 @@ export const ELCN_ProdCardFieldAvail: r.FC<ELCN__ProdCardFieldAvail_Props> = pro
                             }))
                         }}
                     >
-                        {avail_text_new(cst.ProductStatus_Avail.Free)}
+                        {avail_text_new(t, cst.ProductStatus_Avail.Free)}
                     </button>
 
                     <button
@@ -81,7 +84,7 @@ export const ELCN_ProdCardFieldAvail: r.FC<ELCN__ProdCardFieldAvail_Props> = pro
                             }))
                         }}
                     >
-                        {avail_text_new(cst.ProductStatus_Avail.Broken)}
+                        {avail_text_new(t, cst.ProductStatus_Avail.Broken)}
                     </button>
                 </rddn.CmpContent>
             </rddn.CmpListPortal>

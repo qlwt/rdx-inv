@@ -2,17 +2,17 @@
 
 .root {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 
-  gap: std.rem(20);
+  gap: std.rem(10);
 }
 
 .date__top {
-  font-size: std.rem(18);
+  font-size: std.rem(14);
 }
 
 .date__bottom {
-  font-size: std.rem(16);
+  font-size: std.rem(14);
 }
 
 .time {
@@ -22,14 +22,14 @@
 }
 
 .time__text {
-  font-size: std.rem(16);
+  font-size: std.rem(14);
 }
 
 .time__clock {
   position: relative;
 
-  width: std.rem(20);
-  height: std.rem(20);
+  width: std.rem(18);
+  height: std.rem(18);
 
   border-radius: 50%;
   border: std.rem(2) solid var(--p-bg-secondary-h200);
@@ -45,7 +45,7 @@
     left: 50%;
 
     width: std.rem(2);
-    height: std.rem(10);
+    height: std.rem(9);
 
     background-color: var(--p-bg-secondary-h200); 
 

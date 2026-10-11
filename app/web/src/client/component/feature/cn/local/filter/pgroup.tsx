@@ -8,6 +8,7 @@ import { rem } from "@ta/gstate"
 import * as std from "@ta/std"
 import cl from "classnames"
 import * as r from "react"
+import * as ri18 from "react-i18next"
 
 export type ELCN__FilterPGroup_Props = {
     readonly selection: std.Maybe<string>
@@ -15,6 +16,7 @@ export type ELCN__FilterPGroup_Props = {
 }
 
 export const ELCN_FilterPGroup: r.FC<ELCN__FilterPGroup_Props> = props => {
+    const { t } = ri18.useTranslation()
     const [open, open_set] = r.useState(false)
 
     const rview_pgroup = gs.useRemViewFallback(null, "pgroup", gs.useSelect(state => {
@@ -44,7 +46,7 @@ export const ELCN_FilterPGroup: r.FC<ELCN__FilterPGroup_Props> = props => {
 
             <div className={st.title}>
                 <span className={st.title__text}>
-                    {rview_pgroup ? rview_pgroup.data.title : "No Group Selected"}
+                    {rview_pgroup ? rview_pgroup.data.title : t(`cn.grid.filter.no_group`)}
                 </span>
             </div>
         </rddn.CmpButton>

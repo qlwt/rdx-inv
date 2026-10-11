@@ -8,6 +8,7 @@ import * as gs from "@ta/gstate"
 import { rem } from "@ta/gstate"
 import * as std from "@ta/std"
 import * as r from "react"
+import * as ri18 from "react-i18next"
 
 type EL__GroupCard_Props = {
     readonly selection: string | null
@@ -53,6 +54,7 @@ export type ELCN__DDNListPGroup_Props = {
 }
 
 export const ELCN_DDNListPGroup: r.FC<ELCN__DDNListPGroup_Props> = props => {
+    const { t } = ri18.useTranslation()
     const pagnode = gs.usePagNode("pgroup", {})
     const rnode_list = gs.useSelect(rem.pgroup.sel.selectAll)
 
@@ -93,7 +95,7 @@ export const ELCN_DDNListPGroup: r.FC<ELCN__DDNListPGroup_Props> = props => {
 
             <rfc.CmpIf value={rnode_list.length === 0 && pagnode && std.maybe_is(pagnode.cursor, null)}>
                 <div className={st_ddn.placeholder}>
-                    No Groups Available
+                    {t(`cn.grid.ph_pgroup`)}
                 </div>
             </rfc.CmpIf>
 
@@ -106,7 +108,7 @@ export const ELCN_DDNListPGroup: r.FC<ELCN__DDNListPGroup_Props> = props => {
                     props.open_set(false)
                 }}
             >
-                No Group
+                    {t(`cn.grid.filter.no_group`)}
             </button>
 
             <div className={st_ddn.grid}>

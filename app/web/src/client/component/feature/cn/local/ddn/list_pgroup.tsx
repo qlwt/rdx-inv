@@ -99,17 +99,19 @@ export const ELCN_DDNListPGroup: r.FC<ELCN__DDNListPGroup_Props> = props => {
                 </div>
             </rfc.CmpIf>
 
-            <button
-                className={st.card_empty}
-                disabled={props.selection === null}
+            <rfc.CmpIf value={rnode_list.length >= 0 && pagnode && std.maybe_is(pagnode.cursor, null)}>
+                <button
+                    className={st.card_empty}
+                    disabled={props.selection === null}
 
-                onClick={() => {
-                    props.ev_pick(null)
-                    props.open_set(false)
-                }}
-            >
+                    onClick={() => {
+                        props.ev_pick(null)
+                        props.open_set(false)
+                    }}
+                >
                     {t(`cn.grid.filter.no_group`)}
-            </button>
+                </button>
+            </rfc.CmpIf>
 
             <div className={st_ddn.grid}>
                 <rfc.CmpLoop data={rnode_list_fit}>

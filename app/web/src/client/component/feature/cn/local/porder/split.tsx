@@ -24,7 +24,7 @@ type SelectionState = {
 }
 
 export type ELCN__POrderSplit_Props = {
-    readonly deletion_set: std.FnSetterStateles<std.Maybe<string>>
+    readonly deletion_set: std.FnSetterStateles<std.Maybe<{ id: string, action: VoidFunction, }>>
 }
 
 export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
@@ -64,6 +64,18 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
         selection.id.kind
         && !selection.status_closing
     )
+
+    const card_deletion_set = r.useCallback((id_m: std.Maybe<string>) => {
+        props.deletion_set(std.maybe_new_map(id_m, id => ({
+            id,
+            action: () => {
+                selection_set({
+                    id: id_m,
+                    status_closing: true,
+                })
+            },
+        })))
+    }, [selection_set, props.deletion_set])
 
     return <div
         ref={ref_container}
@@ -136,7 +148,7 @@ export const ELCN_POrderSplit: r.FC<ELCN__POrderSplit_Props> = props => {
 
                         remnode={remnode}
                         status_compact={status_open}
-                        deletion_set={props.deletion_set}
+                        deletion_set={card_deletion_set}
                         status_selected={!selection.status_closing && std.maybe_is(selection.id, remnode.id)}
 
                         selection_set={(selection_id) => {

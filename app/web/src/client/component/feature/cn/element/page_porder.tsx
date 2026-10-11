@@ -14,7 +14,7 @@ export type EFCN_PagePOrder_Props = {
 export const EFCN_PagePOrder: r.FC<EFCN_PagePOrder_Props> = props => {
     const dispatch = gs.useDispatch()
     const { t } = ri18.useTranslation()
-    const [deletion, deletion_set] = r.useState<std.Maybe<string>>(std.MNONE)
+    const [deletion, deletion_set] = r.useState<std.Maybe<{ id: string, action: VoidFunction, }>>(std.MNONE)
 
     return <>
         <ELCN_Head
@@ -63,9 +63,11 @@ export const EFCN_PagePOrder: r.FC<EFCN_PagePOrder_Props> = props => {
 
                         dispatch(rem.porder.act.delete({
                             url: {
-                                id: deletion.value,
+                                id: deletion.value.id,
                             },
                         }))
+
+                        deletion.value.action()
 
                         deletion_set(std.MNONE)
                     }}

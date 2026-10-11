@@ -99,7 +99,7 @@ export const ELCN_DDNListPGroup: r.FC<ELCN__DDNListPGroup_Props> = props => {
                 </div>
             </rfc.CmpIf>
 
-            <rfc.CmpIf value={rnode_list.length >= 0 && pagnode && std.maybe_is(pagnode.cursor, null)}>
+            <rfc.CmpIf value={rnode_list.length >= 1 && pagnode && std.maybe_is(pagnode.cursor, null)}>
                 <button
                     className={st.card_empty}
                     disabled={props.selection === null}

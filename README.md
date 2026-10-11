@@ -21,6 +21,7 @@ The App itself is a simple Inventory Management App
 - `pckg/express-utils` is a simple express wrapper library, that allows automatic response type inference
 - `pckg/cst` contains project-wide constants
 - `pckg/std` `pckg/std-react` are collections of standard utilities
+- `pckg/rest/src/db/db.sql` - database initialisation file
 
 ## Definitions
 

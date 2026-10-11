@@ -46,7 +46,7 @@ export const restroute_porder_delete_new = (params: RestRoutePOrderDelete_New_Pa
                         .updateTable("product")
                         .where("porder_id", "=", url.id)
                         .where("deleted_at", "is", null)
-                        .set({ porder_id: null, })
+                        .set({ deleted_at, })
                         .execute()
                     )
                 })

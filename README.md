@@ -1,9 +1,10 @@
 # Introduction
 
-Following project is a job-application pre-interview task
-Otherwise it is an exploration of an application of `Redux` as a `Remote State` Management System
+The App is a simple minimalistic Inventory Management App
+It serves mainly as an exploration of Redux as advanced remote state management system
 
-The App itself is a simple Inventory Management App
+hosted on: https://rdx-inv-web.onrender.com/
+server is free, so it will take up to two minutes for initialisation of Web and API services
 
 # Steps to setup locally
 
